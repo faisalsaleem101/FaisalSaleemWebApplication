@@ -13,9 +13,9 @@ namespace FaisalLearningProjectMVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly TsqlContext _context;
+        private readonly ContextDb _context;
 
-        public HomeController(TsqlContext context)
+        public HomeController(ContextDb context)
         {
             _context = context;
 
