@@ -10,7 +10,32 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
             </div>
 
+            <div id="example-table"></div>
+
+
+
 
         </div>
     </div>
 </div>
+
+@section scripts
+    {
+
+    <script>
+
+        $("#example-table").tabulator({
+            height: "311px",
+            columns: [
+                { title: "Name", field: "name" },
+                { title: "Progress", field: "progress", sorter: "number" },
+                { title: "Gender", field: "gender" },
+                { title: "Rating", field: "rating" },
+                { title: "Favourite Color", field: "col" },
+                { title: "Date Of Birth", field: "dob", align: "center" },
+            ],
+        });
+
+    </script>
+
+}
