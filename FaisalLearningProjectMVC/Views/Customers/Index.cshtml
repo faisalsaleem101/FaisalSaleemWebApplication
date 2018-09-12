@@ -15,15 +15,28 @@
 @section scripts
 {
     <script>
-      
+        $(document).ready(function () {           
+            $.get("Customers/GetCustomerIndexTableData", function (data, status) {
+                $("#example-table").tabulator({
+                    data: data,
+                    pagination: "local",
+                    paginationSize: 14,
+                    layout: "fitColumns",
+                    columns: [
+                        { title: "Company Name", field: "companyName", sorter: "string", width: 200  },
+                        { title: "Full Name", field: "contactName", sorter: "string", width: 200  },
+                        { title: "Title", field: "contactTitle", sorter: "string", width: 200  },
+                        { title: "Address", field: "address", sorter: "string", width: 200  },
+                        { title: "City", field: "city", sorter: "string", width: 100 },
+                        { title: "Country", field: "country", sorter: "string", width: 100 },
+                        { title: "Phone", field: "phone", sorter: "string", width: 138 },
+                    ],
+                })
+            });  
 
-        $("#example-table").tabulator({
-            columns: [
-                { title: "Company Name", field: "CompanyName", sorter: "string", width: 200, editor: true },
-                { title: "Contact Name", ContactTitle: "ContactName", sorter: "string", cellClick: function (e, cell) { console.log("cell click") }, },
-                { title: "Contact Title", field: "ContactTitle", sorter: "string" },
-            ],
-        });
+            //Set initial page
+            $("#example-table").tabulator("setPage", 1);
 
+        })      
     </script>
 }

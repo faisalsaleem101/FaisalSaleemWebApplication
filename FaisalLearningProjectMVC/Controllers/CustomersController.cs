@@ -149,5 +149,11 @@ namespace FaisalLearningProjectMVC.Controllers
         {
             return _context.Customers.Any(e => e.ID == id);
         }
+
+        public async Task<IActionResult> GetCustomerIndexTableData()
+        {
+            var customers = await _context.Customers.ToListAsync();
+            return Json(customers);
+        }
     }
 }
