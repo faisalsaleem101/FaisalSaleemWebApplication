@@ -18,4 +18,8 @@
     <Folder Include="wwwroot\fonts\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DocumentGenerator\DocumentGenerator.csproj" />
+  </ItemGroup>
+
 </Project>
