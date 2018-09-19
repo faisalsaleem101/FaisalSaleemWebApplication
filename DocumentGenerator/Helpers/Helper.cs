@@ -8,14 +8,24 @@ namespace DocumentGenerator.Helpers
     public class Helper
     {
         const string outputFolder = "Outputs";
+        const string templateFolder = "Templates";
 
         public static string GetOutputPath()
         {
-            string dataDir = Directory.GetCurrentDirectory();
-            var startDirectory = Directory.GetParent(Directory.GetParent(Directory.GetParent(Directory.GetParent(dataDir).FullName).FullName).FullName).FullName;
-            string outputPath = Path.Combine(startDirectory, outputFolder);
+            string startDirectory = GetRootDirectory();
+            return Path.Combine(startDirectory, outputFolder);
+        }
 
-            return outputPath;
+        public static string GetTemplatePath()
+        {
+            string startDirectory = GetRootDirectory();
+            return Path.Combine(startDirectory, templateFolder);
+        }
+
+        private static string GetRootDirectory()
+        {
+            string dataDir = Directory.GetCurrentDirectory();
+            return Directory.GetParent(dataDir).FullName;
         }
     }
 }

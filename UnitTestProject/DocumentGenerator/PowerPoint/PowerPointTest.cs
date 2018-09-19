@@ -12,7 +12,7 @@ namespace UnitTestProject.DocumentGenerator.PowerPoint
         public void CreateTable()
         {
             var tableGenerator = new TableGeneratorPP();
-            tableGenerator.Run();
+            //tableGenerator.Run();
         }
     }
 }

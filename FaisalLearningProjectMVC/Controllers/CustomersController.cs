@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FaisalLearningProjectMVC.Data;
 using FaisalLearningProjectMVC.Models;
+using DocumentGenerator.PowerPoint;
 
 namespace FaisalLearningProjectMVC.Controllers
 {
@@ -22,8 +23,37 @@ namespace FaisalLearningProjectMVC.Controllers
         // GET: Customers
         public async Task<IActionResult> Index()
         {
+            await CreatePowerPointTable(_context.Customers.ToList());
             return View(await _context.Customers.ToListAsync());
         }
+
+        public async Task CreatePowerPointTable(List<Customer> customers)
+        {
+            // column names to be used by the table 
+            var columns = new List<string> { "Company Name", "Contact Name", "Contact Title", "Address", "City", "Region", "Postal Code", "Country", "Phone", "Fax" };
+
+            // create an array with the number of rows based on the customers records total and 10 columns 
+            string[,] data = new string[customers.Count, 10];
+
+            int counter = 0;
+            foreach (var customer in customers)
+            {
+                data[counter, 0] = customer.CompanyName;
+                data[counter, 1] = customer.ContactName;
+                data[counter, 2] = customer.ContactTitle;
+                data[counter, 3] = customer.Address;
+                data[counter, 4] = customer.City;
+                data[counter, 5] = customer.Region;
+                data[counter, 6] = customer.PostalCode;
+                data[counter, 7] = customer.Country;
+                data[counter, 8] = customer.Phone;
+                data[counter, 9] = customer.Fax;
+                counter++;
+            }
+
+            TableGeneratorPP tableGenerator = new TableGeneratorPP();
+            tableGenerator.Run(columns, data);
+        } 
 
         // GET: Customers/Details/5
         public async Task<IActionResult> Details(int? id)

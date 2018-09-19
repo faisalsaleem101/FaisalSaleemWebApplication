@@ -9,35 +9,45 @@ namespace DocumentGenerator.PowerPoint
 {
     public class TableGeneratorPP
     {
-        public void Run()
+        const string existingTableFile = "UpdateExistingTable.pptx";
+        const string outputTableFile = "OutputTable.pptx";
+
+        public void Run(List<string> columns, string[,] data) 
         {
-            //ExStart:UpdateExistingTable
+
             // The path to the documents directory.
+            var templateDir = Helper.GetTemplatePath();
+            var outputDir = Helper.GetOutputPath();
 
-            var dataDir = Helper.GetOutputPath();
+            // Instantiate Presentation class that represents PPTX// Instantiate Presentation class that represents PPTX
+            using (Presentation pres = new Presentation( $"{templateDir}//{existingTableFile}"))
+            {
+                // Access the first slide
+                ISlide sld = pres.Slides[0];
 
-            //// Instantiate Presentation class that represents PPTX// Instantiate Presentation class that represents PPTX
-            //using (Presentation pres = new Presentation(dataDir + "UpdateExistingTable.pptx"))
-            //{
+                // Initialize null TableEx
+                ITable tbl = null;
 
-            //    // Access the first slide
-            //    ISlide sld = pres.Slides[0];
+                // Iterate through the shapes and set a reference to the table found
+                foreach (IShape shp in sld.Shapes)
+                    if (shp is ITable)
+                        tbl = (ITable)shp;
 
-            //    // Initialize null TableEx
-            //    ITable tbl = null;
+                // create number of columns 
+                for (int i = 1; i < columns.Count; i++)
+                    tbl.Columns.AddClone(tbl.Columns[0], true);
 
-            //    // Iterate through the shapes and set a reference to the table found
-            //    foreach (IShape shp in sld.Shapes)
-            //        if (shp is ITable)
-            //            tbl = (ITable)shp;
+                // assign column names 
+                for (int i = 0; i < columns.Count; i++)
+                    tbl[i, 0].TextFrame.Text = columns[i];
 
-            //    // Set the text of the first column of second row
-            //    tbl[0, 1].TextFrame.Text = "New";
+                // create n,umber of rows 
+                for (int i = 1; i < data.GetUpperBound(0); i++)
+                    tbl.Rows.AddClone(tbl.Rows[1], true);
 
-            //    //Write the PPTX to Disk
-            //    pres.Save(dataDir + "table1_out.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
-            //}
-            //ExEnd:UpdateExistingTable
+                //Write the PPTX to Disk
+                pres.Save($"{outputDir}//{outputTableFile}", Aspose.Slides.Export.SaveFormat.Pptx);
+            }
         }
 
 
