@@ -17,8 +17,4 @@
     <ProjectReference Include="..\DocumentGenerator\DocumentGenerator.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DocumentGenerator\" />
-  </ItemGroup>
-
 </Project>
