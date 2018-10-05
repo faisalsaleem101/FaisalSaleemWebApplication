@@ -12,9 +12,7 @@ namespace DocumentGenerator.PowerPoint
     public class TableGeneratorPP
     {
         const string existingTableFile = "UpdateExistingTable.pptx";
-        const string outputTableFile = "OutputTable.pptx";
-
-        const int rowsPerSlide = 10;
+        const int rowsPerSlide = 9;
 
         public void Run (List<string> columns, string[,] data, string title) 
         {
@@ -24,46 +22,66 @@ namespace DocumentGenerator.PowerPoint
             var outputDir = Helper.GetOutputPath();
 
             // Instantiate Presentation class that represents PPTX// Instantiate Presentation class that represents PPTX
-            using (Presentation pres = new Presentation( $"{templateDir}//{existingTableFile}"))
+            using (Presentation pres = new Presentation($"{templateDir}//{existingTableFile}"))
             {
                 int noOfSlides = CreateNumberOfSlides(data, pres);
 
-                // Access the first slide
-                ISlide sld = pres.Slides[0];
-
-                // get title object
-                var header = (IAutoShape)sld.Shapes.FirstOrDefault(c => c is IAutoShape);
-                header.TextFrame.Text = title;
-
-                // get table object 
-                var tbl = (ITable)sld.Shapes.FirstOrDefault(c => c is ITable);
-
-                // create number of columns 
-                for (int i = 1; i < columns.Count; i++)
-                    tbl.Columns.AddClone(tbl.Columns[0], true);
-
-                // assign column names 
-                for (int i = 0; i < columns.Count; i++)
-                    tbl[i, 0].TextFrame.Text = columns[i];
-
-
-                // create number of rows 
-                for (int i = 1; i < data.GetUpperBound(0); i++)
-                    tbl.Rows.AddClone(tbl.Rows[1], true);
-
-                //assign data to rows
-                for (int r = 1; r <= data.GetUpperBound(0); r++)
+                int rowCounter = 0;
+                int slide = 0;
+                for (int row = 0; row <= data.GetUpperBound(0); row++)
                 {
+                    // Access the slide
+                    ISlide sld = pres.Slides[slide];
+
+                    // get title object
+                    var header = (IAutoShape)sld.Shapes.FirstOrDefault(c => c is IAutoShape);
+                    header.TextFrame.Text = title;
+
+                    // get table object 
+                    var tbl = (ITable)sld.Shapes.FirstOrDefault(c => c is ITable);
+
+                    // if this is the first row create the blank column and rows for the slide so data can be inserted 
+                    if (rowCounter == 0)
+                        CreateColumnAndsRows(columns, tbl);
+                    
+                    // assign data to the row fields
+                    // start at the second row of the table since first is the colums
+                    // use row varaible instead of rowcounter since it is not limted to e.g 10
                     for (int c = 0; c <= data.GetUpperBound(1); c++)
                     {
-                        tbl[c, r].TextFrame.Text = data[r - 1, c] ?? "";
+                        tbl[c, rowCounter + 1].TextFrame.Text = data[row, c] ?? "";
                     }
+                    
+                    if (rowCounter + 1 == rowsPerSlide)
+                    {
+                        slide++;
+                        rowCounter = 0;
+                    }
+                    else
+                    {
+                        rowCounter++;
+                    }
+
                 }
 
-
                 //Write the PPTX to Disk
-                pres.Save($"{outputDir}//{outputTableFile}", Aspose.Slides.Export.SaveFormat.Pptx);
+                pres.Save($"{outputDir}//{title}.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
             }
+        }
+
+        private static void CreateColumnAndsRows(List<string> columns, ITable tbl)
+        {
+            // create number of columns 
+            for (int i = 1; i < columns.Count; i++)
+                tbl.Columns.AddClone(tbl.Columns[0], true);
+
+            // assign column names 
+            for (int i = 0; i < columns.Count; i++)
+                tbl[i, 0].TextFrame.Text = columns[i];
+
+            // create number of rows 
+            for (int i = 1; i < rowsPerSlide; i++)
+                tbl.Rows.AddClone(tbl.Rows[1], true);
         }
 
         private static int CreateNumberOfSlides(string[,] data, Presentation pres)
