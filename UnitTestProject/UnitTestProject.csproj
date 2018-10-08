@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DocumentGenerator\DocumentGenerator.csproj" />
+    <ProjectReference Include="..\FaisalLearningProjectMVC\FaisalLearningProjectMVC.csproj" />
   </ItemGroup>
 
 </Project>

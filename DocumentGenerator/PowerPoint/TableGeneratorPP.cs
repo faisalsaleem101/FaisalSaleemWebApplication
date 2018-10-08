@@ -6,25 +6,25 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Drawing;
 
 namespace DocumentGenerator.PowerPoint
 {
     public class TableGeneratorPP
     {
-        const string existingTableFile = "UpdateExistingTable.pptx";
-        const int rowsPerSlide = 9;
+        const string existingTableFile = "UpdateExistingTable";
+        const int rowsPerSlide = 11;
 
         public void Run (List<string> columns, string[,] data, string title) 
         {
-
             // The path to the documents directory.
             var templateDir = Helper.GetTemplatePath();
             var outputDir = Helper.GetOutputPath();
 
             // Instantiate Presentation class that represents PPTX// Instantiate Presentation class that represents PPTX
-            using (Presentation pres = new Presentation($"{templateDir}//{existingTableFile}"))
+            using (Presentation pres = new Presentation($"{templateDir}//{existingTableFile}{columns.Count}.pptx"))
             {
-                int noOfSlides = CreateNumberOfSlides(data, pres);
+                int noOfSlides = CreateNumberOfSlides(data.GetUpperBound(0), pres);
 
                 int rowCounter = 0;
                 int slide = 0;
@@ -50,8 +50,15 @@ namespace DocumentGenerator.PowerPoint
                     for (int c = 0; c <= data.GetUpperBound(1); c++)
                     {
                         tbl[c, rowCounter + 1].TextFrame.Text = data[row, c] ?? "";
+
+                        //change background colour of every odd row
+                        if (row % 2 != 0)
+                        {
+                            tbl[c, rowCounter + 1].FillFormat.SolidFillColor.Color = Color.FromArgb(102, 102, 102);
+                        }
                     }
-                    
+                                     
+                    // if the total number of rows perslide have been reached then set slide to next number and reset counter
                     if (rowCounter + 1 == rowsPerSlide)
                     {
                         slide++;
@@ -61,7 +68,6 @@ namespace DocumentGenerator.PowerPoint
                     {
                         rowCounter++;
                     }
-
                 }
 
                 //Write the PPTX to Disk
@@ -84,9 +90,8 @@ namespace DocumentGenerator.PowerPoint
                 tbl.Rows.AddClone(tbl.Rows[1], true);
         }
 
-        private static int CreateNumberOfSlides(string[,] data, Presentation pres)
+        private static int CreateNumberOfSlides(int totalRows, Presentation pres)
         {
-            var totalRows = data.GetUpperBound(0);
             var noOfSlides = totalRows / rowsPerSlide;
 
             // if total rows are less than rowsPerSlide then set no of slides from 0 to 1 
@@ -102,7 +107,5 @@ namespace DocumentGenerator.PowerPoint
 
             return noOfSlides;
         }
-
-
     }
 }

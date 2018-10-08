@@ -30,10 +30,10 @@ namespace FaisalLearningProjectMVC.Controllers
         public void CreatePowerPointTable(List<Customer> customers)
         {
             // column names to be used by the table 
-            var columns = new List<string> { "Company Name", "Contact Name", "Contact Title", "Address", "City", "Region", "Postal Code", "Country", "Phone", "Fax" };
+            var columns = new List<string> { "Company Name", "Full Name", "Title", "Address", "City", "Country", "Phone" };
 
             // initilize an array with the number of rows based on the customers records total and 10 columns 
-            string[,] data = new string[customers.Count, 10];
+            string[,] data = new string[customers.Count, 7];
 
             int counter = 0;
 
@@ -45,11 +45,8 @@ namespace FaisalLearningProjectMVC.Controllers
                 data[counter, 2] = customer.ContactTitle;
                 data[counter, 3] = customer.Address;
                 data[counter, 4] = customer.City;
-                data[counter, 5] = customer.Region;
-                data[counter, 6] = customer.PostalCode;
-                data[counter, 7] = customer.Country;
-                data[counter, 8] = customer.Phone;
-                data[counter, 9] = customer.Fax;
+                data[counter, 5] = customer.Country;
+                data[counter, 6] = customer.Phone;
                 counter++;
             }
 
