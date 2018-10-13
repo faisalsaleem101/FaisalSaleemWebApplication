@@ -15,7 +15,7 @@ namespace DocumentGenerator.PowerPoint
         const string existingTableFile = "UpdateExistingTable";
         const int rowsPerSlide = 11;
 
-        public void Run (List<string> columns, string[,] data, string title) 
+        public string Run (List<string> columns, string[,] data, string title) 
         {
             // The path to the documents directory.
             var templateDir = Helper.GetTemplatePath();
@@ -73,6 +73,8 @@ namespace DocumentGenerator.PowerPoint
                 //Write the PPTX to Disk
                 pres.Save($"{outputDir}//{title}.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
             }
+
+            return $"{title}.pptx";
         }
 
         private static void CreateColumnAndsRows(List<string> columns, ITable tbl)

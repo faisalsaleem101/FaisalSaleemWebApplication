@@ -10,9 +10,11 @@ namespace FaisalLearningProjectMVC
     public class Startup
     {
         public IConfiguration Configuration { get; }
+        private readonly IHostingEnvironment _env;
 
-        public Startup(IConfiguration configuration)
+        public Startup(IHostingEnvironment env, IConfiguration configuration)
         {
+            _env = env;
             Configuration = configuration;
         }
 

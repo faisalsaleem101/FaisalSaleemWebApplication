@@ -10,17 +10,16 @@
     <a asp-action="Create">Create New</a>
 </p>
 
-
 <div class="text-right table-header">
-    <button id="download-powerpoint"><img src="~/images/PowerPointBlack6.png" /> </button>
+    <a asp-action="DownloadPowerpointTable" id="download-powerpoint"><img src="~/images/PowerPointBlack8.png" /> </a>
 </div>
 
-<div id="example-table" ></div>
+<div id="example-table"></div>
 
 @section scripts
-{
+    {
     <script>
-        $(document).ready(function () {           
+        $(document).ready(function () {
             $.get("Customers/GetCustomerIndexTableData", function (data, status) {
                 $("#example-table").tabulator({
                     data: data,
@@ -28,20 +27,23 @@
                     paginationSize: 14,
                     layout: "fitColumns",
                     columns: [
-                        { title: "Company Name", field: "companyName", sorter: "string", width: 200  },
-                        { title: "Full Name", field: "contactName", sorter: "string", width: 200  },
-                        { title: "Title", field: "contactTitle", sorter: "string", width: 200  },
-                        { title: "Address", field: "address", sorter: "string", width: 200  },
+                        { title: "Company Name", field: "companyName", sorter: "string", width: 200 },
+                        { title: "Full Name", field: "contactName", sorter: "string", width: 200 },
+                        { title: "Title", field: "contactTitle", sorter: "string", width: 200 },
+                        { title: "Address", field: "address", sorter: "string", width: 200 },
                         { title: "City", field: "city", sorter: "string", width: 100 },
                         { title: "Country", field: "country", sorter: "string", width: 100 },
                         { title: "Phone", field: "phone", sorter: "string", width: 138 },
                     ],
                 })
-            });  
+            });
 
             //Set initial page
             $("#example-table").tabulator("setPage", 1);
 
-        })      
+        });
+
+          
+
     </script>
 }

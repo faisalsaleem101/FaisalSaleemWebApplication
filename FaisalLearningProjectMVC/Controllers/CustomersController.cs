@@ -8,26 +8,39 @@ using Microsoft.EntityFrameworkCore;
 using FaisalLearningProjectMVC.Data;
 using FaisalLearningProjectMVC.Models;
 using DocumentGenerator.PowerPoint;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.Internal;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace FaisalLearningProjectMVC.Controllers
 {
     public class CustomersController : Controller
     {
         private readonly ContextDb _context;
+        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IConfiguration _configuration;
 
-        public CustomersController(ContextDb context)
+        public CustomersController(ContextDb context, IHostingEnvironment hostingEnvironment, IConfiguration configuration)
         {
             _context = context;
+            _hostingEnvironment = hostingEnvironment;
+            _configuration = configuration;
         }
 
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-            CreatePowerPointTable(_context.Customers.ToList());
             return View(await _context.Customers.ToListAsync());
+        }        
+
+        public ActionResult DownloadPowerpointTable()
+        {
+            var fileName = CreatePowerPointTable(_context.Customers.ToList());
+            return DownloadFile(fileName);
         }
 
-        public void CreatePowerPointTable(List<Customer> customers)
+        private string CreatePowerPointTable(List<Customer> customers)
         {
             // column names to be used by the table 
             var columns = new List<string> { "Company Name", "Full Name", "Title", "Address", "City", "Country", "Phone" };
@@ -51,8 +64,20 @@ namespace FaisalLearningProjectMVC.Controllers
             }
 
             TableGeneratorPP tableGenerator = new TableGeneratorPP();
-            tableGenerator.Run(columns, data, "Customers");
+            var fileName = tableGenerator.Run(columns, data, "Customers");
+
+            return fileName;
         } 
+        
+        private FileContentResult DownloadFile(string fileName)
+        {
+            var directory = Directory.GetParent(_hostingEnvironment.ContentRootPath).FullName;
+            var outputFolder = _configuration.GetValue<string>("WebsiteSettings:OutputFolder");
+            var filePath = $"{directory}\\{outputFolder}\\{fileName}";
+
+            byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
+            return File(fileBytes, "application/x-msdownload", fileName);
+        }
 
         // GET: Customers/Details/5
         public async Task<IActionResult> Details(int? id)
