@@ -69,12 +69,12 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
                             <!-- NAV -->
-                            <li class="@(pageUrl == "/" ? "active" : "")"><a class="navLink" asp-action="Index">HOME</a> </li>
-                            <li class="@(pageUrl == "/Home/About" ? "active" : "")"><a class="navLink" asp-action="About">ABOUT </a> </li>
-                            <li class="@(pageUrl == "/Home/Features" ? "active" : "")"><a class="navLink" asp-action="Features">FEATURES</a></li>
-                            <li class="@(pageUrl == "/Home/Screens" ? "active" : "")"><a class="navLink" asp-action="Screens">SCREENS</a> </li>
-                            <li class="@(pageUrl == "/Home/Download" ? "active" : "")"><a class="navLink" asp-action="Download">DOWNLOAD </a> </li>
-                            <li class="@(pageUrl == "/Home/Contact" ? "active" : "")"><a class="navLink" asp-action="Contact">CONTACT </a> </li>
+                            <li class="@(pageUrl == "/" ? "active" : "")"><a class="navLink" asp-controller="Home" asp-action="Index">HOME</a> </li>
+                            <li class="@(pageUrl == "/Home/About" ? "active" : "")"><a class="navLink" asp-controller="Home"  asp-action="About">ABOUT </a> </li>
+                            <li class="@(pageUrl == "/Home/Features" ? "active" : "")"><a class="navLink" asp-controller="Home"  asp-action="Features">FEATURES</a></li>
+                            <li class="@(pageUrl == "/Home/Screens" ? "active" : "")"><a class="navLink" asp-controller="Home"  asp-action="Screens">SCREENS</a> </li>
+                            <li class="@(pageUrl == "/Home/Download" ? "active" : "")"><a class="navLink" asp-controller="Home"  asp-action="Download">DOWNLOAD </a> </li>
+                            <li class="@(pageUrl == "/Home/Contact" ? "active" : "")"><a class="navLink" asp-controller="Home"  asp-action="Contact">CONTACT </a> </li>
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->

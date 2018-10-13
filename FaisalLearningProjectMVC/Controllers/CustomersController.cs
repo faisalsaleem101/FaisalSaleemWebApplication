@@ -67,14 +67,14 @@ namespace FaisalLearningProjectMVC.Controllers
             var fileName = tableGenerator.Run(columns, data, "Customers");
 
             return fileName;
-        } 
+        }  
         
         private FileContentResult DownloadFile(string fileName)
         {
             var directory = Directory.GetParent(_hostingEnvironment.ContentRootPath).FullName;
             var outputFolder = _configuration.GetValue<string>("WebsiteSettings:OutputFolder");
-            var filePath = $"{directory}\\{outputFolder}\\{fileName}";
 
+            var filePath = $"{directory}\\{outputFolder}\\{fileName}";
             byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
             return File(fileBytes, "application/x-msdownload", fileName);
         }
