@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using DocumentGenerator.Word;
 
 namespace FaisalLearningProjectMVC.Controllers
 {
@@ -30,44 +31,49 @@ namespace FaisalLearningProjectMVC.Controllers
 
         // GET: Customers
         public async Task<IActionResult> Index()
-        {
+        {        
             return View(await _context.Customers.ToListAsync());
         }        
 
         public ActionResult DownloadPowerpointTable()
         {
-            var fileName = CreatePowerPointTable(_context.Customers.ToList());
+            // column names to be used by the table 
+            var columns = new List<string> { "Company Name", "Full Name", "Title", "Address", "City", "Country" };
+
+            var Customers = _context.Customers.Select(x => new
+            {
+                x.CompanyName,
+                x.ContactName,
+                x.ContactTitle,
+                x.Address,
+                x.City,
+                x.Country,
+            }).ToList();
+
+            TableGeneratorPowerPoint tableGenerator = new TableGeneratorPowerPoint();
+
+            var fileName = tableGenerator.Run(columns, Customers, nameof(Customers));
             return DownloadFile(fileName);
         }
 
-        private string CreatePowerPointTable(List<Customer> customers)
+        public ActionResult DownloadWordTable()
         {
-            // column names to be used by the table 
-            var columns = new List<string> { "Company Name", "Full Name", "Title", "Address", "City", "Country", "Phone" };
-
-            // initilize an array with the number of rows based on the customers records total and 10 columns 
-            string[,] data = new string[customers.Count, 7];
-
-            int counter = 0;
-
-            //assign data
-            foreach (var customer in customers)
+            TableGeneratorWord tableGeneratorWord = new TableGeneratorWord();
+            var Customers = _context.Customers.Select(x => new
             {
-                data[counter, 0] = customer.CompanyName;
-                data[counter, 1] = customer.ContactName;
-                data[counter, 2] = customer.ContactTitle;
-                data[counter, 3] = customer.Address;
-                data[counter, 4] = customer.City;
-                data[counter, 5] = customer.Country;
-                data[counter, 6] = customer.Phone;
-                counter++;
-            }
+                x.CompanyName,
+                x.ContactName,
+                x.ContactTitle,
+                x.Address,
+                x.City,
+                x.Country,
+            }).ToList();
 
-            TableGeneratorPP tableGenerator = new TableGeneratorPP();
-            var fileName = tableGenerator.Run(columns, data, "Customers");
+            var fileName = tableGeneratorWord.Run(Customers, nameof(Customers));
+            return DownloadFile(fileName);
+        }
 
-            return fileName;
-        }  
+
         
         private FileContentResult DownloadFile(string fileName)
         {

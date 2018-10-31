@@ -7,28 +7,32 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Drawing;
+using System.Data;
 
 namespace DocumentGenerator.PowerPoint
 {
-    public class TableGeneratorPP
+    public class TableGeneratorPowerPoint
     {
         const string existingTableFile = "UpdateExistingTable";
         const int rowsPerSlide = 11;
 
-        public string Run (List<string> columns, string[,] data, string title) 
+        public string Run<T>(List<string> columns, IEnumerable<T> data, string title) 
         {
             // The path to the documents directory.
             var templateDir = Helper.GetTemplatePath();
             var outputDir = Helper.GetOutputPath();
 
+            // Retrieve the data from our data source which is stored as a DataTable.
+            DataTable dataTable = Helper.CreateDataTable(data);
+
             // Instantiate Presentation class that represents PPTX// Instantiate Presentation class that represents PPTX
             using (Presentation pres = new Presentation($"{templateDir}//{existingTableFile}{columns.Count}.pptx"))
             {
-                int noOfSlides = CreateNumberOfSlides(data.GetUpperBound(0), pres);
+                int noOfSlides = CreateNumberOfSlides(dataTable.Rows.Count, pres);
 
                 int rowCounter = 0;
                 int slide = 0;
-                for (int row = 0; row <= data.GetUpperBound(0); row++)
+                for (int row = 0; row < dataTable.Rows.Count; row++)
                 {
                     // Access the slide
                     ISlide sld = pres.Slides[slide];
@@ -42,14 +46,14 @@ namespace DocumentGenerator.PowerPoint
 
                     // if this is the first row create the blank column and rows for the slide so data can be inserted 
                     if (rowCounter == 0)
-                        CreateColumnAndsRows(columns, tbl);
+                        CreateEmptyColumnAndsRows(columns, tbl);
                     
                     // assign data to the row fields
                     // start at the second row of the table since first is the colums
                     // use row varaible instead of rowcounter since it is not limted to e.g 10
-                    for (int c = 0; c <= data.GetUpperBound(1); c++)
+                    for (int c = 0; c < dataTable.Columns.Count; c++)
                     {
-                        tbl[c, rowCounter + 1].TextFrame.Text = data[row, c] ?? "";
+                        tbl[c, rowCounter + 1].TextFrame.Text = dataTable.Rows[row][c]?.ToString() ?? "";
 
                         //change background colour of every odd row
                         if (row % 2 != 0)
@@ -77,7 +81,7 @@ namespace DocumentGenerator.PowerPoint
             return $"{title}.pptx";
         }
 
-        private static void CreateColumnAndsRows(List<string> columns, ITable tbl)
+        private static void CreateEmptyColumnAndsRows(List<string> columns, ITable tbl)
         {
             // create number of columns 
             for (int i = 1; i < columns.Count; i++)

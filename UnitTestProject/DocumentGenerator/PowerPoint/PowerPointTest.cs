@@ -19,7 +19,7 @@ namespace UnitTestProject.DocumentGenerator.PowerPoint
         [Fact]
         public void CreateTable()
         {
-            var tableGenerator = new TableGeneratorPP();
+            var tableGenerator = new TableGeneratorPowerPoint();
             //tableGenerator.Run();
         }
     }
