@@ -35,39 +35,35 @@ namespace FaisalLearningProjectMVC.Controllers
             return View(await _context.Customers.ToListAsync());
         }        
 
-        public ActionResult DownloadPowerpointTable()
+        public async Task<ActionResult> DownloadPowerpointTable()
         {
-            // column names to be used by the table 
-            var columns = new List<string> { "Company Name", "Full Name", "Title", "Address", "City", "Country" };
-
-            var Customers = _context.Customers.Select(x => new
+            TableGeneratorPowerPoint tableGenerator = new TableGeneratorPowerPoint();
+            var Customers = await _context.Customers.Select(x => new
             {
-                x.CompanyName,
-                x.ContactName,
-                x.ContactTitle,
+                Company_Name = x.CompanyName,
+                Full_Name = x.ContactName,
+                Title = x.ContactTitle,
                 x.Address,
                 x.City,
                 x.Country,
-            }).ToList();
+            }).ToListAsync();
 
-            TableGeneratorPowerPoint tableGenerator = new TableGeneratorPowerPoint();
-
-            var fileName = tableGenerator.Run(columns, Customers, nameof(Customers));
+            var fileName = tableGenerator.Run(Customers, nameof(Customers));
             return DownloadFile(fileName);
         }
 
-        public ActionResult DownloadWordTable()
+        public async Task<ActionResult> DownloadWordTable()
         {
             TableGeneratorWord tableGeneratorWord = new TableGeneratorWord();
-            var Customers = _context.Customers.Select(x => new
+            var Customers = await _context.Customers.Select(x => new
             {
-                x.CompanyName,
-                x.ContactName,
-                x.ContactTitle,
+                Company_Name = x.CompanyName,
+                Full_Name = x.ContactName,
+                Title = x.ContactTitle,
                 x.Address,
                 x.City,
                 x.Country,
-            }).ToList();
+            }).ToListAsync();
 
             var fileName = tableGeneratorWord.Run(Customers, nameof(Customers));
             return DownloadFile(fileName);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 
@@ -55,6 +56,18 @@ namespace DocumentGenerator.Helpers
             }
 
             return dataTable;
+        }
+
+        // get coumn names which replace the existing column name with _ to a space 
+        public static List<string> GetColumnNames(DataTable dataTable)
+        {
+            var columns = new List<string>();
+
+            foreach (var column in dataTable.Columns)
+                columns.Add(column.ToString());
+
+            columns = columns.Select(c => c.Replace("_", " ")).ToList();
+            return columns;
         }
     }
 }

@@ -16,7 +16,7 @@ namespace DocumentGenerator.PowerPoint
         const string existingTableFile = "UpdateExistingTable";
         const int rowsPerSlide = 11;
 
-        public string Run<T>(List<string> columns, IEnumerable<T> data, string title) 
+        public string Run<T>(IEnumerable<T> data, string title) 
         {
             // The path to the documents directory.
             var templateDir = Helper.GetTemplatePath();
@@ -26,7 +26,7 @@ namespace DocumentGenerator.PowerPoint
             DataTable dataTable = Helper.CreateDataTable(data);
 
             // Instantiate Presentation class that represents PPTX// Instantiate Presentation class that represents PPTX
-            using (Presentation pres = new Presentation($"{templateDir}//{existingTableFile}{columns.Count}.pptx"))
+            using (Presentation pres = new Presentation($"{templateDir}//{existingTableFile}{dataTable.Columns.Count}.pptx"))
             {
                 int noOfSlides = CreateNumberOfSlides(dataTable.Rows.Count, pres);
 
@@ -43,11 +43,12 @@ namespace DocumentGenerator.PowerPoint
 
                     // get table object 
                     var tbl = (ITable)sld.Shapes.FirstOrDefault(c => c is ITable);
+                    List<string> columnNames = Helper.GetColumnNames(dataTable);
 
                     // if this is the first row create the blank column and rows for the slide so data can be inserted 
                     if (rowCounter == 0)
-                        CreateEmptyColumnAndsRows(columns, tbl);
-                    
+                        CreateEmptyColumnAndsRows(columnNames, tbl);
+
                     // assign data to the row fields
                     // start at the second row of the table since first is the colums
                     // use row varaible instead of rowcounter since it is not limted to e.g 10
@@ -61,7 +62,7 @@ namespace DocumentGenerator.PowerPoint
                             tbl[c, rowCounter + 1].FillFormat.SolidFillColor.Color = Color.FromArgb(102, 102, 102);
                         }
                     }
-                                     
+
                     // if the total number of rows perslide have been reached then set slide to next number and reset counter
                     if (rowCounter + 1 == rowsPerSlide)
                     {
@@ -81,15 +82,16 @@ namespace DocumentGenerator.PowerPoint
             return $"{title}.pptx";
         }
 
-        private static void CreateEmptyColumnAndsRows(List<string> columns, ITable tbl)
+       
+        private static void CreateEmptyColumnAndsRows(List<string> columnNames, ITable tbl)
         {
             // create number of columns 
-            for (int i = 1; i < columns.Count; i++)
+            for (int i = 1; i < columnNames.Count; i++)
                 tbl.Columns.AddClone(tbl.Columns[0], true);
 
             // assign column names 
-            for (int i = 0; i < columns.Count; i++)
-                tbl[i, 0].TextFrame.Text = columns[i];
+            for (int i = 0; i < columnNames.Count; i++)
+                tbl[i, 0].TextFrame.Text = columnNames[i];
 
             // create number of rows 
             for (int i = 1; i < rowsPerSlide; i++)

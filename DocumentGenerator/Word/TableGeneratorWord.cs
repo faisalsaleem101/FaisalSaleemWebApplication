@@ -66,11 +66,13 @@ namespace DocumentGenerator.Word
                 builder.Font.Bold = true;
                 builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
 
+                List<string> columnNames = Helper.GetColumnNames(dataTable);
+
                 // Create a new row and insert the name of each column into the first row of the table.
-                foreach (DataColumn column in dataTable.Columns)
+                foreach (var column in columnNames)
                 {
                     builder.InsertCell();
-                    builder.Writeln(column.ColumnName);
+                    builder.Writeln(column);
                 }
 
                 builder.EndRow();
