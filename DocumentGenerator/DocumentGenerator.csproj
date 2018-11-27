@@ -5,8 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aspose.Slides.NET" Version="18.8.0" />
-    <PackageReference Include="Aspose.Words" Version="18.10.0" />
+    <PackageReference Include="Aspose.Cells" Version="18.10.0" />
+    <PackageReference Include="Aspose.Slides.NET" Version="18.10.0" />
+    <PackageReference Include="Aspose.Words" Version="18.11.0" />
   </ItemGroup>
 
 </Project>

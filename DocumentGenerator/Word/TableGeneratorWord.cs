@@ -11,10 +11,9 @@ namespace DocumentGenerator.Word
 {
     public class TableGeneratorWord
     {
-        public string Run <T>(IEnumerable<T> data, string fileName)
+        public string Run <T>(IEnumerable<T> data, string title)
         {
             // The path to the documents directory.
-            var templateDir = Helper.GetTemplatePath();
             var outputDir = Helper.GetOutputPath();
 
             // Create a new document.
@@ -41,9 +40,9 @@ namespace DocumentGenerator.Word
             table.FirstRow.LastCell.RemoveAllChildren();
 
             // Save the output document.
-            doc.Save($"{outputDir}//{fileName}.docx");
+            doc.Save($"{outputDir}//{title}.docx");
 
-            return $"{fileName}.docx";
+            return $"{title}.docx";
         }
 
         // ExStart:ImportTableFromDataTable

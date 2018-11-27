@@ -64,9 +64,8 @@ namespace DocumentGenerator.Helpers
             var columns = new List<string>();
 
             foreach (var column in dataTable.Columns)
-                columns.Add(column.ToString());
+                columns.Add(column.ToString().Replace("_", " "));
 
-            columns = columns.Select(c => c.Replace("_", " ")).ToList();
             return columns;
         }
     }

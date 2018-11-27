@@ -33,7 +33,6 @@ namespace FaisalLearningProjectMVC.Data
             modelBuilder.Entity<Customer>().Property(b => b.Phone).HasColumnName("phone");
             modelBuilder.Entity<Customer>().Property(b => b.Fax).HasColumnName("fax");
 
-
             modelBuilder.Entity<Order>().HasOne(p => p.Customer).WithMany(b => b.Orders).HasForeignKey(p => p.CustomerId);
             modelBuilder.Entity<Order>().Property(b => b.ID).HasColumnName("orderid");
             modelBuilder.Entity<Order>().Property(b => b.CustomerId).HasColumnName("custid");

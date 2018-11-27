@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using DocumentGenerator.Word;
+using DocumentGenerator.Excel;
 
 namespace FaisalLearningProjectMVC.Controllers
 {
@@ -37,7 +38,7 @@ namespace FaisalLearningProjectMVC.Controllers
 
         public async Task<ActionResult> DownloadPowerpointTable()
         {
-            TableGeneratorPowerPoint tableGenerator = new TableGeneratorPowerPoint();
+            TableGeneratorPowerPoint powerpoint = new TableGeneratorPowerPoint();
             var Customers = await _context.Customers.Select(x => new
             {
                 Company_Name = x.CompanyName,
@@ -48,13 +49,13 @@ namespace FaisalLearningProjectMVC.Controllers
                 x.Country,
             }).ToListAsync();
 
-            var fileName = tableGenerator.Run(Customers, nameof(Customers));
+            var fileName = powerpoint.Run(Customers, nameof(Customers));
             return DownloadFile(fileName);
         }
 
         public async Task<ActionResult> DownloadWordTable()
         {
-            TableGeneratorWord tableGeneratorWord = new TableGeneratorWord();
+            TableGeneratorWord word = new TableGeneratorWord();
             var Customers = await _context.Customers.Select(x => new
             {
                 Company_Name = x.CompanyName,
@@ -65,12 +66,27 @@ namespace FaisalLearningProjectMVC.Controllers
                 x.Country,
             }).ToListAsync();
 
-            var fileName = tableGeneratorWord.Run(Customers, nameof(Customers));
+            var fileName = word.Run(Customers, nameof(Customers));
             return DownloadFile(fileName);
         }
 
+        public async Task<ActionResult> DownloadExcelTable()
+        {
+            TableGeneratorExcel excel = new TableGeneratorExcel();
+            var Customers = await _context.Customers.Select(x => new
+            {
+                Company_Name = x.CompanyName,
+                Full_Name = x.ContactName,
+                Title = x.ContactTitle,
+                x.Address,
+                x.City,
+                x.Country,
+            }).ToListAsync();
 
-        
+            var fileName = excel.Run(Customers, nameof(Customers));
+            return DownloadFile(fileName);
+        }
+
         private FileContentResult DownloadFile(string fileName)
         {
             var directory = Directory.GetParent(_hostingEnvironment.ContentRootPath).FullName;
