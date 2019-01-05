@@ -7,20 +7,21 @@ using FaisalLearningProjectMVC.Data;
 using Microsoft.EntityFrameworkCore;
 using MimeKit;
 using MailKit.Net.Smtp;
+using Microsoft.Extensions.Configuration;
 
 namespace FaisalLearningProjectMVC.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ContextDb _context;
+        private readonly IConfiguration _configuration;
 
-        public HomeController(ContextDb context)
+        public HomeController(ContextDb context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
 
-            //var customers = _context.Customers.Include(c => c.Orders).ToList();
             var order = _context.Orders.Include(c => c.Customer).FirstOrDefault();
-
         }
 
         public IActionResult Index()
@@ -46,16 +47,17 @@ namespace FaisalLearningProjectMVC.Controllers
 
         private async Task SendMail(string mailbody)
         {
+            var fromEmailAddress = _configuration.GetValue<string>("MyConfig:FromEmailAddress");
             var message = new MimeMessage();
-            message.From.Add(new MailboxAddress("Faisal Saleem Web App", "faisalsaleem104@gmail.com"));
-            message.To.Add(new MailboxAddress("Faisal Saleem", "faisalsaleem101@hotmail.com"));
+            message.From.Add(new MailboxAddress("Faisal Saleem Web App", fromEmailAddress));
+            message.To.Add(new MailboxAddress("Faisal Saleem", _configuration.GetValue<string>("MyConfig:ToEmailAddress")));
             message.Subject = "Contact Us";
             message.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = "test2"};
 
             using (var client = new SmtpClient())
             {
                 client.Connect("smtp.gmail.com", 587, false);
-                client.Authenticate("faisalsaleem104@gmail.com", "Greencar3");
+                client.Authenticate(fromEmailAddress, _configuration.GetValue<string>("MyConfig:FromEmailPassword"));
                 await client.SendAsync(message);
                 client.Disconnect(true);
             }            

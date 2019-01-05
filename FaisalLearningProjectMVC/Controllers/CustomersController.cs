@@ -90,7 +90,7 @@ namespace FaisalLearningProjectMVC.Controllers
         private FileContentResult DownloadFile(string fileName)
         {
             var directory = Directory.GetParent(_hostingEnvironment.ContentRootPath).FullName;
-            var outputFolder = _configuration.GetValue<string>("WebsiteSettings:OutputFolder");
+            var outputFolder = _configuration.GetValue<string>("MyConfig:OutputFolder");
 
             var filePath = $"{directory}\\{outputFolder}\\{fileName}";
             byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
