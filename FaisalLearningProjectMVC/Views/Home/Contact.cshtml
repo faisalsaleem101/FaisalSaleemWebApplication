@@ -1,17 +1,78 @@
-﻿@{
+﻿@model FaisalLearningProjectMVC.Models.ContactModel
+
+@{
     ViewData["Title"] = "Contact";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
 
-<address>
-    <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<section class="contact page" id="CONTACT">
+    <div class="section_overlay">
+        <div class="container">
+            <div class="col-md-10 col-md-offset-1 wow bounceIn">
+                <!-- Start Contact Section Title-->
+                <div class="section_title">
+                    <h2>Get in touch</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact_form wow bounceIn">
+            <div class="container">
+
+                <!-- START ERROR AND SUCCESS MESSAGE -->
+                <div class="form_error text-center">
+                    <div class="name_error hide error">Please Enter your name</div>
+                    <div class="email_error hide error">Please Enter your Email</div>
+                    <div class="email_val_error hide error">Please Enter a Valid Email Address</div>
+                    <div class="message_error hide error">Please Enter Your Message</div>
+                </div>
+                <div class="Sucess"></div>
+                <!-- END ERROR AND SUCCESS MESSAGE -->
+                <!-- FORM -->
+                <form asp-action="Contact">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <input asp-for="Name" class="form-control" placeholder="Name"/>
+                            <input asp-for="Email"class="form-control" id="email" placeholder="Email">
+                            <input asp-for="Subject" class="form-control" id="subject" placeholder="Subject">
+                        </div>
+
+                        <div class="col-md-8">
+                            <textarea asp-for="Message" class="form-control" id="message" rows="25" cols="10" placeholder="  Message Texts..."></textarea>
+                            <input type="submit" value="Send" class="btn btn-default submit-btn form_submit" />
+                        </div>
+                    </div>
+                </form>
+                <!-- END FORM -->
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 wow bounceInLeft">
+                    <div class="social_icons">
+                        <ul>
+                            <li>
+                                <a href=""><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li>
+                                <a href=""><i class="fa fa-twitter"></i></a>
+                            </li>
+                            <li>
+                                <a href=""><i class="fa fa-dribbble"></i></a>
+                            </li>
+                            <li>
+                                <a href=""><i class="fa fa-behance"></i></a>
+                            </li>
+                            <li>
+                                <a href=""><i class="fa fa-youtube-play"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END CONTACT -->

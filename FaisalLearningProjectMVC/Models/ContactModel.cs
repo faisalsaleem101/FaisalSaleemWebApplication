@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace FaisalLearningProjectMVC.Models
 {
-    public class ContactFormModel
+    public class ContactModel
     {
         [Required]
         public string Name { get; set; }
-        [Required]
-        public string LastName { get; set; }
+        public string Subject { get; set; }
         [Required]
         public string Email { get; set; }
         [Required]

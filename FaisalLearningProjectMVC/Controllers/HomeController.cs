@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using MimeKit;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Configuration;
+using System;
 
 namespace FaisalLearningProjectMVC.Controllers
 {
@@ -39,20 +40,32 @@ namespace FaisalLearningProjectMVC.Controllers
         public async Task<IActionResult> Contact()
         {
             ViewData["Message"] = "Your contact page.";
+            return View();
+        }
 
-            await SendMail("Test");
+        // POST: Orders/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Contact(ContactModel contact)
+        {
+            if (ModelState.IsValid)
+            {
+                await SendMail(contact);
+            }
 
             return View();
         }
 
-        private async Task SendMail(string mailbody)
+        private async Task SendMail(ContactModel contact)
         {
             var fromEmailAddress = _configuration.GetValue<string>("MyConfig:FromEmailAddress");
             var message = new MimeMessage();
-            message.From.Add(new MailboxAddress("Faisal Saleem Web App", fromEmailAddress));
+            message.From.Add(new MailboxAddress(contact.Name, fromEmailAddress));
             message.To.Add(new MailboxAddress("Faisal Saleem", _configuration.GetValue<string>("MyConfig:ToEmailAddress")));
-            message.Subject = "Contact Us";
-            message.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = "test2"};
+            message.Subject = $"Contact Us {(contact.Subject != null ? "-" : "")} {contact.Subject ?? ""}";
+            message.Body = new TextPart(MimeKit.Text.TextFormat.Flowed) { Text = $" From:{Environment.NewLine}{contact.Email}{Environment.NewLine}{Environment.NewLine}Message:{Environment.NewLine}{contact.Message}"};
 
             using (var client = new SmtpClient())
             {
