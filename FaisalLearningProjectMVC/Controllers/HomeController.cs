@@ -53,8 +53,11 @@ namespace FaisalLearningProjectMVC.Controllers
             if (ModelState.IsValid)
             {
                 await SendMail(contact);
-            }
 
+                ModelState.Clear();
+                return View(new ContactModel());
+            }
+           
             return View();
         }
 
@@ -64,7 +67,7 @@ namespace FaisalLearningProjectMVC.Controllers
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress(contact.Name, fromEmailAddress));
             message.To.Add(new MailboxAddress("Faisal Saleem", _configuration.GetValue<string>("MyConfig:ToEmailAddress")));
-            message.Subject = $"Contact Us {(contact.Subject != null ? "-" : "")} {contact.Subject ?? ""}";
+            message.Subject = $"Contact Us {(contact.Subject != null ? $"- {contact.Subject}" : "")} ";
             message.Body = new TextPart(MimeKit.Text.TextFormat.Flowed) { Text = $" From:{Environment.NewLine}{contact.Email}{Environment.NewLine}{Environment.NewLine}Message:{Environment.NewLine}{contact.Message}"};
 
             using (var client = new SmtpClient())
