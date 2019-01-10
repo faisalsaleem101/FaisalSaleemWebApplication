@@ -26,6 +26,9 @@
                     <div class="email_error hide error">Please Enter your Email</div>
                     <div class="email_val_error hide error">Please Enter a Valid Email Address</div>
                     <div class="message_error hide error">Please Enter Your Message</div>
+                    <span asp-validation-for="Name" class="name_error error"></span>
+                    <span asp-validation-for="Email" class="name_error error"></span>
+                    <span asp-validation-for="Message" class="name_error error"></span>
                 </div>
                 <div class="Sucess"></div>
                 <!-- END ERROR AND SUCCESS MESSAGE -->
@@ -33,8 +36,8 @@
                 <form asp-action="Contact">
                     <div class="row">
                         <div class="col-md-4">
-                            <input asp-for="Name" class="form-control" placeholder="Name"/>
-                            <input asp-for="Email"class="form-control" id="email" placeholder="Email">
+                            <input asp-for="Name" class="form-control" id="name" placeholder="Name"/>
+                            <input asp-for="Email" class="form-control" id="email" placeholder="Email">
                             <input asp-for="Subject" class="form-control" id="subject" placeholder="Subject">
                         </div>
 

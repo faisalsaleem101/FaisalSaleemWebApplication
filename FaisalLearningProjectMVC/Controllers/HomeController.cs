@@ -53,9 +53,7 @@ namespace FaisalLearningProjectMVC.Controllers
             if (ModelState.IsValid)
             {
                 await SendMail(contact);
-
                 ModelState.Clear();
-                return View(new ContactModel());
             }
            
             return View();
@@ -64,19 +62,31 @@ namespace FaisalLearningProjectMVC.Controllers
         private async Task SendMail(ContactModel contact)
         {
             var fromEmailAddress = _configuration.GetValue<string>("MyConfig:FromEmailAddress");
+            var fromEmailPassword = _configuration.GetValue<string>("MyConfig:FromEmailPassword");
+            var toEmailAddress = _configuration.GetValue<string>("MyConfig:ToEmailAddress");
+            string template = GetEmailBody(contact);
+
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress(contact.Name, fromEmailAddress));
-            message.To.Add(new MailboxAddress("Faisal Saleem", _configuration.GetValue<string>("MyConfig:ToEmailAddress")));
+            message.To.Add(new MailboxAddress("Faisal Saleem", toEmailAddress));
             message.Subject = $"Contact Us {(contact.Subject != null ? $"- {contact.Subject}" : "")} ";
-            message.Body = new TextPart(MimeKit.Text.TextFormat.Flowed) { Text = $" From:{Environment.NewLine}{contact.Email}{Environment.NewLine}{Environment.NewLine}Message:{Environment.NewLine}{contact.Message}"};
+            message.Body = new TextPart(MimeKit.Text.TextFormat.Flowed) { Text = template };
 
             using (var client = new SmtpClient())
             {
                 client.Connect("smtp.gmail.com", 587, false);
-                client.Authenticate(fromEmailAddress, _configuration.GetValue<string>("MyConfig:FromEmailPassword"));
+                client.Authenticate(fromEmailAddress, fromEmailPassword);
                 await client.SendAsync(message);
                 client.Disconnect(true);
-            }            
+            }
+        }
+
+        private static string GetEmailBody(ContactModel contact)
+        {
+            return $@"From:
+            {contact.Email}
+            Message:
+            {contact.Message}";
         }
 
         public IActionResult Error()

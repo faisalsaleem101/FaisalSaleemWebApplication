@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FaisalLearningProjectMVC.ValidationAttributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,12 +9,16 @@ namespace FaisalLearningProjectMVC.Models
 {
     public class ContactModel
     {
-        [Required]
+        [GenericRequired]
         public string Name { get; set; }
+
         public string Subject { get; set; }
-        [Required]
+
+        [GenericRequired]
+        [EmailAddress]
         public string Email { get; set; }
-        [Required]
+
+        [GenericRequired]
         public string Message { get; set; }
     }
 }
