@@ -4,7 +4,6 @@
     ViewData["Title"] = "Contact";
 }
 
-
 <section class="contact page" id="CONTACT">
     <div class="section_overlay">
         <div class="container">
@@ -19,14 +18,13 @@
 
         <div class="contact_form wow bounceIn">
             <div class="container">
+                hello
+                <span asp-validation-for="Message" class="text-danger"></span>
+
 
                 <!-- START ERROR AND SUCCESS MESSAGE -->
-                <div class="form_error text-center">
-                    <div class="name_error hide error">Please Enter your name</div>
-                    <div class="email_error hide error">Please Enter your Email</div>
-                    <div class="email_val_error hide error">Please Enter a Valid Email Address</div>
-                    <div class="message_error hide error">Please Enter Your Message</div>
-                    <span asp-validation-for="Name" class="name_error error"></span>
+                <div>
+                    <span asp-validation-for="Name"></span>
                     <span asp-validation-for="Email" class="name_error error"></span>
                     <span asp-validation-for="Message" class="name_error error"></span>
                 </div>
@@ -34,9 +32,14 @@
                 <!-- END ERROR AND SUCCESS MESSAGE -->
                 <!-- FORM -->
                 <form asp-action="Contact">
+                    <div>
+                        <span asp-validation-for="Name"></span>
+                        <span asp-validation-for="Email" class="name_error error"></span>
+                        <span asp-validation-for="Message" class="name_error error"></span>
+                    </div>
                     <div class="row">
                         <div class="col-md-4">
-                            <input asp-for="Name" class="form-control" id="name" placeholder="Name"/>
+                            <input asp-for="Name" class="form-control" id="name" placeholder="Name" />
                             <input asp-for="Email" class="form-control" id="email" placeholder="Email">
                             <input asp-for="Subject" class="form-control" id="subject" placeholder="Subject">
                         </div>
@@ -79,3 +82,7 @@
     </div>
 </section>
 <!-- END CONTACT -->
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
