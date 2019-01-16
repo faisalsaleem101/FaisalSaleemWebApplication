@@ -1,12 +1,15 @@
-﻿//jQuery.validator.addMethod("GenericRequired",
-//    function (value, element, param) {
+﻿(function ($) {
+    $.validator.addMethod('GenericRequired', function (value, element, params) {
 
-//        if (value === "" || value === null) {
-//            return false;
-//        }
-//        else {
-//            return true;
-//        }
-//    });
+        if (value === "" || value === null) {
+            return false;
+        }
+        return true;
 
-//jQuery.validator.unobtrusive.adapters.addBool("GenericRequired");
+    }, '');
+
+    $.validator.unobtrusive.adapters.add("GenericRequired", ["GenericRequired"], function (options) {
+        options.rules["GenericRequired"] = "#" + options.params.genericrequired;
+        options.messages["GenericRequired"] = options.message;
+    });
+})(jQuery);

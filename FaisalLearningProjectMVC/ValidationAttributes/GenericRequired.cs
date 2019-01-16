@@ -11,18 +11,19 @@ namespace FaisalLearningProjectMVC.ValidationAttributes
     public class GenericRequiredAttribute : ValidationAttribute, IClientModelValidator
     {
 
-        public override bool IsValid(object value)
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var message = value as string;
+            var text = value?.ToString() ?? "";
 
-            if (string.IsNullOrEmpty(message))
+            if (string.IsNullOrEmpty(text))
             {
-                //ErrorMessage = $"Please enter your {context.ModelMetadata.GetDisplayName() }";
-                return false;
+                var errorMessage = $"Please enter your {validationContext.DisplayName}";
+                return new ValidationResult(errorMessage);
             }
 
-            return true;
+            return ValidationResult.Success;
         }
+
 
         public void AddValidation(ClientModelValidationContext context)
         {

@@ -9,7 +9,7 @@ namespace FaisalLearningProjectMVC.Models
 {
     public class ContactModel
     {
-        [Required]
+        [GenericRequired]
         public string Name { get; set; }
 
         public string Subject { get; set; }

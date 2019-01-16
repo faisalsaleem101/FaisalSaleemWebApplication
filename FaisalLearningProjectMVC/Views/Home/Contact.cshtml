@@ -18,24 +18,14 @@
 
         <div class="contact_form wow bounceIn">
             <div class="container">
-                hello
-                <span asp-validation-for="Message" class="text-danger"></span>
-
-
-                <!-- START ERROR AND SUCCESS MESSAGE -->
-                <div>
-                    <span asp-validation-for="Name"></span>
-                    <span asp-validation-for="Email" class="name_error error"></span>
-                    <span asp-validation-for="Message" class="name_error error"></span>
-                </div>
                 <div class="Sucess"></div>
                 <!-- END ERROR AND SUCCESS MESSAGE -->
                 <!-- FORM -->
                 <form asp-action="Contact">
                     <div>
-                        <span asp-validation-for="Name"></span>
+                        <span asp-validation-for="Name" class="name_error error"></span>
                         <span asp-validation-for="Email" class="name_error error"></span>
-                        <span asp-validation-for="Message" class="name_error error"></span>
+                        <span asp-validation-for="Message" class="text-danger"></span>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
@@ -82,7 +72,3 @@
     </div>
 </section>
 <!-- END CONTACT -->
-
-@section Scripts {
-    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
-}
