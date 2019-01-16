@@ -333,9 +333,6 @@ body {
     color: #dd4b39
 }
 
-.btn-googleplus > span {
-    background: #dd4b39
-}
 
 /*Pinterest*/
 .btn-pinterest:hover > i, .btn-pinterest:focus > i {
