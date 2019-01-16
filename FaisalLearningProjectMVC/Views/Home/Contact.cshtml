@@ -4,7 +4,7 @@
     ViewData["Title"] = "Contact";
 }
 
-<section class="contact page" id="CONTACT">
+<div class="contact page" id="CONTACT">
     <div class="section_overlay">
         <div class="container">
             <div class="col-md-10 col-md-offset-1 wow bounceIn">
@@ -22,10 +22,11 @@
                 <!-- END ERROR AND SUCCESS MESSAGE -->
                 <!-- FORM -->
                 <form asp-action="Contact">
+                    <div asp-validation-summary="All" class="error"></div>
                     <div>
-                        <span asp-validation-for="Name" class="name_error error"></span>
-                        <span asp-validation-for="Email" class="name_error error"></span>
-                        <span asp-validation-for="Message" class="text-danger"></span>
+                        <span asp-validation-for="Name" class="error"></span>
+                        <span asp-validation-for="Email" class="error"></span>
+                        <span asp-validation-for="Message" class="error"></span>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
@@ -44,31 +45,23 @@
             </div>
         </div>
 
-        <div class="container">
+        <footer class="container">
             <div class="row">
                 <div class="col-md-12 wow bounceInLeft">
                     <div class="social_icons">
-                        <ul>
-                            <li>
-                                <a href=""><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a href=""><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href=""><i class="fa fa-dribbble"></i></a>
-                            </li>
-                            <li>
-                                <a href=""><i class="fa fa-behance"></i></a>
-                            </li>
-                            <li>
-                                <a href=""><i class="fa fa-youtube-play"></i></a>
-                            </li>
-                        </ul>
+                        <div id="social-platforms social-button">
+                            <a class="btn btn-icon btn-facebook " href="#"><i class="fa fa-facebook"></i><span>Facebook</span></a>
+                            <a class="btn btn-icon btn-twitter" href="#"><i class="fa fa-twitter"></i><span>Twitter</span></a>
+                            <a class="btn btn-icon btn-googleplus" href="#"><i class="fa fa-google-plus"></i><span>Google+</span></a>
+                            <a class="btn btn-icon btn-pinterest" href="#"><i class="fa fa-pinterest"></i><span>Pinterest</span></a>
+                            <a class="btn btn-icon btn-linkedin" href="#"><i class="fa fa-linkedin"></i><span>LinkedIn</span></a>
+                        </div>
+
                     </div>
                 </div>
             </div>
-        </div>
+        </footer>
+
     </div>
-</section>
+</div>
 <!-- END CONTACT -->

@@ -818,6 +818,7 @@ div.carousel-inner .item img {
 .social_icons {
     padding-top: 50px;
     padding-bottom: 70px;
+    text-align:center;
 }
 .social_icons ul {
     margin: 0;
@@ -856,11 +857,11 @@ div.carousel-inner .item img {
     color: #f39c12;
     display: block;
     padding-bottom: 15px;
-    font-size: 18px
+    font-size: 14px
 }
 .error i {
     padding-right: 10px;
-    font-size: 18px
+    font-size: 14px
 }
 .Sucess {
     color: #4DB849;
