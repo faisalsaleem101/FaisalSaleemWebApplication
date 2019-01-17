@@ -22,21 +22,19 @@
                 <!-- END ERROR AND SUCCESS MESSAGE -->
                 <!-- FORM -->
                 <form asp-action="Contact">
-                    <div asp-validation-summary="All" class="error"></div>
-                    <div>
-                        <span asp-validation-for="Name" class="error"></span>
-                        <span asp-validation-for="Email" class="error"></span>
-                        <span asp-validation-for="Message" class="error"></span>
-                    </div>
+                    @*<div asp-validation-summary="All" class="error"></div>*@
                     <div class="row">
                         <div class="col-md-4">
                             <input asp-for="Name" class="form-control" id="name" placeholder="Name" />
+                            <span asp-validation-for="Name" class="error"></span>
                             <input asp-for="Email" class="form-control" id="email" placeholder="Email">
+                            <span asp-validation-for="Email" class="error"></span>
                             <input asp-for="Subject" class="form-control" id="subject" placeholder="Subject">
                         </div>
 
                         <div class="col-md-8">
                             <textarea asp-for="Message" class="form-control" id="message" rows="25" cols="10" placeholder="  Message Texts..."></textarea>
+                            <span asp-validation-for="Message" class="error"></span>
                             <input type="submit" value="Send" class="btn btn-default submit-btn form_submit" />
                         </div>
                     </div>
