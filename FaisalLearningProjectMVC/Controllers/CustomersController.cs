@@ -50,7 +50,7 @@ namespace FaisalLearningProjectMVC.Controllers
             }).ToListAsync();
 
             var fileName = powerpoint.Run(Customers, nameof(Customers));
-            return DownloadFile(fileName);
+            return await DownloadFile(fileName);
         }
 
         public async Task<ActionResult> DownloadWordTable()
@@ -67,7 +67,7 @@ namespace FaisalLearningProjectMVC.Controllers
             }).ToListAsync();
 
             var fileName = word.Run(Customers, nameof(Customers));
-            return DownloadFile(fileName);
+            return await DownloadFile(fileName);
         }
 
         public async Task<ActionResult> DownloadExcelTable()
@@ -84,17 +84,19 @@ namespace FaisalLearningProjectMVC.Controllers
             }).ToListAsync();
 
             var fileName = excel.Run(Customers, nameof(Customers));
-            return DownloadFile(fileName);
+            return await DownloadFile(fileName);
         }
 
-        private FileContentResult DownloadFile(string fileName)
+        private async Task<FileContentResult> DownloadFile(string fileName)
         {
             var directory = Directory.GetParent(_hostingEnvironment.ContentRootPath).FullName;
             var outputFolder = _configuration.GetValue<string>("MyConfig:OutputFolder");
 
             var filePath = $"{directory}\\{outputFolder}\\{fileName}";
-            byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
-            return File(fileBytes, "application/x-msdownload", fileName);
+            byte[] fileBytes = await System.IO.File.ReadAllBytesAsync(filePath);
+            var file =  File(fileBytes, "application/x-msdownload", fileName);
+
+            return file;
         }
 
         // GET: Customers/Details/5
