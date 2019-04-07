@@ -21,7 +21,8 @@
         <!-- Pixeden Icon Font -->
         <link rel="stylesheet" href="/css/bent/Pe-icon-7-stroke.css">
         <!-- Font Awesome -->
-        <link href="/css/bent/font-awesome.min.css" rel="stylesheet">
+        @*<link href="/css/bent/font-awesome.min.css" rel="stylesheet">*@
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <!-- PrettyPhoto -->
         <link href="/css/bent/prettyPhoto.css" rel="stylesheet">
         <!-- Favicon -->
@@ -34,9 +35,9 @@
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
     </environment>
     <environment exclude="Development">
@@ -69,12 +70,18 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
                             <!-- NAV -->
-                            <li class="@(pageUrl == "/" ? "active" : "")"><a class="navLink" asp-controller="Home" asp-action="Index">HOME</a> </li>
-                            <li class="@(pageUrl == "/Home/About" ? "active" : "")"><a class="navLink" asp-controller="Home"  asp-action="About">ABOUT </a> </li>
-                            <li class="@(pageUrl == "/Home/Features" ? "active" : "")"><a class="navLink" asp-controller="Home"  asp-action="Features">FEATURES</a></li>
-                            <li class="@(pageUrl == "/Home/Screens" ? "active" : "")"><a class="navLink" asp-controller="Home"  asp-action="Screens">SCREENS</a> </li>
-                            <li class="@(pageUrl == "/Home/Download" ? "active" : "")"><a class="navLink" asp-controller="Home"  asp-action="Download">DOWNLOAD </a> </li>
-                            <li class="@(pageUrl == "/Home/Contact" ? "active" : "")"><a class="navLink" asp-controller="Home"  asp-action="Contact">CONTACT </a> </li>
+                            <li class="@(pageUrl == "/" ? "active" : "")">
+                            <a class="navLink" asp-controller="Home" asp-action="Index">HOME</a> </li>
+                            <li class="@(pageUrl == "/Home/About" ? "active" : "")">
+                            <a class="navLink" asp-controller="Home" asp-action="About">ABOUT </a> </li>
+                            <li class="@(pageUrl == "/Home/Features" ? "active" : "")">
+                            <a class="navLink" asp-controller="Home" asp-action="Features">FEATURES</a></li>
+                            <li class="@(pageUrl == "/Home/Screens" ? "active" : "")">
+                            <a class="navLink" asp-controller="Home" asp-action="Screens">SCREENS</a> </li>
+                            <li class="@(pageUrl == "/Home/Download" ? "active" : "")">
+                            <a class="navLink" asp-controller="Home" asp-action="Download">DOWNLOAD </a> </li>
+                            <li class="@(pageUrl == "/Home/Contact" ? "active" : "")">
+                            <a class="navLink" asp-controller="Home" asp-action="Contact">CONTACT </a> </li>
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->

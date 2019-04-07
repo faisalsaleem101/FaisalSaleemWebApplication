@@ -20,5 +20,6 @@ namespace FaisalLearningProjectMVC.Models
 
         [GenericRequired]
         public string Message { get; set; }
+
     }
 }

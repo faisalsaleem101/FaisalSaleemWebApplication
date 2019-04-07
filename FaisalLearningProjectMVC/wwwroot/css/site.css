@@ -31,9 +31,9 @@
     border-bottom: 1px solid #f49e0b !important;
 }
 
-.tabulator .tabulator-header .tabulator-col {
-    background: #666 !important;
-}
+    .tabulator .tabulator-header .tabulator-col {
+        background: #666 !important;
+    }
 
 .tabulator .tabulator-footer .tabulator-page.active {
     color: #f39c12 !important;
@@ -49,8 +49,8 @@
 
 /*custom css by faisal saleem start section*/
 
-.active{
-    color:red;
+.active {
+    color: red;
 }
 
 /* navbar */
@@ -58,69 +58,69 @@
     background-color: #F8F8F8;
     border-color: #E7E7E7;
 }
-/* Title */
-.navbar-default .navbar-brand {
-    color: #777;
-}
-
-    .navbar-default .navbar-brand:hover,
-    .navbar-default .navbar-brand:focus {
-        color: #5E5E5E;
-    }
-/* Link */
-.navbar-default .navbar-nav > li > a {
-    color: #777;
-}
-
-    .navbar-default .navbar-nav > li > a:hover,
-    .navbar-default .navbar-nav > li > a:focus {
-        color: #333;
+    /* Title */
+    .navbar-default .navbar-brand {
+        color: #777;
     }
 
-.navbar-default .navbar-nav > .active > a,
-.navbar-default .navbar-nav > .active > a:hover,
-.navbar-default .navbar-nav > .active > a:focus {
-    color: #555;
-    background-color: #E7E7E7;
-}
-
-.navbar-default .navbar-nav > .open > a,
-.navbar-default .navbar-nav > .open > a:hover,
-.navbar-default .navbar-nav > .open > a:focus {
-    color: #555;
-    background-color: #D5D5D5;
-}
-/* Caret */
-.navbar-default .navbar-nav > .dropdown > a .caret {
-    border-top-color: #777;
-    border-bottom-color: #777;
-}
-
-.navbar-default .navbar-nav > .dropdown > a:hover .caret,
-.navbar-default .navbar-nav > .dropdown > a:focus .caret {
-    border-top-color: #333;
-    border-bottom-color: #333;
-}
-
-.navbar-default .navbar-nav > .open > a .caret,
-.navbar-default .navbar-nav > .open > a:hover .caret,
-.navbar-default .navbar-nav > .open > a:focus .caret {
-    border-top-color: #555;
-    border-bottom-color: #555;
-}
-/* Mobile version */
-.navbar-default .navbar-toggle {
-    border-color: #DDD;
-}
-
-    .navbar-default .navbar-toggle:hover,
-    .navbar-default .navbar-toggle:focus {
-        background-color: #DDD;
+        .navbar-default .navbar-brand:hover,
+        .navbar-default .navbar-brand:focus {
+            color: #5E5E5E;
+        }
+    /* Link */
+    .navbar-default .navbar-nav > li > a {
+        color: #777;
     }
 
-    .navbar-default .navbar-toggle .icon-bar {
-        background-color: #CCC;
+        .navbar-default .navbar-nav > li > a:hover,
+        .navbar-default .navbar-nav > li > a:focus {
+            color: #333;
+        }
+
+    .navbar-default .navbar-nav > .active > a,
+    .navbar-default .navbar-nav > .active > a:hover,
+    .navbar-default .navbar-nav > .active > a:focus {
+        color: #555;
+        background-color: #E7E7E7;
     }
+
+    .navbar-default .navbar-nav > .open > a,
+    .navbar-default .navbar-nav > .open > a:hover,
+    .navbar-default .navbar-nav > .open > a:focus {
+        color: #555;
+        background-color: #D5D5D5;
+    }
+    /* Caret */
+    .navbar-default .navbar-nav > .dropdown > a .caret {
+        border-top-color: #777;
+        border-bottom-color: #777;
+    }
+
+    .navbar-default .navbar-nav > .dropdown > a:hover .caret,
+    .navbar-default .navbar-nav > .dropdown > a:focus .caret {
+        border-top-color: #333;
+        border-bottom-color: #333;
+    }
+
+    .navbar-default .navbar-nav > .open > a .caret,
+    .navbar-default .navbar-nav > .open > a:hover .caret,
+    .navbar-default .navbar-nav > .open > a:focus .caret {
+        border-top-color: #555;
+        border-bottom-color: #555;
+    }
+    /* Mobile version */
+    .navbar-default .navbar-toggle {
+        border-color: #DDD;
+    }
+
+        .navbar-default .navbar-toggle:hover,
+        .navbar-default .navbar-toggle:focus {
+            background-color: #DDD;
+        }
+
+        .navbar-default .navbar-toggle .icon-bar {
+            background-color: #CCC;
+        }
 
 @media (max-width: 767px) {
     .navbar-default .navbar-nav .open .dropdown-menu > li > a {
@@ -158,7 +158,7 @@
 }
 
 
-/*custom css by faisal saleem end section*/ 
+/*custom css by faisal saleem end section*/
 
 body {
     padding-top: 50px;
@@ -340,12 +340,12 @@ body {
 
 
 /*Pinterest*/
-.btn-pinterest:hover > i, .btn-pinterest:focus > i {
+.btn-instagram:hover > i, .btn-pinterest:focus > i {
     color: #cb2028
 }
 
-.btn-pinterest > span {
-    background: #cb2028
+.btn-instagram > span {
+    background: #DD2A7B
 }
 
 /*LinkedIn*/
@@ -360,8 +360,66 @@ body {
 
 
 
+/*test*/
+
+
+.center {
+    display: table;
+    width: 100%;
+    padding-top: 30px;
+}
+
+#social-test {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 30px;   
+}
+
+    #social-test .social {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 0px;
+        background: #717171;
+    }
+
+#social-test li {
+    display: inline-block;
+}
+
+#social-test li a {
+    color: rgba(256, 256, 256, 0.6);
+    border-radius: 6px;
+    list-style-type: none;
+    display: inline-block;
+    width: 37px;
+    height: 37px;
+    line-height: 37px;
+    padding: 1%;
+    border: 1px solid rgba(256, 256, 256, 0.6);
+    cursor: pointer;
+    margin-left: 10px;
+    transition: ease .3s;
+}
+
+#social-test li a:hover {
+    color: rgba(256, 256, 256, 1);
+    border: 1px solid rgba(256, 256, 256, 1);
+}
 
 
 
 
 
+
+
+
+    .social:hover > li:hover {
+        opacity: 1;
+    }
+
+.credits, .credits a {
+    font-size: 20px;
+    font-family: Open Sans;
+    color: rgba(256, 256, 256, 0.6);
+}

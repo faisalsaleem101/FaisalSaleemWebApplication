@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+﻿using DocumentGenerator.Excel;
+using DocumentGenerator.PowerPoint;
+using DocumentGenerator.Word;
 using FaisalLearningProjectMVC.Data;
 using FaisalLearningProjectMVC.Models;
-using DocumentGenerator.PowerPoint;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Hosting.Internal;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.IO;
-using DocumentGenerator.Word;
-using DocumentGenerator.Excel;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace FaisalLearningProjectMVC.Controllers
 {
@@ -32,9 +28,9 @@ namespace FaisalLearningProjectMVC.Controllers
 
         // GET: Customers
         public async Task<IActionResult> Index()
-        {        
+        {
             return View(await _context.Customers.ToListAsync());
-        }        
+        }
 
         public async Task<ActionResult> DownloadPowerpointTable()
         {
@@ -94,7 +90,7 @@ namespace FaisalLearningProjectMVC.Controllers
 
             var filePath = $"{directory}\\{outputFolder}\\{fileName}";
             byte[] fileBytes = await System.IO.File.ReadAllBytesAsync(filePath);
-            var file =  File(fileBytes, "application/x-msdownload", fileName);
+            var file = File(fileBytes, "application/x-msdownload", fileName);
 
             return file;
         }

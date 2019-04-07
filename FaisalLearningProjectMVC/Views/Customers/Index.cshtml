@@ -1,25 +1,25 @@
 ﻿@model IEnumerable<FaisalLearningProjectMVC.Models.Customer>
 
-@{
+    @{
     ViewData["Title"] = "Index";
-}
+    }
 
-<h2>Index</h2>
+    <h2>Index</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
 
-<div class="text-right table-header">
-   
-    <a asp-action="DownloadExcelTable" id="download-excel"><img src="~/images/ExcelImage.png" /> </a>
-    <a asp-action="DownloadWordTable" id="download-word"><img src="~/images/WordDocumentImage.png" /> </a>
-    <a asp-action="DownloadPowerpointTable" id="download-powerpoint"><img src="~/images/PowerPointImage.png" /> </a>
-</div>
+    <div class="text-right table-header">
 
-<div id="example-table"></div>
+        <a asp-action="DownloadExcelTable" id="download-excel"><img src="~/images/ExcelImage.png" /> </a>
+        <a asp-action="DownloadWordTable" id="download-word"><img src="~/images/WordDocumentImage.png" /> </a>
+        <a asp-action="DownloadPowerpointTable" id="download-powerpoint"><img src="~/images/PowerPointImage.png" /> </a>
+    </div>
 
-@section scripts
+    <div id="example-table"></div>
+
+    @section scripts
     {
     <script>
         $(document).ready(function () {
@@ -46,7 +46,7 @@
 
         });
 
-          
+
 
     </script>
-}
+    }

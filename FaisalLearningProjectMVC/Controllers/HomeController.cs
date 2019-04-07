@@ -1,14 +1,13 @@
-﻿using System.Diagnostics;
+﻿using FaisalLearningProjectMVC.Data;
+using FaisalLearningProjectMVC.Models;
+using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using MimeKit;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using FaisalLearningProjectMVC.Models;
-using FaisalLearningProjectMVC.Data;
-using Microsoft.EntityFrameworkCore;
-using MimeKit;
-using MailKit.Net.Smtp;
-using Microsoft.Extensions.Configuration;
-using System;
 
 namespace FaisalLearningProjectMVC.Controllers
 {
@@ -37,7 +36,7 @@ namespace FaisalLearningProjectMVC.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Contact()
+        public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
             return View();
@@ -55,7 +54,7 @@ namespace FaisalLearningProjectMVC.Controllers
                 await SendMail(contact);
                 ModelState.Clear();
             }
-           
+
             return View();
         }
 
