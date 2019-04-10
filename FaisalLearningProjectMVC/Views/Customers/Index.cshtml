@@ -1,52 +1,72 @@
 ﻿@model IEnumerable<FaisalLearningProjectMVC.Models.Customer>
 
-    @{
+@{
     ViewData["Title"] = "Index";
-    }
+}
 
-    <h2>Index</h2>
+<h2>Index</h2>
 
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
 
-    <div class="text-right table-header">
+<div class="text-right table-header">
 
-        <a asp-action="DownloadExcelTable" id="download-excel"><img src="~/images/ExcelImage.png" /> </a>
-        <a asp-action="DownloadWordTable" id="download-word"><img src="~/images/WordDocumentImage.png" /> </a>
-        <a asp-action="DownloadPowerpointTable" id="download-powerpoint"><img src="~/images/PowerPointImage.png" /> </a>
-    </div>
+    <a asp-action="DownloadExcelTable" id="download-excel"><img src="~/images/ExcelImage.png" /> </a>
+    <a asp-action="DownloadWordTable" id="download-word"><img src="~/images/WordDocumentImage.png" /> </a>
+    <a asp-action="DownloadPowerpointTable" id="download-powerpoint"><img src="~/images/PowerPointImage.png" /> </a>
+</div>
 
-    <div id="example-table"></div>
+<div id="example-table"></div>
 
-    @section scripts
+@section scripts
     {
     <script>
         $(document).ready(function () {
             $.get("Customers/GetCustomerIndexTableData", function (data, status) {
+
+                //custom icon formatter
+                var DeleteIcon = function (cell, formatterParams) { //plain text value
+                    return "<i class='fa fa-trash'></i>";
+                };
+
+                var EditIcon = function (cell, formatterParams) { //plain text value
+                    return "<i class='fa fa-edit'></i>";
+                };
+
+                var ShowIcon = function (cell, formatterParams) { //plain text value
+                    return "<i class='fa fa-search'></i>";
+                };
+
+
                 $("#example-table").tabulator({
                     data: data,
                     pagination: "local",
                     paginationSize: 14,
                     layout: "fitColumns",
                     columns: [
+                        { title: "", field: "icon", align: "center", width: 30, headerSort: false, formatter: ShowIcon, cellClick: function (e, cell) { cell.getRow().delete(); } },
+                        { title: "", field: "icon", align: "center", width: 30, headerSort: false, formatter: EditIcon, cellClick: function (e, cell) { cell.getRow().delete(); } },
+                        { title: "", field: "icon", align: "center", width: 30, headerSort: false, formatter: DeleteIcon, cellClick: function (e, cell) { cell.getRow().delete(); } },
                         { title: "Company Name", field: "companyName", sorter: "string", width: 200 },
                         { title: "Full Name", field: "contactName", sorter: "string", width: 200 },
                         { title: "Title", field: "contactTitle", sorter: "string", width: 200 },
                         { title: "Address", field: "address", sorter: "string", width: 200 },
                         { title: "City", field: "city", sorter: "string", width: 100 },
                         { title: "Country", field: "country", sorter: "string", width: 100 },
-                        { title: "Phone", field: "phone", sorter: "string", width: 138 },
                     ],
                 })
+
+                //Set initial page to start at the first page
+                $("#example-table").tabulator("setPage", 1);
+
             });
 
-            //Set initial page
-            $("#example-table").tabulator("setPage", 1);
+
 
         });
 
 
 
     </script>
-    }
+}
