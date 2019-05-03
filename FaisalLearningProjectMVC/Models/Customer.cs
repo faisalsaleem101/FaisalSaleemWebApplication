@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace FaisalLearningProjectMVC.Models
 {
@@ -18,6 +15,8 @@ namespace FaisalLearningProjectMVC.Models
         public string Country { get; set; }
         public string Phone { get; set; }
         public string Fax { get; set; }
+
+        public bool IsActive { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; }
 

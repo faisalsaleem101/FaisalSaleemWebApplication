@@ -29,7 +29,7 @@ namespace FaisalLearningProjectMVC.Controllers
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Customers.ToListAsync());
+            return View(await _context.Customers.Where(c => c.IsActive).ToListAsync());
         }
 
         public async Task<ActionResult> DownloadPowerpointTable()
@@ -204,6 +204,7 @@ namespace FaisalLearningProjectMVC.Controllers
             return View(customer);
         }
 
+
         // POST: Customers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -215,6 +216,18 @@ namespace FaisalLearningProjectMVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // POST: Customers/Delete/5
+        [HttpPost, ActionName("SoftDelete")]
+        public async Task<IActionResult> SoftDelete(int id)
+        {
+            var customer = await _context.Customers.SingleOrDefaultAsync(m => m.ID == id);
+            customer.IsActive = false;
+            _context.Update(customer);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
         private bool CustomerExists(int id)
         {
             return _context.Customers.Any(e => e.ID == id);
@@ -222,7 +235,7 @@ namespace FaisalLearningProjectMVC.Controllers
 
         public async Task<IActionResult> GetCustomersData()
         {
-            var customers = await _context.Customers.ToListAsync();
+            var customers = await _context.Customers.Where(c => c.IsActive).ToListAsync();
             return Json(customers);
         }
     }

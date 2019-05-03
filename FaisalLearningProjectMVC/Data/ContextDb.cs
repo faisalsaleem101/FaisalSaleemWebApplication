@@ -1,15 +1,11 @@
 ﻿using FaisalLearningProjectMVC.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FaisalLearningProjectMVC.Data
 {
     public class ContextDb : DbContext
     {
-        public ContextDb(DbContextOptions<ContextDb> options) 
+        public ContextDb(DbContextOptions<ContextDb> options)
             : base(options)
         {
         }
@@ -33,6 +29,7 @@ namespace FaisalLearningProjectMVC.Data
             modelBuilder.Entity<Customer>().Property(b => b.Country).HasColumnName("country");
             modelBuilder.Entity<Customer>().Property(b => b.Phone).HasColumnName("phone");
             modelBuilder.Entity<Customer>().Property(b => b.Fax).HasColumnName("fax");
+            modelBuilder.Entity<Customer>().Property(b => b.IsActive).HasColumnName("IsActive");
 
             modelBuilder.Entity<Order>().HasOne(p => p.Customer).WithMany(b => b.Orders).HasForeignKey(p => p.CustomerId);
             modelBuilder.Entity<Order>().Property(b => b.ID).HasColumnName("orderid");

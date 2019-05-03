@@ -46,32 +46,42 @@
                     layout: "fitColumns",
                     columns: [
                         {
-                            title: "ShowButton", field: "icon", align: "center", width: 30, headerSort: false, formatter: ShowIcon, cellClick:
+                            title: "", field: "icon", align: "center", width: 30, headerSort: false, formatter: ShowIcon, cellClick:
                                 function (e, cell) {
                                     var rowData = cell.getRow().getData();
                                     window.location.href = '@Url.Action("Details", "Customers")/' + rowData.id;
                                 }
                         },
                         {
-                            title: "EditButton", field: "icon", align: "center", width: 30, headerSort: false, formatter: EditIcon, cellClick:
+                            title: "", field: "icon", align: "center", width: 30, headerSort: false, formatter: EditIcon, cellClick:
                                 function (e, cell) {
                                     var rowData = cell.getRow().getData();
                                     window.location.href = '@Url.Action("Edit", "Customers")/' + rowData.id;
                             }
                         },
                         {
-                            title: "DeleteButton", field: "icon", align: "center", width: 30, headerSort: false, formatter: DeleteIcon, cellClick:
+                            title: "", field: "icon", align: "center", width: 30, headerSort: false, formatter: DeleteIcon, cellClick:
                                 function (e, cell) {
                                     cell.getRow().delete();
+
+                                    var rowData = cell.getRow().getData();
+                                    $.ajax({
+                                        url: '/Customers/SoftDelete/' +  rowData.id,
+                                        type: 'POST',
+                                        contentType: 'application/json; charset=utf-8',
+                                        dataType: 'json',
+
+                                    });
                                 }
                         },
                         { title: "ID", field: "id", width: 50, visible: false },
-                        { title: "Company Name", field: "companyName", sorter: "string", width: 200 },
                         { title: "Full Name", field: "contactName", sorter: "string", width: 200 },
-                        { title: "Title", field: "contactTitle", sorter: "string", width: 200 },
+                        { title: "Company", field: "companyName", sorter: "string", width: 200 },
+                        { title: "Job Title", field: "contactTitle", sorter: "string", width: 200 },
                         { title: "Address", field: "address", sorter: "string", width: 200 },
                         { title: "City", field: "city", sorter: "string", width: 100 },
-                        { title: "Country", field: "country", sorter: "string", width: 100 },
+                        { title: "", field: "", width: 118,  headerSort:false },
+                        //{ title: "Country", field: "country", sorter: "string", width: 100 },
                     ],
                 })
 
