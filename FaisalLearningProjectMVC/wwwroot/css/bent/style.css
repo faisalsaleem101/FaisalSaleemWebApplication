@@ -42,11 +42,10 @@ p {
 
 
 .section_title h2 {
-    text-transform: uppercase;
     text-align: center;
     position: relative;
     color: #333;
-    font-size: 30px;
+    font-size: 35px;
     font-weight: 400;
 }
 .section_title h2:after {
@@ -259,7 +258,7 @@ tuor:visited {
 .inner_about_title h2 {
     text-transform: uppercase;
     font-weight: 800;
-    font-size: 30px;
+    font-size: 25px;
     line-height: 37px;
     position: relative;
 }
