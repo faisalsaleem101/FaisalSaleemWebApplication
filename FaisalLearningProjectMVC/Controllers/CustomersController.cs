@@ -143,7 +143,7 @@ namespace FaisalLearningProjectMVC.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customers.SingleOrDefaultAsync(m => m.ID == id);
+            var customer = await _context.Customers.SingleOrDefaultAsync(m => m.ID == id && m.IsActive);
             if (customer == null)
             {
                 return NotFound();
@@ -156,7 +156,7 @@ namespace FaisalLearningProjectMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,CompanyName,ContactName,ContactTitle,Address,City,Region,PostalCode,Country,Phone,Fax")] Customer customer)
+        public async Task<IActionResult> Edit(int id, Customer customer)
         {
             if (id != customer.ID)
             {

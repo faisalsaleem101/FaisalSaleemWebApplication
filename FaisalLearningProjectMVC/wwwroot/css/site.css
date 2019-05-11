@@ -423,3 +423,28 @@ body {
     font-family: Open Sans;
     color: rgba(256, 256, 256, 0.6);
 }
+
+
+/*edit and add page*/
+
+.control-label-custom {
+    font-family: "Muli-Regular !important";
+    color: #f1f1f1;
+    font-size: 13px;
+}
+
+
+.edit-add-div {
+    background-color: #666666;
+    height: 250px;
+    padding-top:25px;
+}
+
+.edit-add-subdiv
+{
+    padding-top:15px;
+}
+
+.edit-add-form{
+    padding-top:25px;   
+}
