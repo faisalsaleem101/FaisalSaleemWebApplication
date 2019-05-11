@@ -437,7 +437,9 @@ body {
 .edit-add-div {
     background-color: #666666;
     height: 250px;
-    padding-top:25px;
+    padding-top: 25px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .edit-add-subdiv
@@ -449,13 +451,21 @@ body {
     padding-top:25px;   
 }
 
-.edit-add-button-div
-{
-    background-color:#666;
-    width:1170px;
-
+.edit-add-button-div {
+    background-color: #666;
+    width: 1170px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding-left: 27px;
+    border-top: 1px solid #f39d0b;
+    height: 40px;
 }
 
+
+.sub-edit-add-button-div
+{
+    padding-top:3px;
+}
 
 .form-control-custom {
     display: block;
@@ -475,3 +485,15 @@ body {
     -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
+
+.btn-custom {
+    color: #f1f1f1;
+    background-color: #666666;
+    border-color: #f39d0b;
+}
+
+    .btn-custom:hover {
+        color: #f1f1f1;
+        border-color: #aaa;
+        background-color: #f39d0b;
+    }
