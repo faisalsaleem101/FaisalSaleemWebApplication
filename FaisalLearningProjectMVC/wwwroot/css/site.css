@@ -429,17 +429,18 @@ body {
 
 .control-label-custom {
     font-family: "Muli-Regular !important";
-    color: #f1f1f1;
+    color: #555;
     font-size: 13px;
 }
 
 
 .edit-add-div {
-    background-color: #666666;
+    background-color: #f1f1f1;
     height: 250px;
     padding-top: 25px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    border: 1px solid #aeaeae;
 }
 
 .edit-add-subdiv
@@ -452,10 +453,8 @@ body {
 }
 
 .edit-add-button-div {
-    background-color: #666;
+    background-color: #939393;
     width: 1170px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
     padding-left: 27px;
     border-top: 1px solid #f39d0b;
     height: 40px;
@@ -488,12 +487,12 @@ body {
 
 .btn-custom {
     color: #f1f1f1;
-    background-color: #666666;
+    background-color: #939393;
     border-color: #f39d0b;
 }
 
-    .btn-custom:hover {
-        color: #f1f1f1;
-        border-color: #aaa;
-        background-color: #f39d0b;
-    }
+.btn-custom:hover {
+    color: #f1f1f1;
+    border-color: #aaa;
+    background-color: #f39d0b;
+}
