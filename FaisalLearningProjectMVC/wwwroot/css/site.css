@@ -19,7 +19,8 @@
     /*Color the table rows*/
     #example-table .tabulator-tableHolder .tabulator-table .tabulator-row {
         color: #f1f1f1;
-        background-color: #666;
+        background-color: #939393;
+        /*background-color: #666;*/
     }
 
         /*Color even rows*/
