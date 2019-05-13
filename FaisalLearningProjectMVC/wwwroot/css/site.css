@@ -48,8 +48,13 @@
     background-color: #555 !important;
 }
 
-/*custom css by faisal saleem start section*/
+/*footer line in index page*/
+.tabulator .tabulator-footer {
+    border-top: 1px solid #f39c12 !important;
+}
 
+
+/*custom css by faisal saleem start section*/
 .active {
     color: red;
 }
