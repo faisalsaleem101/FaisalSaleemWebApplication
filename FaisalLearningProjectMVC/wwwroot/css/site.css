@@ -146,9 +146,10 @@
 }
 
 .myLogo {
-    height: 35px !important;
+    height: 29px !important;
     padding-top: 0px !important;
     color: #B5B5B5 !important;
+    border-radius: 3px;
 }
 
 .navLink {
