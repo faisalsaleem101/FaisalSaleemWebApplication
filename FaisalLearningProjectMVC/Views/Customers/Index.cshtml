@@ -12,20 +12,19 @@
                 <h2>Customers</h2>
             </div>
         </div>
-
     </div>
 </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<p></p>
 
 <div class="text-right table-header">
-
-    <a asp-action="DownloadExcelTable" id="download-excel"><img src="~/images/ExcelImage.png" /> </a>
-    <a asp-action="DownloadWordTable" id="download-word"><img src="~/images/WordDocumentImage.png" /> </a>
-    <a asp-action="DownloadPowerpointTable" id="download-powerpoint"><img src="~/images/PowerPointImage.png" /> </a>
+    <a asp-action="Create"><img src="~/images/add.png" class="index-buttons-topright-row" title="Add Customer" /></a>
+    <a asp-action="DownloadExcelTable" id="download-excel"><img src="~/images/ExcelImage.png" title="Download Excel" /> </a>
+    <a asp-action="DownloadWordTable" id="download-word"><img src="~/images/WordDocumentImage.png" title="Download Word" /> </a>
+    <a asp-action="DownloadPowerpointTable" id="download-powerpoint"><img src="~/images/PowerPointImage.png" title="Download Powerpoint" /> </a>
 </div>
+
+
 
 <div id="example-table"></div>
 
