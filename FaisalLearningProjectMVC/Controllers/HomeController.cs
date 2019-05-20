@@ -47,7 +47,7 @@ namespace FaisalLearningProjectMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Contact(ContactModel contact)
+        public async Task<IActionResult> Contact(Contact contact)
         {
             if (ModelState.IsValid)
             {
@@ -58,7 +58,7 @@ namespace FaisalLearningProjectMVC.Controllers
             return View();
         }
 
-        private async Task SendMail(ContactModel contact)
+        private async Task SendMail(Contact contact)
         {
             var fromEmailAddress = _configuration.GetValue<string>("MyConfig:FromEmailAddress");
             var fromEmailPassword = _configuration.GetValue<string>("MyConfig:FromEmailPassword");
@@ -80,7 +80,7 @@ namespace FaisalLearningProjectMVC.Controllers
             }
         }
 
-        private static string GetEmailBody(ContactModel contact)
+        private static string GetEmailBody(Contact contact)
         {
             return $@"From:
             {contact.Email}
@@ -90,7 +90,7 @@ namespace FaisalLearningProjectMVC.Controllers
 
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorView { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
         public IActionResult Features()

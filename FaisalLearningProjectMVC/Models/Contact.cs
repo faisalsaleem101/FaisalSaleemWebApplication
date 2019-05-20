@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FaisalLearningProjectMVC.Models
 {
-    public class ContactModel
+    public class Contact
     {
         [GenericRequired]
         public string Name { get; set; }
