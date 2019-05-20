@@ -62,11 +62,24 @@
     border-color: #f39d0b;
 }
 
-    .btn-custom:hover {
-        color: #f1f1f1;
-        border-color: #aaa;
-        background-color: #f39d0b;
-    }
+.btn-custom:hover {
+    color: #f1f1f1;
+    border-color: #aaa;
+    background-color: #f39d0b;
+}
+
+.btn-custom:active {
+    color: #f1f1f1;
+    background-color: #939393;
+    border-color: #f39d0b;
+}
+
+.btn-custom:focus {
+    color: #f1f1f1;
+    background-color: #939393;
+    border-color: #f39d0b;
+    outline:0;
+}
 
 textarea:focus,
 input[type="text"]:focus,
