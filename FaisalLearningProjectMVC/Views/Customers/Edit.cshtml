@@ -17,12 +17,8 @@
 </div>
 
 <form asp-action="Edit" class="edit-add-form">
-
     <div class="container edit-add-div">
-
         <div class="edit-add-subdiv">
-
-
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ID" />
             <input type="hidden" asp-for="IsActive" />
@@ -80,21 +76,14 @@
                     <span asp-validation-for="Phone" class="text-danger"></span>
                 </div>
             </div>
-
         </div>
-
     </div>
-
-
-
     <div class="edit-add-button-div">
         <div class="sub-edit-add-button-div">
             <button class="btn btn-custom" type="submit">Save</button>
             <a asp-action="Index" class="btn btn-custom">Back</a>
         </div>
     </div>
-
-
 </form>
 
 
