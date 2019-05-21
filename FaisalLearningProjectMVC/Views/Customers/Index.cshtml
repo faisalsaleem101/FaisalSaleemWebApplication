@@ -23,10 +23,7 @@
     <a asp-action="DownloadWordTable" id="download-word"><img src="~/images/WordDocumentImage.png" title="Download Word" /> </a>
     <a asp-action="DownloadPowerpointTable" id="download-powerpoint"><img src="~/images/PowerPointImage.png" title="Download Powerpoint" /> </a>
     <a asp-action="DownloadPdfTable" id="download-pdf"><img src="~/images/pdf.png" style="height:23px; width:24px" title="Download PDF" /> </a>
-
 </div>
-
-
 
 <div id="example-table"></div>
 
@@ -48,7 +45,6 @@
                 var ShowIcon = function (cell, formatterParams) { //plain text value
                     return "<i class='fa fa-search'></i>";
                 };
-
 
                 $("#example-table").tabulator({
                     data: data,
@@ -101,6 +97,5 @@
 
             });
         });
-
     </script>
 }

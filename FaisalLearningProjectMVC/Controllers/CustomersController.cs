@@ -120,7 +120,7 @@ namespace FaisalLearningProjectMVC.Controllers
         }
 
         // POST: Customers/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -153,7 +153,7 @@ namespace FaisalLearningProjectMVC.Controllers
         }
 
         // POST: Customers/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -204,7 +204,6 @@ namespace FaisalLearningProjectMVC.Controllers
 
             return View(customer);
         }
-
 
         // POST: Customers/Delete/5
         [HttpPost, ActionName("Delete")]

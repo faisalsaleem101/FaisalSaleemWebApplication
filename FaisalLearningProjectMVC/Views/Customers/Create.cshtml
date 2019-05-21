@@ -4,7 +4,6 @@
     ViewData["Title"] = "Create Customer";
 }
 
-
 <div>
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
@@ -13,10 +12,8 @@
                 <h2>Create Customer</h2>
             </div>
         </div>
-
     </div>
 </div>
-
 
 <form asp-action="Create" class="edit-add-form">
     <div class="container edit-add-div">
@@ -32,7 +29,6 @@
                     <label asp-for="CompanyName" class="control-label control-label-custom"></label>
                     <input asp-for="CompanyName" class="form-control-custom" />
                     <span asp-validation-for="CompanyName" class="text-danger"></span>
-
                 </div>
                 <div class="col-md-3 mb-3">
                     <label asp-for="ContactTitle" class="control-label control-label-custom"></label>
@@ -84,7 +80,6 @@
             <a asp-action="Index" class="btn btn-custom">Back</a>
         </div>
     </div>
-
 </form>
 
 @section Scripts {
