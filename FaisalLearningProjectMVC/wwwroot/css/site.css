@@ -1,4 +1,9 @@
 ﻿
+.pointer {
+    cursor: pointer;
+}
+
+
 .index-buttons-topright-row {
     height: 21px;
     width: 20px;

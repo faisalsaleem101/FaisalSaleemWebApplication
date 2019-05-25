@@ -22,7 +22,7 @@
     <a asp-action="DownloadExcelTable" id="download-excel"><img src="~/images/ExcelImage.png" title="Download Excel" /> </a>
     <a asp-action="DownloadWordTable" id="download-word"><img src="~/images/WordDocumentImage.png" title="Download Word" /> </a>
     <a asp-action="DownloadPowerpointTable" id="download-powerpoint"><img src="~/images/PowerPointImage.png" title="Download Powerpoint" /> </a>
-    <a asp-action="DownloadPdfTable" id="download-pdf"><img src="~/images/pdf.png" style="height:23px; width:24px" title="Download PDF" /> </a>
+    <a id="download-pdf" class="pointer"><img src="~/images/pdf.png" style="height:23px; width:24px" title="Download PDF" /> </a>
 </div>
 
 <div id="example-table"></div>
@@ -31,22 +31,24 @@
     {
     <script>
         $(document).ready(function () {
+
+            //custom icon formatter
+            var DeleteIcon = function (cell, formatterParams) { //plain text value
+                return "<i class='fa fa-trash'></i>";
+            };
+
+            var EditIcon = function (cell, formatterParams) { //plain text value
+                return "<i class='fa fa-edit'></i>";
+            };
+
+            var ShowIcon = function (cell, formatterParams) { //plain text value
+                return "<i class='fa fa-search'></i>";
+            };
+
+            var table = null;
+
             $.get("Customers/GetCustomersData", function (data, status) {
-
-                //custom icon formatter
-                var DeleteIcon = function (cell, formatterParams) { //plain text value
-                    return "<i class='fa fa-trash'></i>";
-                };
-
-                var EditIcon = function (cell, formatterParams) { //plain text value
-                    return "<i class='fa fa-edit'></i>";
-                };
-
-                var ShowIcon = function (cell, formatterParams) { //plain text value
-                    return "<i class='fa fa-search'></i>";
-                };
-
-                $("#example-table").tabulator({
+                 table = new Tabulator("#example-table", {
                     data: data,
                     pagination: "local",
                     paginationSize: 14,
@@ -64,7 +66,7 @@
                                 function (e, cell) {
                                     var rowData = cell.getRow().getData();
                                     window.location.href = '@Url.Action("Edit", "Customers")/' + rowData.id;
-                            }
+                                }
                         },
                         {
                             title: "", field: "icon", align: "center", width: 30, headerSort: false, formatter: DeleteIcon, cellClick:
@@ -73,7 +75,7 @@
 
                                     var rowData = cell.getRow().getData();
                                     $.ajax({
-                                        url: '/Customers/SoftDelete/' +  rowData.id,
+                                        url: '/Customers/SoftDelete/' + rowData.id,
                                         type: 'POST',
                                         contentType: 'application/json; charset=utf-8',
                                         dataType: 'json',
@@ -87,15 +89,29 @@
                         { title: "Job Title", field: "contactTitle", sorter: "string", width: 200 },
                         { title: "Address", field: "address", sorter: "string", width: 200 },
                         { title: "City", field: "city", sorter: "string", width: 100 },
-                        { title: "", field: "", width: 118,  headerSort:false },
+                        { title: "", field: "", width: 118, headerSort: false },
                         //{ title: "Country", field: "country", sorter: "string", width: 100 },
                     ],
-                })
+                });
 
                 //Set initial page to start at the first page
-                $("#example-table").tabulator("setPage", 1);
+                table.setPage(1);
+
+
+
 
             });
+
+
+            //trigger download of data.pdf file
+            $("#download-pdf").click(function(){
+                table.download("pdf", "data.pdf", {
+                    orientation:"portrait", //set page orientation to portrait
+                    title:"Customers", //add title to report
+                });
+            });
+
+
         });
     </script>
 }
