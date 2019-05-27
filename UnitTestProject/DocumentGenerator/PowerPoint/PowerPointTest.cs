@@ -1,11 +1,8 @@
 ﻿using DocumentGenerator.PowerPoint;
 using FaisalLearningProjectMVC.Data;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
-namespace UnitTestProject.DocumentGenerator.PowerPoint
+namespace UnitTestDocumentGenerator.DocumentGenerator.PowerPoint
 {
     public class PowerPointTest
     {

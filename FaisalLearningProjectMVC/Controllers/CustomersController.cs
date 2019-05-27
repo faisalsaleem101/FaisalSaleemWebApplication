@@ -1,13 +1,11 @@
 ﻿using DocumentGenerator.Excel;
-using DocumentGenerator.PowerPoint;
-using DocumentGenerator.Word;
 using FaisalLearningProjectMVC.Data;
+using FaisalLearningProjectMVC.Helper;
 using FaisalLearningProjectMVC.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -32,68 +30,62 @@ namespace FaisalLearningProjectMVC.Controllers
             return View(await _context.Customers.Where(c => c.IsActive).ToListAsync());
         }
 
-        public async Task<ActionResult> DownloadPowerpointTable()
-        {
-            TableGeneratorPowerPoint powerpoint = new TableGeneratorPowerPoint();
-            var Customers = await _context.Customers.Select(x => new
-            {
-                Company_Name = x.CompanyName,
-                Full_Name = x.ContactName,
-                Title = x.ContactTitle,
-                x.Address,
-                x.City,
-                x.Country,
-            }).ToListAsync();
+        //public async Task<ActionResult> DownloadPowerpointTable()
+        //{
+        //    TableGeneratorPowerPoint powerpoint = new TableGeneratorPowerPoint();
+        //    var Customers = await _context.Customers.Select(x => new
+        //    {
+        //        Company_Name = x.CompanyName,
+        //        Full_Name = x.ContactName,
+        //        Title = x.ContactTitle,
+        //        x.Address,
+        //        x.City,
+        //        x.Country,
+        //    }).ToListAsync();
 
-            var fileName = powerpoint.Run(Customers, nameof(Customers));
-            return await DownloadFile(fileName);
-        }
+        //    var fileName = powerpoint.Run(Customers, nameof(Customers));
+        //    return await DownloadFile(fileName);
+        //}
 
-        public async Task<ActionResult> DownloadWordTable()
-        {
-            TableGeneratorWord word = new TableGeneratorWord();
-            var Customers = await _context.Customers.Select(x => new
-            {
-                Company_Name = x.CompanyName,
-                Full_Name = x.ContactName,
-                Title = x.ContactTitle,
-                x.Address,
-                x.City,
-                x.Country,
-            }).ToListAsync();
+        //public async Task<ActionResult> DownloadWordTable()
+        //{
+        //    TableGeneratorWord word = new TableGeneratorWord();
+        //    var Customers = await _context.Customers.Select(x => new
+        //    {
+        //        Company_Name = x.CompanyName,
+        //        Full_Name = x.ContactName,
+        //        Title = x.ContactTitle,
+        //        x.Address,
+        //        x.City,
+        //        x.Country,
+        //    }).ToListAsync();
 
-            var fileName = word.Run(Customers, nameof(Customers));
-            return await DownloadFile(fileName);
-        }
+        //    var fileName = word.Run(Customers, nameof(Customers));
+        //    return await DownloadFile(fileName);
+        //}
 
         public async Task<ActionResult> DownloadExcelTable()
         {
             TableGeneratorExcel2 excel = new TableGeneratorExcel2();
+
+            // we need to use anonoymus type so set the custom label names
             var Customers = await _context.Customers.Select(x => new
             {
-                Company_Name = x.CompanyName,
-                Full_Name = x.ContactName,
-                Title = x.ContactTitle,
+                FullName = x.ContactName,
+                Company = x.CompanyName,
+                JobTitle = x.ContactTitle,
                 x.Address,
                 x.City,
-                x.Country,
             }).ToListAsync();
 
             var fileName = excel.Run(Customers, nameof(Customers));
-            return await DownloadFile(fileName);
-        }
-
-        private async Task<FileContentResult> DownloadFile(string fileName)
-        {
-            var directory = Directory.GetParent(_hostingEnvironment.ContentRootPath).FullName;
-            var outputFolder = _configuration.GetValue<string>("MyConfig:OutputFolder");
-
-            var filePath = $"{directory}\\{outputFolder}\\{fileName}";
-            byte[] fileBytes = await System.IO.File.ReadAllBytesAsync(filePath);
+            byte[] fileBytes = await Helpers.DownloadFile(fileName, _configuration, _hostingEnvironment);
             var file = File(fileBytes, "application/x-msdownload", fileName);
 
             return file;
         }
+
+
 
         // GET: Customers/Details/5
         public async Task<IActionResult> Details(int? id)

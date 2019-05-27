@@ -21,7 +21,7 @@ namespace DocumentGenerator.Excel
             DataTable dt = Helper.CreateDataTable(data);
 
             // get column names with "_" removed 
-            List<string> columnHeaders = Helper.GetColumnNames(dt);
+            dt = Helper.GetColumnNamesForDatabable(dt);
 
             var wsDt = pck.Workbook.Worksheets.Add(title);
 

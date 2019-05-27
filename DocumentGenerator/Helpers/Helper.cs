@@ -4,7 +4,6 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace DocumentGenerator.Helpers
 {
@@ -67,6 +66,14 @@ namespace DocumentGenerator.Helpers
                 columns.Add(column.ToString().Replace("_", " "));
 
             return columns;
+        }
+
+        public static DataTable GetColumnNamesForDatabable(DataTable dataTable)
+        {
+            foreach (var column in dataTable.Columns)
+                dataTable.Columns[column.ToString()].ColumnName = string.Concat(column.ToString().Select(x => Char.IsUpper(x) ? " " + x : x.ToString())).TrimStart(' ');
+
+            return dataTable;
         }
     }
 }
