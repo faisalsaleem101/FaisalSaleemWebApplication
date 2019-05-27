@@ -68,7 +68,7 @@ namespace FaisalLearningProjectMVC.Controllers
 
         public async Task<ActionResult> DownloadExcelTable()
         {
-            TableGeneratorExcel excel = new TableGeneratorExcel();
+            TableGeneratorExcel2 excel = new TableGeneratorExcel2();
             var Customers = await _context.Customers.Select(x => new
             {
                 Company_Name = x.CompanyName,

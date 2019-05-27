@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2000
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.452
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FaisalLearningProjectMVC", "FaisalLearningProjectMVC\FaisalLearningProjectMVC.csproj", "{4683B6A6-B2EB-435D-93DE-B25B88E64AE7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocumentGenerator", "DocumentGenerator\DocumentGenerator.csproj", "{51FFE230-9F4C-498F-8EB0-B54FE4719CE4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTestProject", "UnitTestProject\UnitTestProject.csproj", "{AFC4E03D-6B9A-4EA2-843D-F650F701BE6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTestDocumentGenerator", "UnitTestProject\UnitTestDocumentGenerator.csproj", "{AFC4E03D-6B9A-4EA2-843D-F650F701BE6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
