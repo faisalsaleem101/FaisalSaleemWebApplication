@@ -11,9 +11,7 @@ namespace DocumentGenerator.Excel
     public class TableGeneratorExcel2
     {
 
-        string templateDirectory = @"C:\Users\Faisal Saleem\source\repos\FaisalLearningProjectMVC\Outputs\";
-
-        public string Run<T>(IEnumerable<T> data, string title)
+        public string Run<T>(IEnumerable<T> data, string title, string outputPath)
         {
             var pck = new ExcelPackage();
 
@@ -30,7 +28,7 @@ namespace DocumentGenerator.Excel
             wsDt.Cells[wsDt.Dimension.Address].AutoFitColumns();
 
             string newTitle = $"{title} {DateTime.Now.ToString().Replace("/", "").Replace(":", "")}.xlsx";
-            var fi = new FileInfo(templateDirectory + Path.DirectorySeparatorChar + newTitle);
+            var fi = new FileInfo(outputPath + Path.DirectorySeparatorChar + newTitle);
 
             pck.SaveAs(fi);
 

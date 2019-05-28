@@ -9,13 +9,22 @@ namespace FaisalLearningProjectMVC.Helper
     {
         public static async Task<byte[]> DownloadFile(string fileName, IConfiguration configuration, IHostingEnvironment hostingEnvironment)
         {
-            var directory = Directory.GetParent(hostingEnvironment.ContentRootPath).FullName;
-            var outputFolder = configuration.GetValue<string>("MyConfig:OutputFolder");
+            var outputPath = GetOutputFolderPath(configuration, hostingEnvironment);
 
-            var filePath = $"{directory}\\{outputFolder}\\{fileName}";
+            var filePath = $"{outputPath}\\{fileName}";
             byte[] fileBytes = await System.IO.File.ReadAllBytesAsync(filePath);
 
             return fileBytes;
+        }
+
+
+        public static string GetOutputFolderPath(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
+        {
+            var directory = Directory.GetParent(hostingEnvironment.ContentRootPath).FullName;
+            var outputFolder = configuration.GetValue<string>("MyConfig:OutputFolder");
+
+            return $"{directory}\\{outputFolder}";
+
         }
     }
 }
