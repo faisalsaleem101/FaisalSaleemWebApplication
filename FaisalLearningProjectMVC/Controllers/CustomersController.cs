@@ -80,7 +80,7 @@ namespace FaisalLearningProjectMVC.Controllers
 
             var outputPath = Helpers.GetOutputFolderPath(_configuration, _hostingEnvironment);
 
-            var fileName = excel.Run(Customers, nameof(Customers), outputPath);
+            var fileName = excel.Run(Customers, nameof(Customers));
             byte[] fileBytes = await Helpers.DownloadFile(fileName, _configuration, _hostingEnvironment);
             var file = File(fileBytes, "application/x-msdownload", fileName);
 

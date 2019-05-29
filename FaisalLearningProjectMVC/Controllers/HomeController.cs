@@ -60,9 +60,9 @@ namespace FaisalLearningProjectMVC.Controllers
 
         private async Task SendMail(Contact contact)
         {
-            var fromEmailAddress = _configuration.GetValue<string>("MyConfig:FromEmailAddress");
-            var fromEmailPassword = _configuration.GetValue<string>("MyConfig:FromEmailPassword");
-            var toEmailAddress = _configuration.GetValue<string>("MyConfig:ToEmailAddress");
+            var fromEmailAddress = _configuration.GetValue<string>("Config:FromEmailAddress");
+            var fromEmailPassword = _configuration.GetValue<string>("Config:FromEmailPassword");
+            var toEmailAddress = _configuration.GetValue<string>("Config:ToEmailAddress");
             string template = GetEmailBody(contact);
 
             var message = new MimeMessage();

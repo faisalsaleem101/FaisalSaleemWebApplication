@@ -11,7 +11,7 @@ namespace DocumentGenerator.Excel
     public class TableGeneratorExcel2
     {
 
-        public string Run<T>(IEnumerable<T> data, string title, string outputPath)
+        public string Run<T>(IEnumerable<T> data, string title)
         {
             var pck = new ExcelPackage();
 
@@ -27,8 +27,10 @@ namespace DocumentGenerator.Excel
             wsDt.Cells["A1"].LoadFromDataTable(dt, true, TableStyles.Medium9);
             wsDt.Cells[wsDt.Dimension.Address].AutoFitColumns();
 
+            AppConfiguration appConfig = new AppConfiguration();
+
             string newTitle = $"{title} {DateTime.Now.ToString().Replace("/", "").Replace(":", "")}.xlsx";
-            var fi = new FileInfo(outputPath + Path.DirectorySeparatorChar + newTitle);
+            var fi = new FileInfo(appConfig.OutputFolderDirectory + Path.DirectorySeparatorChar + newTitle);
 
             pck.SaveAs(fi);
 

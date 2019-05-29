@@ -21,7 +21,7 @@ namespace FaisalLearningProjectMVC.Helper
         public static string GetOutputFolderPath(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
         {
             var directory = Directory.GetParent(hostingEnvironment.ContentRootPath).FullName;
-            var outputFolder = configuration.GetValue<string>("MyConfig:OutputFolder");
+            var outputFolder = configuration.GetValue<string>("Config:OutputFolder");
 
             return $"{directory}\\{outputFolder}";
 
