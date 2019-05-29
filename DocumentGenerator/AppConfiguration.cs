@@ -5,7 +5,8 @@ namespace DocumentGenerator
 {
     public class AppConfiguration
     {
-        readonly string outputFolderDirectory = string.Empty;
+        public string OutputFolderDirectory { get; }
+
 
         public AppConfiguration()
         {
@@ -14,12 +15,9 @@ namespace DocumentGenerator
             var builder = new ConfigurationBuilder().SetBasePath(path).AddJsonFile("appsettings.json");
             var configuration = builder.Build();
 
-            outputFolderDirectory = Path.GetFullPath(Path.Combine(path, @"..\", configuration["Config:OutputFolder"]));
+            OutputFolderDirectory = Path.GetFullPath(Path.Combine(path, @"..\", configuration["Config:OutputFolder"]));
 
         }
-        public string OutputFolderDirectory
-        {
-            get => outputFolderDirectory;
-        }
+
     }
 }
