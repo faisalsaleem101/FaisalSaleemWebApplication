@@ -12,6 +12,12 @@ namespace DocumentGenerator
         {
             string path = Directory.GetCurrentDirectory();
 
+            int indexOfSteam = path.IndexOf("FaisalLearningProjectMVC");
+            if (indexOfSteam >= 0)
+                path = path.Remove(indexOfSteam);
+
+            path = $"{path}FaisalLearningProjectMVC\\DocumentGenerator";
+
             var builder = new ConfigurationBuilder().SetBasePath(path).AddJsonFile("appsettings.json");
             var configuration = builder.Build();
 
