@@ -8,7 +8,7 @@ namespace UnitTestDocumentGenerator.DocumentGenerator.Word
     public class WordTest
     {
         [Fact]
-        public void CreateSpreadSheetTable()
+        public void GenerateTable()
         {
             ContextDbService service = new ContextDbService();
             var context = service.GetDbContext();
