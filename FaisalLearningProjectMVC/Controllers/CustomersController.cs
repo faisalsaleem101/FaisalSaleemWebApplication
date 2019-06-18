@@ -68,7 +68,7 @@ namespace FaisalLearningProjectMVC.Controllers
         {
             TableGeneratorExcel2 excel = new TableGeneratorExcel2();
 
-            // we need to use anonoymus type so set the custom label names
+            // we need to use anonoymus type to set the custom label names
             var Customers = await _context.Customers.Select(x => new
             {
                 FullName = x.ContactName,

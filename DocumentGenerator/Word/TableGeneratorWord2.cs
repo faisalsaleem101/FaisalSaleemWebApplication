@@ -19,27 +19,27 @@ namespace DocumentGenerator.Word
             {
                 // Add a title
                 var documentTitle = document.InsertParagraph(title).FontSize(18).SpacingAfter(20d);
-                documentTitle.Alignment = Alignment.left;
+                documentTitle.Alignment = Alignment.center;
                 documentTitle.Font("Arial");
 
 
-                // Add a table in a document of 1 row and 3 columns.
-                var columnWidths = new float[] { 100f, 300f, 200f };
-                var t = document.InsertTable(1, columnWidths.Length);
+                // Add a table in a document of 1 row and x columns.
+                var columnsNo = data.FirstOrDefault()?.GetType()?.GetProperties()?.Length ?? 0;
+                var t = document.InsertTable(1, columnsNo);
 
-                // Set the table's column width and background 
-                t.SetWidths(columnWidths);
+
+                // Set the table's properties 
+                t.Alignment = Alignment.center;
                 t.Design = TableDesign.TableGrid;
                 t.AutoFit = AutoFit.Contents;
 
                 var row = t.Rows.First();
-
                 var border = new Border() { Color = Color.FromArgb(41, 128, 186) };
 
                 // Fill in the columns of the first row in the table.
                 for (int i = 0; i < row.Cells.Count; ++i)
                 {
-                    row.Cells[i].Paragraphs.First().Append("Data " + i);
+                    row.Cells[i].Paragraphs.First().Append("Dataaaa " + i);
                     row.Cells[i].FillColor = Color.FromArgb(41, 128, 186);
                     row.Cells[i].Paragraphs.First().Color(Color.White);
 
