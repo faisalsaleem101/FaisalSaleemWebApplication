@@ -28,6 +28,16 @@ namespace DocumentGenerator.Word
                 var t = document.InsertTable(1, columnsNo);
 
 
+                var columnNames = new List<string>();
+                var properties = data.FirstOrDefault()?.GetType()?.GetProperties();
+
+                foreach (var property in properties)
+                {
+                    var propertyName = string.Concat(property.Name.Select(x => Char.IsUpper(x) ? " " + x : x.ToString())).TrimStart(' ');
+                    columnNames.Add(propertyName);
+                }
+
+
                 // Set the table's properties 
                 t.Alignment = Alignment.center;
                 t.Design = TableDesign.TableGrid;
@@ -39,7 +49,7 @@ namespace DocumentGenerator.Word
                 // Fill in the columns of the first row in the table.
                 for (int i = 0; i < row.Cells.Count; ++i)
                 {
-                    row.Cells[i].Paragraphs.First().Append("Dataaaa " + i);
+                    row.Cells[i].Paragraphs.First().Append(columnNames[i]);
                     row.Cells[i].FillColor = Color.FromArgb(41, 128, 186);
                     row.Cells[i].Paragraphs.First().Color(Color.White);
 
