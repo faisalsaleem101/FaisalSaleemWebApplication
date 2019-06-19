@@ -1,6 +1,8 @@
-﻿using Novacode;
+﻿using DocumentGenerator.Helpers;
+using Novacode;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 
@@ -56,20 +58,25 @@ namespace DocumentGenerator.Word
                     SetBorder(border, row.Cells[i]);
                 }
 
+
+                // Retrieve the data from our data source which is stored as a DataTable.
+                DataTable table = Helper.CreateDataTable(data);
+
+
                 // Add rows in the table.
-                for (int i = 0; i < 5; i++)
+                for (int r = 0; r < table.Rows.Count; r++)
                 {
                     var newRow = t.InsertRow();
 
                     // Fill in the columns of the new rows.
-                    for (int j = 0; j < newRow.Cells.Count; ++j)
+                    for (int c = 0; c < table.Columns.Count; c++)
                     {
-                        var newCell = newRow.Cells[j];
-                        newCell.Paragraphs.First().Append("Data " + i);
+                        var newCell = newRow.Cells[c];
+                        newCell.Paragraphs.First().Append(table.Rows[r][c].ToString());
                         SetBorder(border, newCell);
 
                         // remove first row of data border on top 
-                        if (i == 0)
+                        if (r == 0)
                             newCell.SetBorder(TableCellBorderType.Top, border);
 
                     }
