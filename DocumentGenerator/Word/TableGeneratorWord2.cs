@@ -24,11 +24,9 @@ namespace DocumentGenerator.Word
                 documentTitle.Alignment = Alignment.center;
                 documentTitle.Font("Arial");
 
-
                 // Add a table in a document of 1 row and x columns.
                 var columnsNo = data.FirstOrDefault()?.GetType()?.GetProperties()?.Length ?? 0;
                 var t = document.InsertTable(1, columnsNo);
-
 
                 var columnNames = new List<string>();
                 var properties = data.FirstOrDefault()?.GetType()?.GetProperties();
@@ -39,7 +37,6 @@ namespace DocumentGenerator.Word
                     columnNames.Add(propertyName);
                 }
 
-
                 // Set the table's properties 
                 t.Alignment = Alignment.center;
                 t.Design = TableDesign.TableGrid;
@@ -48,50 +45,51 @@ namespace DocumentGenerator.Word
                 var row = t.Rows.First();
                 var border = new Border() { Color = Color.FromArgb(41, 128, 186) };
 
-                // Fill in the columns of the first row in the table.
-                for (int i = 0; i < row.Cells.Count; ++i)
-                {
-                    row.Cells[i].Paragraphs.First().Append(columnNames[i]);
-                    row.Cells[i].FillColor = Color.FromArgb(41, 128, 186);
-                    row.Cells[i].Paragraphs.First().Color(Color.White);
-
-                    SetBorder(border, row.Cells[i]);
-                }
-
-
-                // Retrieve the data from our data source which is stored as a DataTable.
-                DataTable table = Helper.CreateDataTable(data);
-
-
-                // Add rows in the table.
-                for (int r = 0; r < table.Rows.Count; r++)
-                {
-                    var newRow = t.InsertRow();
-
-                    // Fill in the columns of the new rows.
-                    for (int c = 0; c < table.Columns.Count; c++)
-                    {
-                        var newCell = newRow.Cells[c];
-                        newCell.Paragraphs.First().Append(table.Rows[r][c].ToString());
-                        SetBorder(border, newCell);
-
-                        // remove first row of data border on top 
-                        if (r == 0)
-                            newCell.SetBorder(TableCellBorderType.Top, border);
-
-                    }
-                }
-
-
-
-                //// Set a blank border for the table's top/bottom borders.
-                //var blankBorder = new Border(BorderStyle.Tcbs_none, 0, 0, Color.White);
-                //t.SetBorder(TableBorderType.Bottom, blankBorder);
-                //t.SetBorder(TableBorderType.Top, blankBorder);
+                SetColumnNamesInTable(columnNames, row, border);
+                SetDataInTable(data, t, border);
 
                 document.Save();
             }
         }
+
+        private void SetColumnNamesInTable(List<string> columnNames, Row row, Border border)
+        {
+            // Fill in the columns of the first row in the table.
+            for (int i = 0; i < columnNames.Count; ++i)
+            {
+                row.Cells[i].Paragraphs.First().Append(columnNames[i]);
+                row.Cells[i].FillColor = Color.FromArgb(41, 128, 186);
+                row.Cells[i].Paragraphs.First().Color(Color.White);
+
+                SetBorder(border, row.Cells[i]);
+            }
+        }
+
+        private void SetDataInTable<T>(IEnumerable<T> data, Table t, Border border)
+        {
+            // Retrieve the data from our data source which is stored as a DataTable.
+            DataTable table = Helper.CreateDataTable(data);
+
+            // Add rows in the table.
+            for (int r = 0; r < table.Rows.Count; r++)
+            {
+                var newRow = t.InsertRow();
+
+                // Fill in the columns of the new rows.
+                for (int c = 0; c < table.Columns.Count; c++)
+                {
+                    var newCell = newRow.Cells[c];
+                    newCell.Paragraphs.First().Append(table.Rows[r][c].ToString());
+                    SetBorder(border, newCell);
+
+                    // remove first row of data border on top 
+                    if (r == 0)
+                        newCell.SetBorder(TableCellBorderType.Top, border);
+
+                }
+            }
+        }
+
 
         private void SetBorder(Border border, Cell cell)
         {
@@ -99,22 +97,6 @@ namespace DocumentGenerator.Word
             cell.SetBorder(TableCellBorderType.Top, border);
             cell.SetBorder(TableCellBorderType.Left, border);
             cell.SetBorder(TableCellBorderType.Right, border);
-        }
-
-        private static void AddItemToTable(Table table, Row rowPattern, string productName)
-        {
-            // Gets a random unit price and quantity.
-            var unitPrice = Math.Round(rand.NextDouble(), 2);
-            var unitQuantity = rand.Next(1, 10);
-
-            // Insert a copy of the rowPattern at the last index in the table.
-            var newItem = table.InsertRow(rowPattern, table.RowCount - 1);
-
-            // Replace the default values of the newly inserted row.
-            newItem.ReplaceText("%PRODUCT_NAME%", productName);
-            newItem.ReplaceText("%PRODUCT_UNITPRICE%", "$ " + unitPrice.ToString("N2"));
-            newItem.ReplaceText("%PRODUCT_QUANTITY%", unitQuantity.ToString());
-            newItem.ReplaceText("%PRODUCT_TOTALPRICE%", "$ " + (unitPrice * unitQuantity).ToString("N2"));
         }
 
     }
