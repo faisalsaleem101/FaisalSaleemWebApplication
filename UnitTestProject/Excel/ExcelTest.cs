@@ -1,9 +1,10 @@
 ﻿using DocumentGenerator.Excel;
 using FaisalLearningProjectMVC.Data;
+using System;
 using System.Linq;
 using Xunit;
 
-namespace UnitTestDocumentGenerator.DocumentGenerator.Excel
+namespace UnitTestDocumentGenerator.Excel
 {
     public class ExcelTest
     {
@@ -16,7 +17,9 @@ namespace UnitTestDocumentGenerator.DocumentGenerator.Excel
 
             var tableGenerator = new TableGeneratorExcel2();
 
-            tableGenerator.Run(context.Customers.ToList(), "Customers");
+            var fileName = $"Customers {DateTime.Now.ToString().Replace("/", "").Replace(":", "")}.xlsx";
+
+            tableGenerator.Run(context.Customers.ToList(), "Customers", fileName);
 
 
         }

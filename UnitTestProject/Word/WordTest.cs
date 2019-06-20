@@ -1,9 +1,10 @@
 ﻿using DocumentGenerator.Word;
 using FaisalLearningProjectMVC.Data;
+using System;
 using System.Linq;
 using Xunit;
 
-namespace UnitTestDocumentGenerator.DocumentGenerator.Word
+namespace UnitTestDocumentGenerator.Word
 {
     public class WordTest
     {
@@ -25,7 +26,9 @@ namespace UnitTestDocumentGenerator.DocumentGenerator.Word
 
             var tableGenerator = new TableGeneratorWord2();
 
-            tableGenerator.Run(Customers, "Customers");
+            var fileName = $"Customers {DateTime.Now.ToString().Replace("/", "").Replace(":", "")}.docx";
+
+            tableGenerator.Run(Customers, "Customers", fileName);
 
 
         }

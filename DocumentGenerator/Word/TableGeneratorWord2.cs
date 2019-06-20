@@ -13,11 +13,11 @@ namespace DocumentGenerator.Word
     {
         private static Random rand = new Random();
 
-        public void Run<T>(IEnumerable<T> data, string title)
+        public void Run<T>(IEnumerable<T> data, string title, string fileName)
         {
             AppConfiguration config = new AppConfiguration();
 
-            using (DocX document = DocX.Create(config.OutputFolderDirectory + @"\\CreateTableFromTemplate.docx"))
+            using (DocX document = DocX.Create(config.OutputFolderDirectory + $@"\\{fileName}"))
             {
                 // Add a title
                 var documentTitle = document.InsertParagraph(title).FontSize(18).SpacingAfter(20d);

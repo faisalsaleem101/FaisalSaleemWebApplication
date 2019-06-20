@@ -1,4 +1,5 @@
 ﻿using DocumentGenerator.Excel;
+using DocumentGenerator.Word;
 using FaisalLearningProjectMVC.Data;
 using FaisalLearningProjectMVC.Helper;
 using FaisalLearningProjectMVC.Models;
@@ -30,46 +31,13 @@ namespace FaisalLearningProjectMVC.Controllers
             return View(await _context.Customers.Where(c => c.IsActive).ToListAsync());
         }
 
-        //public async Task<ActionResult> DownloadPowerpointTable()
-        //{
-        //    TableGeneratorPowerPoint powerpoint = new TableGeneratorPowerPoint();
-        //    var Customers = await _context.Customers.Select(x => new
-        //    {
-        //        Company_Name = x.CompanyName,
-        //        Full_Name = x.ContactName,
-        //        Title = x.ContactTitle,
-        //        x.Address,
-        //        x.City,
-        //        x.Country,
-        //    }).ToListAsync();
 
-        //    var fileName = powerpoint.Run(Customers, nameof(Customers));
-        //    return await DownloadFile(fileName);
-        //}
-
-        //public async Task<ActionResult> DownloadWordTable()
-        //{
-        //    TableGeneratorWord word = new TableGeneratorWord();
-        //    var Customers = await _context.Customers.Select(x => new
-        //    {
-        //        Company_Name = x.CompanyName,
-        //        Full_Name = x.ContactName,
-        //        Title = x.ContactTitle,
-        //        x.Address,
-        //        x.City,
-        //        x.Country,
-        //    }).ToListAsync();
-
-        //    var fileName = word.Run(Customers, nameof(Customers));
-        //    return await DownloadFile(fileName);
-        //}
-
-        public async Task<ActionResult> DownloadExcelTable()
+        public async Task<ActionResult> DownloadExcelTableDocument()
         {
             TableGeneratorExcel2 excel = new TableGeneratorExcel2();
 
             // we need to use anonoymus type to set the custom label names
-            var Customers = await _context.Customers.Select(x => new
+            var customers = await _context.Customers.Select(x => new
             {
                 FullName = x.ContactName,
                 Company = x.CompanyName,
@@ -78,15 +46,43 @@ namespace FaisalLearningProjectMVC.Controllers
                 x.City,
             }).ToListAsync();
 
-            var outputPath = Helpers.GetOutputFolderPath(_configuration, _hostingEnvironment);
+            var title = "Customers";
 
-            var fileName = excel.Run(Customers, nameof(Customers));
+            var fileName = Helpers.GetExcelDocumentFileName(title);
+
+            excel.Run(customers, title, fileName);
+
             byte[] fileBytes = await Helpers.DownloadFile(fileName, _configuration, _hostingEnvironment);
             var file = File(fileBytes, "application/x-msdownload", fileName);
 
             return file;
         }
 
+        public async Task<ActionResult> DownloadWordTableDocument()
+        {
+            TableGeneratorWord2 excel = new TableGeneratorWord2();
+
+            // we need to use anonoymus type to set the custom label names
+            var customers = await _context.Customers.Select(x => new
+            {
+                FullName = x.ContactName,
+                Company = x.CompanyName,
+                JobTitle = x.ContactTitle,
+                x.Address,
+                x.City,
+            }).ToListAsync();
+
+            var title = "Customers";
+
+            var fileName = Helpers.GetWordDocumentFileName(title);
+
+            excel.Run(customers, title, fileName);
+
+            byte[] fileBytes = await Helpers.DownloadFile(fileName, _configuration, _hostingEnvironment);
+            var file = File(fileBytes, "application/x-msdownload", fileName);
+
+            return file;
+        }
 
 
         // GET: Customers/Details/5

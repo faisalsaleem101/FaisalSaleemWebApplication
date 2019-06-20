@@ -1,10 +1,8 @@
 ﻿using Aspose.Cells;
 using DocumentGenerator.Helpers;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
-using System.Text;
 
 namespace DocumentGenerator.Excel
 {
@@ -23,10 +21,10 @@ namespace DocumentGenerator.Excel
             Worksheet ws = workbook.Worksheets[0];
             Cells cells = workbook.Worksheets[0].Cells;
 
-            // get column names with "_" removed 
+            // get column names with "_" removed
             List<string> columnNames = Helper.GetColumnNames(table);
 
-            // Generate Columns 
+            // Generate Columns
             GenerateColumns(cells, columnNames);
 
             // Generate rows and add data

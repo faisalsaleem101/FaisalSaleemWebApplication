@@ -2,7 +2,7 @@
 using FaisalLearningProjectMVC.Data;
 using Xunit;
 
-namespace UnitTestDocumentGenerator.DocumentGenerator.PowerPoint
+namespace UnitTestDocumentGenerator.PowerPoint
 {
     public class PowerPointTest
     {

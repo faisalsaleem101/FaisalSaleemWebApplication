@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -26,5 +27,9 @@ namespace FaisalLearningProjectMVC.Helper
             return $"{directory}\\{outputFolder}";
 
         }
+
+        public static string GetWordDocumentFileName(string name) => $"{name} {DateTime.Now.ToString().Replace("/", "_").Replace(":", "_")}.docx";
+
+        public static string GetExcelDocumentFileName(string name) => $"{name} {DateTime.Now.ToString().Replace("/", "_").Replace(":", "_")}.xlsx";
     }
 }
