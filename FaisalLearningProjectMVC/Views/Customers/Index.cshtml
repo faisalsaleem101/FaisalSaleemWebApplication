@@ -105,7 +105,7 @@
                 var day = d.getDate();
 
                 var time = ((day < 10 ? "0" : "") + day + "_" + (month < 10 ? "0" : "") + (month + 1) + "_" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds());
-
+                 
                 table.download("pdf", "Customers " + time + ".pdf", {
                     orientation:"portrait", //set page orientation to portrait
                     title:"Customers", //add title to report
