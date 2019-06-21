@@ -26,7 +26,7 @@ namespace DocumentGenerator.Word
 
                 // Add a table in a document of 1 row and x columns.
                 var columnsNo = data.FirstOrDefault()?.GetType()?.GetProperties()?.Length ?? 0;
-                var t = document.InsertTable(1, columnsNo);
+                var documentTable = document.InsertTable(1, columnsNo);
 
                 var columnNames = new List<string>();
                 var properties = data.FirstOrDefault()?.GetType()?.GetProperties();
@@ -38,15 +38,15 @@ namespace DocumentGenerator.Word
                 }
 
                 // Set the table's properties 
-                t.Alignment = Alignment.center;
-                t.Design = TableDesign.TableGrid;
-                t.AutoFit = AutoFit.Contents;
+                documentTable.Alignment = Alignment.center;
+                documentTable.Design = TableDesign.TableGrid;
+                documentTable.AutoFit = AutoFit.Contents;
 
-                var row = t.Rows.First();
+                var row = documentTable.Rows.First();
                 var border = new Border() { Color = Color.FromArgb(41, 128, 186) };
 
                 SetColumnNamesInTable(columnNames, row, border);
-                SetDataInTable(data, t, border);
+                SetDataInTable(data, documentTable, border);
 
                 document.Save();
             }
@@ -75,12 +75,17 @@ namespace DocumentGenerator.Word
             {
                 var newRow = t.InsertRow();
 
+
+
                 // Fill in the columns of the new rows.
                 for (int c = 0; c < table.Columns.Count; c++)
                 {
                     var newCell = newRow.Cells[c];
                     newCell.Paragraphs.First().Append(table.Rows[r][c].ToString());
                     SetBorder(border, newCell);
+
+                    if (r % 2 == 0)
+                        newCell.FillColor = Color.FromArgb(1, 245, 245, 245);
 
                     // remove first row of data border on top 
                     if (r == 0)
