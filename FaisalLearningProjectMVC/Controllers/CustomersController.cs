@@ -44,7 +44,10 @@ namespace FaisalLearningProjectMVC.Controllers
         //    }).ToListAsync();
 
         //    var fileName = powerpoint.Run(Customers, nameof(Customers));
-        //    return await DownloadFile(fileName);
+        //    byte[] fileBytes = await Helpers.DownloadFile(fileName, _configuration, _hostingEnvironment);
+        //    var file = File(fileBytes, "application/x-msdownload", fileName);
+
+        //    return file;
         //}
 
         //public async Task<ActionResult> DownloadWordTable()

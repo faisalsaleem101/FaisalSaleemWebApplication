@@ -1,23 +1,23 @@
 ﻿using DocumentGenerator.PowerPoint;
 using FaisalLearningProjectMVC.Data;
+using System.Linq;
 using Xunit;
 
 namespace UnitTestDocumentGenerator.DocumentGenerator.PowerPoint
 {
     public class PowerPointTest
     {
-        private readonly ContextDb _context;
-
-        public PowerPointTest(ContextDb context)
-        {
-            _context = context;
-        }
-
         [Fact]
         public void CreateTable()
         {
+            ContextDbService service = new ContextDbService();
+            var context = service.GetDbContext();
+
             var tableGenerator = new TableGeneratorPowerPoint();
-            //tableGenerator.Run();
+
+            var customers = context.Customers.Select(c => new { c.ContactName, c.CompanyName, c.ContactTitle, c.Address, c.City });
+
+            tableGenerator.Run(customers, "Customers");
         }
     }
 }

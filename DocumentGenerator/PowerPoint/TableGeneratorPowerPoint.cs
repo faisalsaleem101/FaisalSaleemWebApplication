@@ -1,13 +1,11 @@
-﻿using Aspose.Slides;
-using DocumentGenerator.Helpers;
-using System;
+﻿using DocumentFormat.OpenXml.Drawing;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Presentation;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using System.Threading.Tasks;
 using System.Linq;
-using System.Drawing;
-using System.Data;
+using A = DocumentFormat.OpenXml.Drawing;
+using Text = DocumentFormat.OpenXml.Drawing.Text;
+using TextBody = DocumentFormat.OpenXml.Drawing.TextBody;
 
 namespace DocumentGenerator.PowerPoint
 {
@@ -16,104 +14,123 @@ namespace DocumentGenerator.PowerPoint
         const string existingTableFile = "UpdateExistingTable";
         const int rowsPerSlide = 11;
 
-        public string Run<T>(IEnumerable<T> data, string title) 
+        public void Run<T>(IEnumerable<T> data, string title)
         {
-            // The path to the documents directory.
-            var templateDir = Helper.GetTemplatePath();
-            var outputDir = Helper.GetOutputPath();
 
-            // Retrieve the data from our data source which is stored as a DataTable.
-            DataTable dataTable = Helper.CreateDataTable(data);
 
-            // Instantiate Presentation class that represents PPTX// Instantiate Presentation class that represents PPTX
-            using (Presentation pres = new Presentation($"{templateDir}//{existingTableFile}{dataTable.Columns.Count}.pptx"))
+
+            // Open the presentation as read-only.
+            using (PresentationDocument presentationDocument =
+                PresentationDocument.Open(@"C:\Users\Faisal Saleem\source\repos\FaisalLearningProjectMVC\Templates\UpdateExistingTable6.pptx", true))
             {
-                int noOfSlides = CreateNumberOfSlides(dataTable.Rows.Count, pres);
 
-                int rowCounter = 0;
-                int slide = 0;
-                for (int row = 0; row < dataTable.Rows.Count; row++)
+                // Get a PresentationPart object from the PresentationDocument object.
+                PresentationPart presentationPart = presentationDocument.PresentationPart;
+
+                // Get a Presentation object from the PresentationPart object.
+                Presentation presentation = presentationPart.Presentation;
+
+
+                if (presentation.SlideIdList != null)
                 {
-                    // Access the slide
-                    ISlide sld = pres.Slides[slide];
+                    // Get the collection of slide IDs from the slide ID list.
+                    DocumentFormat.OpenXml.OpenXmlElementList slideIds =
+                        presentation.SlideIdList.ChildElements;
 
-                    // get title object
-                    var header = (IAutoShape)sld.Shapes.FirstOrDefault(c => c is IAutoShape);
-                    header.TextFrame.Text = title;
+                    int slideIndex = 0;
 
-                    // get table object 
-                    var tbl = (ITable)sld.Shapes.FirstOrDefault(c => c is ITable);
-                    List<string> columnNames = Helper.GetColumnNames(dataTable);
-
-                    // if this is the first row create the blank column and rows for the slide so data can be inserted 
-                    if (rowCounter == 0)
-                        CreateEmptyColumnAndsRows(columnNames, tbl);
-
-                    // assign data to the row fields
-                    // start at the second row of the table since first is the colums
-                    // use row varaible instead of rowcounter since it is not limted to e.g 10
-                    for (int c = 0; c < dataTable.Columns.Count; c++)
+                    // If the slide ID is in range...
+                    if (slideIndex < slideIds.Count)
                     {
-                        tbl[c, rowCounter + 1].TextFrame.Text = dataTable.Rows[row][c]?.ToString() ?? "";
+                        // Get the relationship ID of the slide.
+                        string slidePartRelationshipId = (slideIds[slideIndex] as SlideId).RelationshipId;
 
-                        //change background colour of every odd row
-                        if (row % 2 != 0)
+                        // Get the specified slide part from the relationship ID.
+                        SlidePart slidePart =
+                            (SlidePart)presentationPart.GetPartById(slidePartRelationshipId);
+                        if (slidePart.Slide != null)
                         {
-                            tbl[c, rowCounter + 1].FillFormat.SolidFillColor.Color = Color.FromArgb(102, 102, 102);
-                        }
-                    }
+                            A.Table table = slidePart.Slide.Descendants<A.Table>().First();
 
-                    // if the total number of rows perslide have been reached then set slide to next number and reset counter
-                    if (rowCounter + 1 == rowsPerSlide)
-                    {
-                        slide++;
-                        rowCounter = 0;
-                    }
-                    else
-                    {
-                        rowCounter++;
+                            A.TableRow tableRow1 = table.Elements<A.TableRow>().ElementAt(1);
+
+                            A.TableCell tableCell1 = tableRow1.Elements<A.TableCell>().ElementAt(1);
+
+
+                            A.TextBody textBody1 = tableCell1.GetFirstChild<A.TextBody>();
+
+                            A.Paragraph paragraph1 = textBody1.GetFirstChild<A.Paragraph>();
+
+                            A.EndParagraphRunProperties endParagraphRunProperties1 = paragraph1.GetFirstChild<A.EndParagraphRunProperties>();
+                            A.Run run1 = new A.Run();
+                            A.RunProperties runProperties1 = new A.RunProperties() { Language = "en-US", AlternativeLanguage = "zh-CN", Dirty = false };
+                            A.Text text1 = new A.Text();
+
+
+                            text1.Text = "John";
+
+                            run1.Append(runProperties1);
+                            run1.Append(text1);
+                            paragraph1.InsertBefore(run1, endParagraphRunProperties1);
+                            endParagraphRunProperties1.Dirty = false;
+
+
+                            CreateNewRow(table);
+
+                        }
                     }
                 }
 
-                //Write the PPTX to Disk
-                pres.Save($"{outputDir}//{title}.pptx", Aspose.Slides.Export.SaveFormat.Pptx);
+                presentationPart.Presentation.Save();
+
             }
 
-            return $"{title}.pptx";
+
+            //AppConfiguration appConfig = new AppConfiguration();
+
+            //// save the document 
+            //string newTitle = $"{ title} {DateTime.Now.ToString().Replace("/", "").Replace(":", "")}";
+            //var filePath = appConfig.OutputFolderDirectory + Path.DirectorySeparatorChar + newTitle;
+
         }
 
-       
-        private static void CreateEmptyColumnAndsRows(List<string> columnNames, ITable tbl)
+        private void CreateNewRow(Table table)
         {
-            // create number of columns 
-            for (int i = 1; i < columnNames.Count; i++)
-                tbl.Columns.AddClone(tbl.Columns[0], true);
+            TableRow tableRow1 = new TableRow() { Height = 370840L };
 
-            // assign column names 
-            for (int i = 0; i < columnNames.Count; i++)
-                tbl[i, 0].TextFrame.Text = columnNames[i];
+            TableCell tableCell1 = new TableCell();
 
-            // create number of rows 
-            for (int i = 1; i < rowsPerSlide; i++)
-                tbl.Rows.AddClone(tbl.Rows[1], true);
+            TextBody textBody1 = new TextBody();
+            BodyProperties bodyProperties1 = new BodyProperties();
+            ListStyle listStyle1 = new ListStyle();
+
+            Paragraph paragraph1 = new Paragraph();
+
+            Run run1 = new Run();
+            RunProperties runProperties1 = new RunProperties() { Language = "en-US", Dirty = false };
+            Text text1 = new Text();
+            text1.Text = "Column1";
+
+            run1.Append(runProperties1);
+            run1.Append(text1);
+            EndParagraphRunProperties endParagraphRunProperties1 = new EndParagraphRunProperties() { Language = "en-US", Dirty = false };
+
+            paragraph1.Append(run1);
+            paragraph1.Append(endParagraphRunProperties1);
+
+            textBody1.Append(bodyProperties1);
+            textBody1.Append(listStyle1);
+            textBody1.Append(paragraph1);
+            TableCellProperties tableCellProperties1 = new TableCellProperties();
+
+            tableCell1.Append(textBody1);
+            tableCell1.Append(tableCellProperties1);
+
+            table.Append(tableRow1);
         }
 
-        private static int CreateNumberOfSlides(int totalRows, Presentation pres)
-        {
-            var noOfSlides = totalRows / rowsPerSlide;
 
-            // if total rows are less than rowsPerSlide then set no of slides from 0 to 1 
-            if (totalRows < rowsPerSlide)
-                noOfSlides = 1;
 
-            // Clone the desired slide from the source presentation to the end of the collection of slides in destination presentation
-            ISlideCollection slideCollection = pres.Slides;
 
-            // Clone the desired slide from the source presentation to the specified position in destination presentation
-            for (int i = 1; i <= noOfSlides; i++)
-                slideCollection.InsertClone(1, pres.Slides[0]);
-
-            return noOfSlides;
-        }
     }
 }
