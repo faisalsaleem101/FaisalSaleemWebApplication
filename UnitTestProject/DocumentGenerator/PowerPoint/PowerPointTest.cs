@@ -15,7 +15,7 @@ namespace UnitTestDocumentGenerator.DocumentGenerator.PowerPoint
 
             var tableGenerator = new TableGeneratorPowerPoint();
 
-            var customers = context.Customers.Select(c => new { c.ContactName, c.CompanyName, c.ContactTitle, c.Address, c.City });
+            var customers = context.Customers.Select(c => new { c.ContactName, c.CompanyName, c.ContactTitle, c.Address, c.City, c.Country, c.PostalCode });
 
             tableGenerator.Run(customers, "Customers");
         }
