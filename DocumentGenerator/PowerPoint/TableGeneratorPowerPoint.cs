@@ -44,8 +44,10 @@ namespace DocumentGenerator.PowerPoint
 
                 var widthsAndHeights = GetCellWidthsAndHeights(rowsPerCurrentSlide, noOfColumns);
 
+                int y = noOfColumns * 50;
                 // create table
-                ITable table = presentation.Slides[i].Shapes.AppendTable(presentation.SlideSize.Size.Width / 2 - 275, 80, widthsAndHeights.widths, widthsAndHeights.heights);
+                ITable table = presentation.Slides[i].Shapes.AppendTable(presentation.SlideSize.Size.Width / 2 - y, 40, widthsAndHeights.widths, widthsAndHeights.heights);
+
 
                 InsertColumnNames(columnNames, table);
 
