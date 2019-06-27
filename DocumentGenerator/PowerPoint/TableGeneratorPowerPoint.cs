@@ -40,7 +40,11 @@ namespace DocumentGenerator.PowerPoint
 
             for (int i = 0; i < noOfSlides; i++)
             {
-                var widthsAndHeights = GetCellWidthsAndHeights(rowsPerSlide, noOfColumns);
+
+                int noOfRowsLeft = totalNoOfRows - rowCounter;
+                int rowsPerCurrentSlide = noOfRowsLeft > rowsPerSlide ? rowsPerSlide : noOfRowsLeft;
+
+                var widthsAndHeights = GetCellWidthsAndHeights(rowsPerCurrentSlide, noOfColumns);
 
                 // create table
                 ITable table = presentation.Slides[i].Shapes.AppendTable(presentation.SlideSize.Size.Width / 2 - 275, 80, widthsAndHeights.widths, widthsAndHeights.heights);
@@ -55,8 +59,7 @@ namespace DocumentGenerator.PowerPoint
 
                 DataTable dataTable = Helper.CreateDataTable(data);
 
-                int noOfRowsLeft = totalNoOfRows - rowCounter;
-                int rowsPerCurrentSlide = noOfRowsLeft > rowsPerSlide ? rowsPerSlide : noOfRowsLeft;
+
 
                 // insert data
                 for (int rowNumber = 0; rowNumber < rowsPerCurrentSlide; rowNumber++)
