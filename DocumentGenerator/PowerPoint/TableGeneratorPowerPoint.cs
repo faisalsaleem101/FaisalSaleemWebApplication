@@ -19,7 +19,10 @@ namespace DocumentGenerator.PowerPoint
             Presentation presentation = new Presentation();
 
             int totalNoOfRows = data.ToList().Count();
-            int noOfSlides = totalNoOfRows / rowsPerSlide;
+            double noOfSlidesDouble = Convert.ToDouble(totalNoOfRows) / Convert.ToDouble(rowsPerSlide);
+
+            // get closest upper number from the double
+            double noOfSlides = Math.Ceiling(noOfSlidesDouble);
 
             // use reflection to get the number of columns in the list
             int noOfColumns = data.FirstOrDefault()?.GetType()?.GetProperties()?.Length ?? 0;
@@ -29,34 +32,47 @@ namespace DocumentGenerator.PowerPoint
             columnNames = columnNames.Select(c => (string.Concat(c.Select(x => Char.IsUpper(x) ? " " + x : x.ToString())).TrimStart(' '))).ToList();
 
 
-            // create no of slides needed is spire
-            for (int i = 0; i < noOfSlides; i++)
+            int rowCounter = 0;
+
+            // create no of slides needed is spire (1 already exists from the start)
+            for (int i = 1; i < noOfSlides; i++)
                 presentation.Slides.Append();
 
-            var widthsAndHeights = GetCellWidthsAndHeights(totalNoOfRows, noOfColumns);
-
-            // create table
-            ITable table = presentation.Slides[0].Shapes.AppendTable(presentation.SlideSize.Size.Width / 2 - 275, 80, widthsAndHeights.widths, widthsAndHeights.heights);
-
-
-            // insert column names on first row
-            for (int c = 0; c < columnNames.Count; c++)
+            for (int i = 0; i < noOfSlides; i++)
             {
-                table[c, 0].TextFrame.Text = columnNames[c];
-                table[c, 0].TextFrame.Paragraphs[0].TextRanges[0].LatinFont = new TextFont("Calibri");
-                table[c, 0].TextFrame.Paragraphs[0].TextRanges[0].FontHeight = 12;
-            }
+                var widthsAndHeights = GetCellWidthsAndHeights(rowsPerSlide, noOfColumns);
 
-            DataTable dataTable = Helper.CreateDataTable(data);
+                // create table
+                ITable table = presentation.Slides[i].Shapes.AppendTable(presentation.SlideSize.Size.Width / 2 - 275, 80, widthsAndHeights.widths, widthsAndHeights.heights);
 
-            // insert data
-            for (int r = 0; r < dataTable.Rows.Count; r++)
-            {
-                for (int c = 0; c < dataTable.Columns.Count; c++)
+                // insert column names on first row
+                for (int c = 0; c < columnNames.Count; c++)
                 {
-                    table[c, r + 1].TextFrame.Text = dataTable.Rows[r][c]?.ToString() ?? "";
-                    table[c, r + 1].TextFrame.Paragraphs[0].TextRanges[0].LatinFont = new TextFont("Calibri");
-                    table[c, r + 1].TextFrame.Paragraphs[0].TextRanges[0].FontHeight = 12;
+                    table[c, 0].TextFrame.Text = columnNames[c];
+                    table[c, 0].TextFrame.Paragraphs[0].TextRanges[0].LatinFont = new TextFont("Calibri");
+                    table[c, 0].TextFrame.Paragraphs[0].TextRanges[0].FontHeight = 12;
+                }
+
+                DataTable dataTable = Helper.CreateDataTable(data);
+
+                int noOfRowsLeft = totalNoOfRows - rowCounter;
+                int rowsPerCurrentSlide = noOfRowsLeft > rowsPerSlide ? rowsPerSlide : noOfRowsLeft;
+
+                // insert data
+                for (int rowNumber = 0; rowNumber < rowsPerCurrentSlide; rowNumber++)
+                {
+                    for (int c = 0; c < noOfColumns; c++)
+                    {
+                        table[c, rowNumber + 1].TextFrame.Text = dataTable.Rows[rowCounter][c]?.ToString() ?? "";
+                        table[c, rowNumber + 1].TextFrame.Paragraphs[0].TextRanges[0].LatinFont = new TextFont("Calibri");
+                        table[c, rowNumber + 1].TextFrame.Paragraphs[0].TextRanges[0].FontHeight = 12;
+
+                    }
+
+                    rowCounter++;
+
+                    if (rowNumber == rowsPerSlide - 1)
+                        continue;
 
                 }
             }
@@ -68,12 +84,12 @@ namespace DocumentGenerator.PowerPoint
 
         }
 
-        private (double[] widths, double[] heights) GetCellWidthsAndHeights(int totalNoOfRows, int noOfColumns)
+        private (double[] widths, double[] heights) GetCellWidthsAndHeights(int noOfRows, int noOfColumns)
         {
             // widths and heights represnt each size of cell in terms of with and hieght 
             // create widths/heights in double array since double array is what spire uses to create a table
             var widths = new double[noOfColumns];
-            var heights = new double[totalNoOfRows + 1];
+            var heights = new double[noOfRows + 1];
 
 
             // 100 is the width of each column
