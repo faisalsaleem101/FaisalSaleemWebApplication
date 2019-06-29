@@ -68,7 +68,7 @@ namespace DocumentGenerator.Helpers
             return columns;
         }
 
-        public static DataTable GetColumnNamesForDatabable(DataTable dataTable)
+        public static DataTable GetColumnNamesForDataTable(DataTable dataTable)
         {
             foreach (var column in dataTable.Columns)
                 dataTable.Columns[column.ToString()].ColumnName = string.Concat(column.ToString().Select(x => Char.IsUpper(x) ? " " + x : x.ToString())).TrimStart(' ');
