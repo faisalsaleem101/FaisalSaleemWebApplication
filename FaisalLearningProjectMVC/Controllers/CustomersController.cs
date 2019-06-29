@@ -1,4 +1,5 @@
 ﻿using DocumentGenerator.Excel;
+using DocumentGenerator.PowerPoint;
 using DocumentGenerator.Word;
 using FaisalLearningProjectMVC.Data;
 using FaisalLearningProjectMVC.Helper;
@@ -49,9 +50,9 @@ namespace FaisalLearningProjectMVC.Controllers
             var title = "Customers";
 
             var fileName = Helpers.GetExcelDocumentFileName(title);
-
             excel.Run(customers, title, fileName);
 
+            //download file 
             byte[] fileBytes = await Helpers.DownloadFile(fileName, _configuration, _hostingEnvironment);
             var file = File(fileBytes, "application/x-msdownload", fileName);
 
@@ -75,9 +76,35 @@ namespace FaisalLearningProjectMVC.Controllers
             var title = "Customers";
 
             var fileName = Helpers.GetWordDocumentFileName(title);
-
             excel.Run(customers, title, fileName);
 
+            //download file 
+            byte[] fileBytes = await Helpers.DownloadFile(fileName, _configuration, _hostingEnvironment);
+            var file = File(fileBytes, "application/x-msdownload", fileName);
+
+            return file;
+        }
+
+        public async Task<ActionResult> DownloadPowerpointTableDocument()
+        {
+            TableGeneratorPowerPoint powerpoint = new TableGeneratorPowerPoint();
+
+            // we need to use anonoymus type to set the custom label names
+            var customers = await _context.Customers.Select(x => new
+            {
+                FullName = x.ContactName,
+                Company = x.CompanyName,
+                JobTitle = x.ContactTitle,
+                x.Address,
+                x.City,
+            }).ToListAsync();
+
+            var title = "Customers";
+
+            var fileName = Helpers.GetPowerpointDocumentFileName(title);
+            powerpoint.Run(customers, title, fileName);
+
+            //download file 
             byte[] fileBytes = await Helpers.DownloadFile(fileName, _configuration, _hostingEnvironment);
             var file = File(fileBytes, "application/x-msdownload", fileName);
 

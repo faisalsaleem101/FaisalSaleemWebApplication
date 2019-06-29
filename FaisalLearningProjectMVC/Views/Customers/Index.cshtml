@@ -1,33 +1,33 @@
 ﻿@model IEnumerable<FaisalLearningProjectMVC.Models.Customer>
 
-@{
+    @{
     ViewData["Title"] = "Customers";
-}
+    }
 
-<div>
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <!-- ABOUT US SECTION TITLE-->
-            <div class="section_title">
-                <h2>Customers</h2>
+    <div>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <!-- ABOUT US SECTION TITLE-->
+                <div class="section_title">
+                    <h2>Customers</h2>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<p></p>
+    <p></p>
 
-<div class="text-right table-header">
-    <a asp-action="Create" style="padding-right: 980px;"><img src="~/images/add.png" class="index-buttons-topright-row" title="Add Customer" /></a>
-    <a asp-action="DownloadExcelTableDocument" id="download-excel"><img src="~/images/ExcelImage.png" title="Download Excel" /> </a>
-    <a asp-action="DownloadWordTableDocument" id="download-word"><img src="~/images/WordDocumentImage.png" title="Download Word" /> </a>
-    <a asp-action="" id="download-powerpoint"><img src="~/images/PowerPointImage.png" title="Download Powerpoint" /> </a>
-    <a id="download-pdf" class="pointer"><img src="~/images/pdf.png" style="height:23px; width:24px" title="Download PDF" /> </a>
-</div>
+    <div class="text-right table-header">
+        <a asp-action="Create" style="padding-right: 980px;"><img src="~/images/add.png" class="index-buttons-topright-row" title="Add Customer" /></a>
+        <a asp-action="DownloadExcelTableDocument" id="download-excel"><img src="~/images/ExcelImage.png" title="Download Excel" /> </a>
+        <a asp-action="DownloadWordTableDocument" id="download-word"><img src="~/images/WordDocumentImage.png" title="Download Word" /> </a>
+        <a asp-action="DownloadPowerpointTableDocument" id="download-powerpoint"><img src="~/images/PowerPointImage.png" title="Download Powerpoint" /> </a>
+        <a id="download-pdf" class="pointer"><img src="~/images/pdf.png" style="height:23px; width:24px" title="Download PDF" /> </a>
+    </div>
 
-<div id="example-table"></div>
+    <div id="example-table"></div>
 
-@section scripts
+    @section scripts
     {
     <script>
         $(document).ready(function () {
@@ -105,7 +105,7 @@
                 var day = d.getDate();
 
                 var time = ((day < 10 ? "0" : "") + day + "_" + (month < 10 ? "0" : "") + (month + 1) + "_" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds());
-                 
+
                 table.download("pdf", "Customers " + time + ".pdf", {
                     orientation:"portrait", //set page orientation to portrait
                     title:"Customers", //add title to report
@@ -113,4 +113,4 @@
             });
         });
     </script>
-}
+    }

@@ -12,9 +12,8 @@ namespace DocumentGenerator.PowerPoint
     {
         const int rowsPerSlide = 11;
 
-        public void Run<T>(IEnumerable<T> data, string title)
+        public void Run<T>(IEnumerable<T> data, string title, string fileName)
         {
-            string filePath = @"C:\Users\Faisal Saleem\source\repos\FaisalLearningProjectMVC\Templates\UpdateExistingTable7.pptx";
 
             Presentation presentation = new Presentation();
 
@@ -37,50 +36,68 @@ namespace DocumentGenerator.PowerPoint
             for (int i = 1; i < noOfSlides; i++)
                 presentation.Slides.Append();
 
+            // foreach slide starting at first one
             for (int i = 0; i < noOfSlides; i++)
             {
+                // number of data rows left to insert
                 int noOfRowsLeft = totalNoOfRows - rowCounter;
+
+                // get number of rows to insert either rowsPerSlide or the remaining rows e.g 4
                 int rowsPerCurrentSlide = noOfRowsLeft > rowsPerSlide ? rowsPerSlide : noOfRowsLeft;
 
+                // widths and heighs for table
                 var widthsAndHeights = GetCellWidthsAndHeights(rowsPerCurrentSlide, noOfColumns);
 
+                // needed to calculate column space
                 int y = noOfColumns * 50;
                 // create table
                 ITable table = presentation.Slides[i].Shapes.AppendTable(presentation.SlideSize.Size.Width / 2 - y, 40, widthsAndHeights.widths, widthsAndHeights.heights);
 
-
+                // insert column names
                 InsertColumnNames(columnNames, table);
 
+                // create databale to work with for data insert
                 DataTable dataTable = Helper.CreateDataTable(data);
 
                 // insert data
-                for (int rowNumber = 0; rowNumber < rowsPerCurrentSlide; rowNumber++)
-                {
-                    for (int c = 0; c < noOfColumns; c++)
-                    {
-                        table[c, rowNumber + 1].TextFrame.Text = dataTable.Rows[rowCounter][c]?.ToString() ?? "";
-                        table[c, rowNumber + 1].TextFrame.Paragraphs[0].TextRanges[0].LatinFont = new TextFont("Calibri");
-                        table[c, rowNumber + 1].TextFrame.Paragraphs[0].TextRanges[0].FontHeight = 12;
-                    }
-
-                    var tableRow = table.TableRows[rowNumber + 1];
-
-                    //set cell colour
-                    if (rowCounter % 2 == 0)
-                        SetColor(tableRow, 245, 245, 245);
-                    else
-                        SetColor(tableRow, 255, 255, 255);
-
-                    rowCounter++;
-
-                    if (rowNumber == rowsPerSlide - 1)
-                        continue;
-
-                }
+                rowCounter = InsertData(noOfColumns, rowCounter, rowsPerCurrentSlide, table, dataTable);
             }
+
+            // get file path configuration
+            AppConfiguration config = new AppConfiguration();
+            var filePath = config.OutputFolderDirectory + $@"\\{fileName}";
 
             // save file
             presentation.SaveToFile(filePath, FileFormat.Pptx2010);
+        }
+
+        private static int InsertData(int noOfColumns, int rowCounter, int rowsPerCurrentSlide, ITable table, DataTable dataTable)
+        {
+            for (int rowNumber = 0; rowNumber < rowsPerCurrentSlide; rowNumber++)
+            {
+                for (int c = 0; c < noOfColumns; c++)
+                {
+                    table[c, rowNumber + 1].TextFrame.Text = dataTable.Rows[rowCounter][c]?.ToString() ?? "";
+                    table[c, rowNumber + 1].TextFrame.Paragraphs[0].TextRanges[0].LatinFont = new TextFont("Calibri");
+                    table[c, rowNumber + 1].TextFrame.Paragraphs[0].TextRanges[0].FontHeight = 12;
+                }
+
+                var tableRow = table.TableRows[rowNumber + 1];
+
+                //set cell colour
+                if (rowCounter % 2 == 0)
+                    SetColor(tableRow, 245, 245, 245);
+                else
+                    SetColor(tableRow, 255, 255, 255);
+
+                rowCounter++;
+
+                if (rowNumber == rowsPerSlide - 1)
+                    continue;
+
+            }
+
+            return rowCounter;
         }
 
         private static void InsertColumnNames(List<string> columnNames, ITable table)

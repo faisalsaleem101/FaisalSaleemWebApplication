@@ -31,5 +31,7 @@ namespace FaisalLearningProjectMVC.Helper
         public static string GetWordDocumentFileName(string name) => $"{name} {DateTime.Now.ToString().Replace("/", "_").Replace(":", "_")}.docx";
 
         public static string GetExcelDocumentFileName(string name) => $"{name} {DateTime.Now.ToString().Replace("/", "_").Replace(":", "_")}.xlsx";
+
+        public static string GetPowerpointDocumentFileName(string name) => $"{name} {DateTime.Now.ToString().Replace("/", "_").Replace(":", "_")}.ppt";
     }
 }
