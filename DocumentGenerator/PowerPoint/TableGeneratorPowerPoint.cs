@@ -76,7 +76,7 @@ namespace DocumentGenerator.PowerPoint
 
         private static void CreateTitle(Presentation presentation, int slideNumber, string title)
         {
-            IAutoShape shape = presentation.Slides[slideNumber].Shapes.AppendShape(ShapeType.Rectangle, new RectangleF(290, 10, 150, 20));
+            IAutoShape shape = presentation.Slides[slideNumber].Shapes.AppendShape(ShapeType.Rectangle, new RectangleF(287, 15, 150, 20));
 
             shape.Fill.FillType = Spire.Presentation.Drawing.FillFormatType.None;
 
