@@ -12,7 +12,6 @@ namespace DocumentGenerator.PowerPoint
     public class TableGeneratorPowerPoint
     {
         const int rowsPerSlide = 11;
-        const string title = "Customers";
 
         public void Run<T>(IEnumerable<T> data, string title, string fileName)
         {
@@ -55,7 +54,7 @@ namespace DocumentGenerator.PowerPoint
                 // needed to calculate column space
                 int y = noOfColumns * 50;
                 // create table
-                ITable table = presentation.Slides[i].Shapes.AppendTable(presentation.SlideSize.Size.Width / 2 - y, 40, widthsAndHeights.widths, widthsAndHeights.heights);
+                ITable table = presentation.Slides[i].Shapes.AppendTable(presentation.SlideSize.Size.Width / 2 - y, 50, widthsAndHeights.widths, widthsAndHeights.heights);
 
                 // insert column names
                 InsertColumnNames(columnNames, table);
