@@ -24,7 +24,7 @@ namespace UnitTestDocumentGenerator.Word
                 x.City,
             }).ToList();
 
-            var tableGenerator = new TableGeneratorWord2();
+            var tableGenerator = new TableGeneratorWord();
 
             var fileName = $"Customers {DateTime.Now.ToString().Replace("/", "").Replace(":", "")}.docx";
 

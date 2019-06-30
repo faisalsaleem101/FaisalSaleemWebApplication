@@ -7,7 +7,7 @@ using System.IO;
 
 namespace DocumentGenerator.Excel
 {
-    public class TableGeneratorExcel2
+    public class TableGeneratorExcel
     {
         public void Run<T>(IEnumerable<T> data, string title, string fileName)
         {

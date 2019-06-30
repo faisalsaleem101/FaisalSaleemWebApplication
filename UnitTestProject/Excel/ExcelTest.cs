@@ -15,7 +15,7 @@ namespace UnitTestDocumentGenerator.Excel
             ContextDbService service = new ContextDbService();
             var context = service.GetDbContext();
 
-            var tableGenerator = new TableGeneratorExcel2();
+            var tableGenerator = new TableGeneratorExcel();
 
             var fileName = $"Customers {DateTime.Now.ToString().Replace("/", "").Replace(":", "")}.xlsx";
 

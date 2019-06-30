@@ -35,7 +35,7 @@ namespace FaisalLearningProjectMVC.Controllers
 
         public async Task<ActionResult> DownloadExcelTableDocument()
         {
-            TableGeneratorExcel2 excel = new TableGeneratorExcel2();
+            TableGeneratorExcel excel = new TableGeneratorExcel();
 
             // we need to use anonoymus type to set the custom label names
             var customers = await _context.Customers.Select(x => new
@@ -61,7 +61,7 @@ namespace FaisalLearningProjectMVC.Controllers
 
         public async Task<ActionResult> DownloadWordTableDocument()
         {
-            TableGeneratorWord2 excel = new TableGeneratorWord2();
+            TableGeneratorWord excel = new TableGeneratorWord();
 
             // we need to use anonoymus type to set the custom label names
             var customers = await _context.Customers.Select(x => new

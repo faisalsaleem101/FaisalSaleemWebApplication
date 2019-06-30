@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace DocumentGenerator.Word
 {
-    public class TableGeneratorWord2
+    public class TableGeneratorWord
     {
         private static Random rand = new Random();
 

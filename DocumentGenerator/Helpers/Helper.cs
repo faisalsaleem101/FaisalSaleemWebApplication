@@ -76,9 +76,5 @@ namespace DocumentGenerator.Helpers
             return dataTable;
         }
 
-        public static string GetWordDocumentFileName(string name) => $"{name} {DateTime.Now.ToString().Replace("/", "_").Replace(":", "_")}.docx";
-
-        public static string GetExcelDocumentFileName(string name) => $"{name} {DateTime.Now.ToString().Replace("/", "_").Replace(":", "_")}.xlsx";
-
     }
 }
