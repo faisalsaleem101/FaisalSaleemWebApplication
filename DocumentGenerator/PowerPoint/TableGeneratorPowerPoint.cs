@@ -4,6 +4,7 @@ using Spire.Presentation.Drawing;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 
 namespace DocumentGenerator.PowerPoint
@@ -11,6 +12,7 @@ namespace DocumentGenerator.PowerPoint
     public class TableGeneratorPowerPoint
     {
         const int rowsPerSlide = 11;
+        const string title = "Customers";
 
         public void Run<T>(IEnumerable<T> data, string title, string fileName)
         {
@@ -39,6 +41,8 @@ namespace DocumentGenerator.PowerPoint
             // foreach slide starting at first one
             for (int i = 0; i < noOfSlides; i++)
             {
+                CreateTitle(presentation, i, title);
+
                 // number of data rows left to insert
                 int noOfRowsLeft = totalNoOfRows - rowCounter;
 
@@ -69,6 +73,28 @@ namespace DocumentGenerator.PowerPoint
 
             // save file
             presentation.SaveToFile(filePath, FileFormat.Pptx2010);
+        }
+
+        private static void CreateTitle(Presentation presentation, int slideNumber, string title)
+        {
+            IAutoShape shape = presentation.Slides[slideNumber].Shapes.AppendShape(ShapeType.Rectangle, new RectangleF(290, 10, 150, 20));
+
+            shape.Fill.FillType = Spire.Presentation.Drawing.FillFormatType.None;
+
+            //set the LineColor
+            shape.ShapeStyle.LineColor.Color = Color.White;
+
+            //set the color and fill style
+            shape.AppendTextFrame(title);
+
+            //set the color of text in shape
+            TextRange textRange = shape.TextFrame.TextRange;
+            textRange.Fill.FillType = Spire.Presentation.Drawing.FillFormatType.Solid;
+            textRange.Fill.SolidColor.Color = Color.Black;
+
+            //set the Font of text in shape
+            textRange.FontHeight = 18;
+            textRange.LatinFont = new TextFont("Arial");
         }
 
         private static int InsertData(int noOfColumns, int rowCounter, int rowsPerCurrentSlide, ITable table, DataTable dataTable)
