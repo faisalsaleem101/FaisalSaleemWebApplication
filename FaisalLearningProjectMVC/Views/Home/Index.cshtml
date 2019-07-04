@@ -33,7 +33,7 @@
                     <div class="inner_about_desc">
 
                         <!-- SINGLE DESC -->
-                        <div class="single_about_area fadeInUp wow" data-wow-duration=".5s" data-wow-delay="1s">
+                        <div id="square1" hidden class="single_about_area fadeInUp wow" data-wow-duration=".5s" data-wow-delay="1s">
                             <!-- ICON -->
                             <div><i class="pe-7s-timer"></i></div>
                             <!-- HEADING DESCRIPTION -->
@@ -42,7 +42,7 @@
                         </div>
                         <!-- END SINGLE DESC -->
                         <!-- SINGLE DESC -->
-                        <div class="single_about_area fadeInUp wow" data-wow-duration=".5s" data-wow-delay="1.5s">
+                        <div id="square2" hidden class="single_about_area fadeInUp wow" data-wow-duration=".5s" data-wow-delay="1.5s">
                             <!-- ICON -->
                             <div><i class="pe-7s-target"></i></div>
                             <!-- HEADING DESCRIPTION -->
@@ -51,7 +51,7 @@
                         </div>
                         <!-- END SINGLE DESC -->
                         <!-- SINGLE DESC -->
-                        <div class="single_about_area fadeInUp wow" data-wow-duration=".5s" data-wow-delay="1s">
+                        <div id="square3" hidden class="single_about_area fadeInUp wow" data-wow-duration=".5s" data-wow-delay="1s">
                             <!-- ICON -->
                             <div><i class="pe-7s-stopwatch"></i></div>
                             <!-- HEADING DESCRIPTION -->
@@ -110,11 +110,13 @@
     {
 <script>
     $(document).ready(function () {
-        $('#heading1').fadeIn(0.1).removeClass('hidden');
-        $('#heading2').fadeIn(0.1).removeClass('hidden');
-        $('#heading3').fadeIn(0.1).removeClass('hidden');
-        $('#footer').fadeIn(0.1).removeClass('hidden');
+        $('#heading1').fadeIn(1).removeClass('hidden');
+        $('#heading2').fadeIn(1).removeClass('hidden');
+        $('#heading3').fadeIn(1).removeClass('hidden');
+        $('#footer').fadeIn(1).removeClass('hidden');
+        $('#square1').fadeIn(1000).removeClass('hidden');
+        $('#square2').fadeIn(1000).removeClass('hidden');
+        $('#square3').fadeIn(1000).removeClass('hidden');
     });
-    $('#footerShared').fadeIn(0.1).removeClass('hidden');
 </script>
 }
