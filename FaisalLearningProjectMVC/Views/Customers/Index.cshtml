@@ -95,17 +95,18 @@
                 table.setPage(1);
             });
 
-            //trigger download of data.pdf file
+            //download of data pdf file
             $("#download-pdf").click(function () {
 
+                // get date
                 var d = new Date($.now());
-
                 var month  = d.getMonth();
                 var day = d.getDate();
 
-                var time = ((day < 10 ? "0" : "") + day + "_" + (month < 10 ? "0" : "") + (month + 1) + "_" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds());
+                // create date time format for file name
+                var datetime = ((day < 10 ? "0" : "") + day + "_" + (month < 10 ? "0" : "") + (month + 1) + "_" + d.getFullYear() + " " + d.getHours() + "_" + d.getMinutes() + "_" + d.getSeconds());
 
-                table.download("pdf", "Customers " + time + ".pdf", {
+                table.download("pdf", "Customers " + datetime + ".pdf", {
                     orientation:"portrait", //set page orientation to portrait
                     title:"Customers", //add title to report
                 });
