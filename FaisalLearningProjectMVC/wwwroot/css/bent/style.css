@@ -40,12 +40,20 @@ p {
    COMMON STYLES             
 -----------------------------------------*/
 
+.section_title_index h2 {
+    text-align: center;
+    position: relative;
+    color: #333;
+    font-size: 30px;
+    font-weight: 400;
+}
+
 
 .section_title h2 {
     text-align: center;
     position: relative;
     color: #333;
-    font-size: 35px;
+    font-size: 30px;
     font-weight: 400;
 }
 .section_title h2:after {
