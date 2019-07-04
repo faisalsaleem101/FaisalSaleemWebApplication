@@ -9,7 +9,7 @@
                 <!-- ABOUT US SECTION TITLE-->
                 <div class="section_title">
                     <h2>Home</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+                    <p>Our team of analysts, architects and engineers guides you through technical and functional feasibility to elaborate and validate product concept and prepare foundation for future design and development work.</p>
                 </div>
             </div>
 
@@ -19,16 +19,16 @@
         <div>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="about_phone wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">
+                    <div id="heading1" class="about_phone wow fadeInLeft hidden" data-wow-duration="1s" data-wow-delay=".5s">
                         <!-- PHONE -->
                         <img src="images/about_iphone.png" alt="">
                     </div>
                 </div>
-                <div class="col-md-6  wow fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">
+                <div id="heading2" class="col-md-6  wow fadeInRight hidden" data-wow-duration="1s" data-wow-delay=".5s">
                     <!-- TITLE -->
                     <div class="inner_about_title">
                         <h2>Why we are best <br> for you</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <p>Manage, assign and acknowledge the tasks yourself. Receive daily progress reports.</p>
                     </div>
                     <div class="inner_about_desc">
 
@@ -37,8 +37,8 @@
                             <!-- ICON -->
                             <div><i class="pe-7s-timer"></i></div>
                             <!-- HEADING DESCRIPTION -->
-                            <h3>Lorem ipsum dolor sit amet</h3>
-                            <p>Cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit.</p>
+                            <h3></h3>
+                            <p class="home-p">From Faisal Saleems staff we assign an in-house developer's most suitable for your project. The developer's work exclusively for you.</p>
                         </div>
                         <!-- END SINGLE DESC -->
                         <!-- SINGLE DESC -->
@@ -46,8 +46,8 @@
                             <!-- ICON -->
                             <div><i class="pe-7s-target"></i></div>
                             <!-- HEADING DESCRIPTION -->
-                            <h3>Lorem ipsum dolor sit amet</h3>
-                            <p>Cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit.</p>
+                            <h3></h3>
+                            <p class="home-p">We adapt to your needs. We offer: long-term or  short-term agreements, short notice periods, whatever works best for you.</p>
                         </div>
                         <!-- END SINGLE DESC -->
                         <!-- SINGLE DESC -->
@@ -55,8 +55,8 @@
                             <!-- ICON -->
                             <div><i class="pe-7s-stopwatch"></i></div>
                             <!-- HEADING DESCRIPTION -->
-                            <h3>Lorem ipsum dolor sit amet</h3>
-                            <p>Cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit.</p>
+                            <h3></h3>
+                            <p class="home-p">Outsource on flexible, comfortable terms which guarantee IT cost decrease.</p>
                         </div>
                         <!-- END SINGLE DESC -->
 
@@ -66,7 +66,7 @@
         </div>
     </div>
 
-    <div class="video_area">
+    <div id="heading3" class="video_area hidden">
         <div>
             <div class="row">
                 <div class="col-md-6 wow fadeInLeftBig">
@@ -106,3 +106,13 @@
         </div>
     </footer>
 </div>
+@section scripts
+    {
+<script>
+    $(document).ready(function () {
+        $('#heading1').fadeIn(0.1).removeClass('hidden');
+        $('#heading2').fadeIn(0.1).removeClass('hidden');
+        $('#heading3').fadeIn(0.1).removeClass('hidden');
+    });
+</script>
+}
