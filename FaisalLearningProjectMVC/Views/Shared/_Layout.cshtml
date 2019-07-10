@@ -73,22 +73,32 @@
                         <ul class="nav navbar-nav navbar-right">
                             <!-- NAV -->
                             <li class="@(pageUrl == "/" ? "active" : "")">
-                            <a class="navLink" asp-controller="Home" asp-action="Index">HOME</a>
+                                <a class="navLink" asp-controller="Home" asp-action="Index">HOME</a>
                             </li>
                             <li class="@(pageUrl == "/Home/About" ? "active" : "")">
-                            <a class="navLink" asp-controller="Home" asp-action="About">ABOUT </a>
+                                <a class="navLink" asp-controller="Home" asp-action="About">ABOUT </a>
                             </li>
                             <li class="@(pageUrl == "/Home/Features" ? "active" : "")">
-                            <a class="navLink" asp-controller="Home" asp-action="Features">FEATURES</a>
+                                <a class="navLink" asp-controller="Home" asp-action="Features">FEATURES</a>
                             </li>
                             <li class="@(pageUrl == "/Home/Screens" ? "active" : "")">
-                            <a class="navLink" asp-controller="Home" asp-action="Screens">SCREENS</a>
+                                <a class="navLink" asp-controller="Home" asp-action="Screens">SCREENS</a>
                             </li>
                             <li class="@(pageUrl == "/Home/Download" ? "active" : "")">
-                            <a class="navLink" asp-controller="Home" asp-action="Download">DOWNLOAD </a>
+                                <a class="navLink" asp-controller="Home" asp-action="Download">DOWNLOAD </a>
                             </li>
                             <li class="@(pageUrl == "/Home/Contact" ? "active" : "")">
-                            <a class="navLink" asp-controller="Home" asp-action="Contact">CONTACT </a>
+                                <a class="navLink" asp-controller="Home" asp-action="Contact">CONTACT </a>
+                            </li>
+                            <li class="nav-item">
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <a class="navLink" asp-controller="Account" asp-action="Logout">@User.Identity.Name?.ToUpper(), LOGOUT</a>
+                                }
+                                else
+                                {
+                                    <a class="navLink" asp-controller="Account" asp-action="login">LOGIN </a>
+                                }
                             </li>
                         </ul>
                     </div>

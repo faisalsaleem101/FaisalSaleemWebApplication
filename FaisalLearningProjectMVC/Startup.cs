@@ -1,4 +1,5 @@
 ﻿using FaisalLearningProjectMVC.Data;
+using FaisalLearningProjectMVC.Models.AccountModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,14 @@ namespace FaisalLearningProjectMVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ContextDb>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<AppUser, AppRole>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+            }).AddEntityFrameworkStores<IdentityAppContext>();
+
+            services.AddDbContext<IdentityAppContext>(cfg => cfg.UseSqlServer(Configuration.GetConnectionString("AppData")));
+
             services.AddMvc();
         }
 
@@ -39,6 +48,8 @@ namespace FaisalLearningProjectMVC
             }
 
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
