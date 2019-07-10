@@ -1,64 +1,57 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@model FaisalLearningProjectMVC.Models.AccountModels.Login
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login</title>
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/3.3.92/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="~/lib/assets/css/galaxy-style.css">
-</head>
-<body>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-4 auth-left">
-                <div class="row auth-form mb-4">
-                    <div class="col-12 col-sm-12">
-                        <div class="auth-text-top mb-4">
-                            <h1>Welcome Back</h1>
-                            <small>Please login to your account</small>
-                        </div>
-                        <form action="#" method="POST">
-                            <div class="form-group">
-                                <label for="email">Email Address</label>
-                                <div class="input-icon">
-                                    <i class="mdi mdi-email"></i>
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter Your Email" autofocus required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <div class="input-icon">
-                                    <i class="mdi mdi-lock"></i>
-                                    <span class="passtoggle mdi mdi-eye toggle-password"></span>
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter Your Password" required>
-                                </div>
-                            </div>
-                            <div class="d-flex form-check">
-                                <input type="checkbox" class="filter" id="remember" checked>
-                                <label for="remember">Remember me</label>
-                                <a href="reset_password.html" class="ml-auto font-s">Forgot Password?</a>
-                            </div>
-                            <button class="btn btn-primary btn-block btn-c mt-4 mb-4">Login</button>
-                        </form>
+@{
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4 auth-left">
+            <div class="row auth-form mb-4">
+                <div class="col-12 col-sm-12">
+                    <div class="auth-text-top mb-4">
+                        <h1>Welcome Back</h1>
+                        <small>Please login to your account</small>
                     </div>
+                    <form asp-action="Login">
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <div class="input-icon">
+                                <i class="mdi mdi-email"></i>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter Your Email" autofocus required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <div class="input-icon">
+                                <i class="mdi mdi-lock"></i>
+                                <span class="passtoggle mdi mdi-eye toggle-password"></span>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter Your Password" required>
+                            </div>
+                        </div>
+                        <div class="d-flex form-check">
+                            <input type="checkbox" class="filter" id="remember" checked>
+                            <label for="remember">Remember me</label>
+                            <a href="reset_password.html" class="ml-auto font-s">Forgot Password?</a>
+                        </div>
+                        <button class="btn btn-primary btn-block btn-c mt-4 mb-4">Login</button>
+                    </form>
                 </div>
-            </div>
-            <div class="col-lg-8 auth-right d-lg-flex d-none bg-gradient" id="particles">
-                <div class="heading">
-                    <h3 style="padding-top:210px;">Welcome to Faisal's Business</h3>
-                </div>
-                <div class="shape"></div>
             </div>
         </div>
+        <div class="col-lg-8 auth-right d-lg-flex d-none bg-gradient" id="particles">
+            <div class="heading">
+                <h3 style="padding-top:210px;">Welcome to Faisal's Business</h3>
+            </div>
+            <div class="shape"></div>
+        </div>
     </div>
-    <script src="~/lib/assets/js/jquery-3.3.1.min.js"></script>
-    <script src="~/lib/assets/js/popper.min.js"></script>
-    <script src="~/lib/assets/js/bootstrap.min.js"></script>
-    <script src="~/lib/assets/js/particles.js"></script>
-    <script src="~/lib/assets/js/custom.js"></script>
-</body>
-</html>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+ 
+}
