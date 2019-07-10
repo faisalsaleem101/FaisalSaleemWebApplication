@@ -1,4 +1,6 @@
 ﻿using FaisalLearningProjectMVC.Models.AccountModels;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -46,6 +48,21 @@ namespace FaisalLearningProjectMVC.Controllers
             return View();
         }
 
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Login(string returnUrl = null)
+        {
+            // Clear the existing external cookie to ensure a clean login process
+            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+
+            ViewData["ReturnUrl"] = returnUrl;
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             var result = await SignInMgr.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
