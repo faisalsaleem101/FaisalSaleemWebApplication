@@ -147,22 +147,19 @@ input[type="color"]:focus,
     padding: 0px 40px;
 }
 
-.auth-right .heading {
+.heading3 {
+    font-size: 48px;
+    font-weight: 700;
+    -webkit-transition: color .3s ease;
+    transition: color .3s ease;
+    letter-spacing: 5px;
+    letter-spacing: .2777777777777778rem;
+    font-style: normal;
+    position: relative;
+    text-transform: uppercase;
+    text-shadow: 0 0 15px #FFFFFF;
     color: #FFFFFF;
 }
-
-    .auth-right .heading h3 {
-        font-size: 48px;
-        font-weight: 700;
-        -webkit-transition: color .3s ease;
-        transition: color .3s ease;
-        letter-spacing: 5px;
-        letter-spacing: .2777777777777778rem;
-        font-style: normal;
-        position: relative;
-        text-transform: uppercase;
-        text-shadow: 0 0 15px #FFFFFF;
-    }
 
 .logo {
     margin: 80px 0 20px 0;
@@ -507,7 +504,7 @@ input[type="checkbox"].filter {
 }
 
 @media only screen and (min-width : 768px) and (max-width : 1024px) {
-    .auth-right .heading h3 {
+    .heading3 {
         font-size: 38px;
     }
 
