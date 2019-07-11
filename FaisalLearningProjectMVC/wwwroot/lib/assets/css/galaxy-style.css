@@ -86,6 +86,8 @@ input[type="color"]:focus,
 
 .btn-c {
     padding: .6rem .75rem;
+    margin-left: 0 !important;
+    margin-top: 20px !important;
 }
 
 .btn-social {
@@ -166,7 +168,7 @@ input[type="color"]:focus,
 }
 
 .auth-text-top small {
-    font-size: .9rem;
+    font-size: 14px;
     font-weight: 600;
     color: #7e90a4;
 }
@@ -190,8 +192,8 @@ input[type="color"]:focus,
     display: block;
     width: 100%;
     padding: .7rem .75rem;
-    height: auto !important;
-    font-size: .84rem;
+    height: 43px !important;
+    font-size: 13px;
     color: #636c7b !important;
     border: 1px solid #c5ccd4;
     border-radius: .2rem;
@@ -209,26 +211,21 @@ input[type="color"]:focus,
 }
 
 .form-group .input-icon .form-control {
-    padding-left: 2rem;
+    padding-left: 32px;
 }
 
 .form-group .input-icon {
     position: relative;
 }
 
+
 .input-icon i {
     position: absolute;
     top: 5px;
     left: 5px;
-    font-size: 1.5rem;
+    font-size: 25px;
     color: #c5ccd4;
     z-index: 9999;
-}
-
-label {
-    color: #354052;
-    font-weight: 600;
-    font-size: .9rem;
 }
 
 .divider {
@@ -287,13 +284,13 @@ input[type="checkbox"].filter {
 
     input[type="checkbox"].filter + label {
         cursor: pointer;
-        font-size: .8rem;
+        font-size: 12px;
     }
 
 .filter + label:before {
     content: '';
     margin-top: -2px;
-    margin-left: -20px;
+    margin-left: -12px;
     margin-right: 5px;
     display: inline-block;
     vertical-align: text-top;
@@ -483,7 +480,7 @@ input[type="checkbox"].filter {
     }
 
     .auth-text-top small {
-        font-size: .75rem;
+        font-size: 14px;
     }
 
     .font-s {
@@ -555,3 +552,43 @@ select:-webkit-autofill:focus {
   transition: background-color 5000s ease-in-out 0s;
 }
 
+
+.d-flex {
+    display: -ms-flexbox !important;
+    display: flex !important;
+}
+
+
+.form-check {
+    position: relative;
+    display: block;
+    padding-left: 1.25rem;
+}
+
+.ml-auto, .mx-auto {
+    margin-left: auto !important;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: .5rem;
+}
+
+.h1, h1 {
+    font-size: 40px;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    margin-bottom: .5rem;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.2;
+    color: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: .5rem;
+}
+
+*, ::after, ::before {
