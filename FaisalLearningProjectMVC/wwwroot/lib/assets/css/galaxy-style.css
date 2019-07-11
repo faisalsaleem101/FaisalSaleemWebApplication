@@ -22,13 +22,12 @@
 ------------------------------------*/
 
 body, html {
-    height: 100vh;
     padding: 0;
     margin: 0;
     font-family: 'Source Sans Pro', sans-serif;
     background: #FFFFFF !important;
     text-rendering: optimizeLegibility;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 a {
@@ -49,6 +48,13 @@ a {
 }
 
     .btn-primary:hover {
+        color: white;
+        background-color: #f39c12;
+        border-color: #f39c12;
+        transition: all 1s;
+    }
+
+    .btn-primary:active {
         color: white;
         background-color: #f39c12;
         border-color: #f39c12;
@@ -591,4 +597,10 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: .5rem;
 }
 
-*, ::after, ::before {
+.loginTitleRight {
+    position: fixed;
+    left: 42%;
+    top: 32%;
+    z-index: 1;
+    width: 100%;
+}
