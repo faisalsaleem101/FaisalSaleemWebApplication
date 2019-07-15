@@ -10,12 +10,12 @@ namespace FaisalLearningProjectMVC.Controllers
     public class AccountController : Controller
     {
         private readonly UserManager<AppUser> UserMgr;
-        private readonly SignInManager<AppUser> SignInMgr;
+        private readonly SignInManager<AppUser> _signInManager;
 
         public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             UserMgr = userManager;
-            SignInMgr = signInManager;
+            _signInManager = signInManager;
         }
 
         [HttpGet]
@@ -34,7 +34,7 @@ namespace FaisalLearningProjectMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(Login model)
         {
-            var result = await SignInMgr.PasswordSignInAsync("TestUser", model.Password, model.RememberMe, lockoutOnFailure: false);
+            var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);
 
             if (result.Succeeded)
             {
@@ -46,6 +46,12 @@ namespace FaisalLearningProjectMVC.Controllers
             }
 
             return View(model);
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
 
