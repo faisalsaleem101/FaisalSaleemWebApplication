@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Threading.Tasks;
 
 namespace FaisalLearningProjectMVC.Controllers
@@ -19,36 +18,6 @@ namespace FaisalLearningProjectMVC.Controllers
             SignInMgr = signInManager;
         }
 
-        public async Task<IActionResult> Register()
-        {
-            try
-            {
-                ViewBag.Message = "User already registered";
-
-                AppUser user = await UserMgr.FindByNameAsync("TestUser");
-
-                if (user == null)
-                {
-                    user = new AppUser();
-                    user.UserName = "TestUser";
-                    user.Email = "TestUser@test.com";
-                    user.FirstName = "John";
-                    user.LastName = "Doe";
-
-                    IdentityResult result = await UserMgr.CreateAsync(user, "Password1!");
-                    ViewBag.Message = "User created";
-
-                }
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Message = "User already registered";
-            }
-
-            return View();
-        }
-
-
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Login(string returnUrl = null)
@@ -63,9 +32,9 @@ namespace FaisalLearningProjectMVC.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> Login(Login model)
         {
-            var result = await SignInMgr.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+            var result = await SignInMgr.PasswordSignInAsync("TestUser", model.Password, model.RememberMe, lockoutOnFailure: false);
 
             if (result.Succeeded)
             {
@@ -73,7 +42,7 @@ namespace FaisalLearningProjectMVC.Controllers
             }
             else
             {
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                ViewBag.Error = "Your account or password is incorrect.";
             }
 
             return View(model);
