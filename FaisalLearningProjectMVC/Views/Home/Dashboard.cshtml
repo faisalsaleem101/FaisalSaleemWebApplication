@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/dashboard/navigation-dark.css">
+    <link rel="stylesheet" href="~/lib/slicknav/slicknav.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+</head>
+
+<div>
+
+    <div>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="section_title">
+                    <h2>Dashboard</h2>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <nav class="menu-navigation-dark">
+        <a href="#"><i class="fa fa-camera-retro"></i><span>Pictures</span></a>
+        <a href="#"><i class="fa fa-code"></i><span>Code</span></a>
+        <a href="#" class="selected"><i class="fa fa-comment"></i><span>Talks</span></a>
+        <a href="#"><i class="fa fa-plane"></i><span>Travel</span></a>
+        <a href="#"><i class="fa fa-heart"></i><span>Favorites</span></a>
+    </nav>
+
+
+
+    @section scripts
+    {
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="~/lib/slicknav/jquery.slicknav.min.js"></script>
+    <script>
+
+        $(function () {
+
+            var menu = $('.menu-navigation-dark');
+
+            menu.slicknav();
+
+            // Mark the clicked item as selected
+
+            menu.on('click', 'a', function () {
+                var a = $(this);
+
+                a.siblings().removeClass('selected');
+                a.addClass('selected');
+            });
+        });
+
+    </script>
+    }
+</div>
+
+
+
