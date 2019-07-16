@@ -9,7 +9,7 @@
     .menu-navigation-dark a {
         display: inline-block;
         color: #f39c12;
-        background-color: rgba(0, 0, 0, .5);
+        background-color: #979797;
         font-size: 35px;
         font-weight: bold;
         box-shadow: 1px 3px 5px 0 rgba(0, 0, 0, 0.26);
