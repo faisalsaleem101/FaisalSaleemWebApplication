@@ -201,7 +201,7 @@ input[type="color"]:focus,
     height: 43px !important;
     font-size: 13px;
     color: #636c7b !important;
-    border: 1px solid #c5ccd4;
+    border: 1px solid #999;
     border-radius: .2rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
@@ -603,4 +603,11 @@ h1, h2, h3, h4, h5, h6 {
     top: 32%;
     z-index: 1;
     width: 100%;
+}
+
+.form-control:focus {
+    border-color: #f39c12 !important;
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }
