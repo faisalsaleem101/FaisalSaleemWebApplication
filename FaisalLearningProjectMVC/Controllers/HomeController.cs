@@ -40,6 +40,12 @@ namespace FaisalLearningProjectMVC.Controllers
         {
             ViewData["Message"] = "Your contact page.";
             return View();
+
+        }
+
+        public IActionResult Dashboard()
+        {
+            return View();
         }
 
         // POST: Orders/Edit/5
