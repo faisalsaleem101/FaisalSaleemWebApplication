@@ -616,3 +616,11 @@ h1, h2, h3, h4, h5, h6 {
 .error {
     color:#f39c12 !important;
 }
+
+.login-details {
+    padding-top: 20px;
+}
+
+.account-body {
+    padding: 0px;
+}

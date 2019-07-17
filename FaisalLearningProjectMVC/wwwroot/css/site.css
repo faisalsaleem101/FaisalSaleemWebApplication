@@ -489,3 +489,17 @@ body {
 .glyphicon-nav {
     top: 2px !important;
 }
+
+.index-create-btn {
+    padding-right: 980px
+}
+
+.index-pdf-btn {
+    height: 23px;
+    width: 24px
+}
+
+.contact-textbox {
+    width: 700px !important;
+}
+
