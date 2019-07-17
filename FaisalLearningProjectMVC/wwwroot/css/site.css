@@ -503,3 +503,9 @@ body {
     width: 700px !important;
 }
 
+.home-tick-img {
+    text-align: unset !important;
+    font-size: 35px !important;
+    top: 10px !important;
+    left: 0px !important;
+}
