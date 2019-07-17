@@ -630,6 +630,7 @@ h1, h2, h3, h4, h5, h6 {
     background-color: white;
     border-color: #f39c12;
     transition: all 1s;
+    outline: none;
 }
 
     .btn-primary1:hover {
@@ -637,6 +638,7 @@ h1, h2, h3, h4, h5, h6 {
         background-color: #f39c12;
         border-color: #f39c12;
         transition: all 1s;
+        outline: none;
     }
 
     .btn-primary1:active {
@@ -644,4 +646,5 @@ h1, h2, h3, h4, h5, h6 {
         background-color: #f39c12;
         border-color: #f39c12;
         transition: all 1s;
+        outline: none;
     }

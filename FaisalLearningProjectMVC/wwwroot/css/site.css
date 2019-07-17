@@ -90,24 +90,7 @@
         color: #777;
     }
 
-        .navbar-default .navbar-nav > li > a:hover,
-        .navbar-default .navbar-nav > li > a:focus {
-            color: #333;
-        }
-
-    .navbar-default .navbar-nav > .active > a,
-    .navbar-default .navbar-nav > .active > a:hover,
-    .navbar-default .navbar-nav > .active > a:focus {
-        color: #555;
-        background-color: #E7E7E7;
-    }
-
-    .navbar-default .navbar-nav > .open > a,
-    .navbar-default .navbar-nav > .open > a:hover,
-    .navbar-default .navbar-nav > .open > a:focus {
-        color: #555;
-        background-color: #D5D5D5;
-    }
+ 
     /* Caret */
     .navbar-default .navbar-nav > .dropdown > a .caret {
         border-top-color: #777;
@@ -166,6 +149,7 @@
 .navLink {
     font-family: 'Raleway', sans-serif !important;
     padding-top: 15px !important;
+    outline: none;
 }
 
 
