@@ -600,7 +600,7 @@ h1, h2, h3, h4, h5, h6 {
 .loginTitleRight {
     position: fixed;
     left: 42%;
-    top: 32%;
+    top: 43%;
     z-index: 1;
     width: 100%;
 }
@@ -610,4 +610,9 @@ h1, h2, h3, h4, h5, h6 {
     outline: 0;
     -webkit-box-shadow: none;
     box-shadow: none;
+}
+
+
+.error {
+    color:#f39c12 !important;
 }

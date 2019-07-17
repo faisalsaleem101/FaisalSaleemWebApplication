@@ -447,3 +447,46 @@ body {
 .hidden {
     display: none
 }
+
+.btn-standard {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-decoration: none !important;
+}
+
+.logout-btn {
+    padding-top: 15px !important;
+    color: #B5B5B5 !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0px !important;
+    font-size: 15px !important;
+}
+
+    .logout-btn:hover {
+        color: #f39c12;
+    }
+    .logout-btn.hover {
+        color: #f39c12;
+    } 
+
+    .header-font{
+        font-size: 15px !important;
+    }
