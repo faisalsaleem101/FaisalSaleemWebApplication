@@ -93,10 +93,14 @@
                             <li class="nav-item">
                                 @if (User.Identity.IsAuthenticated)
                                 {
-                                    // <a class="navLink" asp-controller="Account" asp-action="Logout">@User.Identity.Name?.ToUpper(), LOGOUT</a>
+                                    string userName = User.Identity.Name?.ToUpper();
+                                    var userNameInitials = userName.Split(" ");
+                                    var firstChar = userNameInitials.FirstOrDefault()?[0];
+                                    var lastChar = userNameInitials.LastOrDefault()?[0];
+
 
                                     <a asp-controller="Account" asp-action="Logout" class="btn-standard btn-info btn-lg logout-btn">
-                                        <span class="glyphicon glyphicon-log-out glyphicon-nav"></span> Log out FS
+                                        <span class="glyphicon glyphicon-log-out glyphicon-nav"></span> Log out @firstChar@lastChar
                                     </a>
                                 }
                                 else
