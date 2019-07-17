@@ -99,13 +99,13 @@
                                     var lastChar = userNameInitials.LastOrDefault()?[0];
 
 
-                                    <a asp-controller="Account" asp-action="Logout" class="btn-standard btn-info btn-lg logout-btn">
+                                    <a asp-controller="Account" asp-action="Logout" class="logout-btn">
                                         <span class="glyphicon glyphicon-log-out glyphicon-nav"></span> Log out @firstChar@lastChar
                                     </a>
                                 }
                                 else
                                 {
-                                    <a asp-controller="Account" asp-action="login" class="btn-standard btn-info btn-lg logout-btn">
+                                    <a asp-controller="Account" asp-action="login" class="logout-btn">
                                         <span class="glyphicon glyphicon-log-in glyphicon-nav"></span> Login
                                     </a>
                                 }
