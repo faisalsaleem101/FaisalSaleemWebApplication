@@ -624,3 +624,24 @@ h1, h2, h3, h4, h5, h6 {
 .account-body {
     padding: 0px;
 }
+
+.btn-primary1 {
+    color: #f39c12;
+    background-color: white;
+    border-color: #f39c12;
+    transition: all 1s;
+}
+
+    .btn-primary1:hover {
+        color: white;
+        background-color: #f39c12;
+        border-color: #f39c12;
+        transition: all 1s;
+    }
+
+    .btn-primary1:active {
+        color: white;
+        background-color: #f39c12;
+        border-color: #f39c12;
+        transition: all 1s;
+    }
