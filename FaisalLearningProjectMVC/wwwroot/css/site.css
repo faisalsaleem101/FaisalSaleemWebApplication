@@ -480,13 +480,12 @@ body {
     font-size: 15px !important;
 }
 
-    .logout-btn:hover {
-        color: #f39c12;
-    }
-    .logout-btn.hover {
-        color: #f39c12;
-    } 
+
 
     .header-font{
         font-size: 15px !important;
     }
+
+.glyphicon-nav {
+    top: 2px !important;
+}
