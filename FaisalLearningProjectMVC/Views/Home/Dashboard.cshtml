@@ -24,7 +24,7 @@
         <a asp-action="Index" asp-controller="Customers"><i class="fas fa-users"></i><span>Customers</span></a>
         <a asp-action="Index" asp-controller="Orders"><i class="far fa-list-alt"></i><span>Orders</span></a>
         <a href="#"><i class="fas fa-cube"></i><span>Products</span></a>
-        <a href="#"><i class="fas fa-truck"></i><span>Vendors</span></a>
+        <a href="#"><i class="fas fa-truck"></i><span>Suppliers</span></a>
 
     </nav>
 
@@ -32,25 +32,25 @@
 
     @section scripts
     {
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="~/lib/slicknav/jquery.slicknav.min.js"></script>
-    <script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="~/lib/slicknav/jquery.slicknav.min.js"></script>
+        <script>
 
-        $(function () {
+            $(function () {
 
-            var menu = $('.menu-navigation-dark');
-            menu.slicknav();
+                var menu = $('.menu-navigation-dark');
+                menu.slicknav();
 
-            // Mark the clicked item as selected
-            menu.on('click', 'a', function () {
-                var a = $(this);
+                // Mark the clicked item as selected
+                menu.on('click', 'a', function () {
+                    var a = $(this);
 
-                a.siblings().removeClass('selected');
-                a.addClass('selected');
+                    a.siblings().removeClass('selected');
+                    a.addClass('selected');
+                });
             });
-        });
 
-    </script>
+        </script>
     }
 </div>
 
