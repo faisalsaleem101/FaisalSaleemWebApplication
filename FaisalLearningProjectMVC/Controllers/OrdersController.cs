@@ -1,5 +1,6 @@
 ﻿using FaisalLearningProjectMVC.Data;
 using FaisalLearningProjectMVC.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,8 @@ namespace FaisalLearningProjectMVC.Controllers
         }
 
         // GET: Orders
+
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             var tsqlContext = _context.Orders.Include(o => o.Customer);
@@ -45,6 +48,7 @@ namespace FaisalLearningProjectMVC.Controllers
         }
 
         // GET: Orders/Create
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["CustomerId"] = new SelectList(_context.Customers, "ID", "ID");
@@ -69,6 +73,7 @@ namespace FaisalLearningProjectMVC.Controllers
         }
 
         // GET: Orders/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -122,6 +127,7 @@ namespace FaisalLearningProjectMVC.Controllers
         }
 
         // GET: Orders/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

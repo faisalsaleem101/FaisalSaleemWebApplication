@@ -1,6 +1,7 @@
 ﻿using FaisalLearningProjectMVC.Data;
 using FaisalLearningProjectMVC.Models;
 using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -43,6 +44,7 @@ namespace FaisalLearningProjectMVC.Controllers
 
         }
 
+        [Authorize]
         public IActionResult Dashboard()
         {
             return View();

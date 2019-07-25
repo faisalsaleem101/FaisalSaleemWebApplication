@@ -4,6 +4,7 @@ using DocumentGenerator.Word;
 using FaisalLearningProjectMVC.Data;
 using FaisalLearningProjectMVC.Helper;
 using FaisalLearningProjectMVC.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,7 @@ namespace FaisalLearningProjectMVC.Controllers
         }
 
         // GET: Customers
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Customers.Where(c => c.IsActive).ToListAsync());
@@ -113,6 +115,7 @@ namespace FaisalLearningProjectMVC.Controllers
 
 
         // GET: Customers/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -131,6 +134,7 @@ namespace FaisalLearningProjectMVC.Controllers
         }
 
         // GET: Customers/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -154,6 +158,7 @@ namespace FaisalLearningProjectMVC.Controllers
         }
 
         // GET: Customers/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -205,6 +210,7 @@ namespace FaisalLearningProjectMVC.Controllers
         }
 
         // GET: Customers/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
