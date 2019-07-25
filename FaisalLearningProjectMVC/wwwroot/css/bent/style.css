@@ -116,11 +116,6 @@ p {
           
 
     .navbar-default {
-        -webkit-transition: all 1s;
-        -moz-transition: all 1s;
-        -o-transition: all 1s;
-        transition: all 1s;
-        z-index: 110;
     }
 
     .navbar-brand img {

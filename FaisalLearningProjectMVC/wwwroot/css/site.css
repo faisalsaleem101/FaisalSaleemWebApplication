@@ -493,3 +493,7 @@ body {
     top: 10px !important;
     left: 0px !important;
 }
+
+.last-header-btn {
+    padding-right: 30px;
+}

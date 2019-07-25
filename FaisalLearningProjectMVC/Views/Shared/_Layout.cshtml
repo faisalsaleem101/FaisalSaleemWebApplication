@@ -81,15 +81,15 @@
                             <li class="@(pageUrl == "/Home/Features" ? "active" : "")">
                                 <a class="navLink" asp-controller="Home" asp-action="Features">Features</a>
                             </li>
-                            <li class="@(pageUrl == "/Home/Screens" ? "active" : "")">
-                                <a class="navLink" asp-controller="Home" asp-action="Screens">Screens</a>
-                            </li>
-                            <li class="@(pageUrl == "/Home/Download" ? "active" : "")">
-                                <a class="navLink" asp-controller="Home" asp-action="Download">Download </a>
-                            </li>
                             <li class="@(pageUrl == "/Home/Contact" ? "active" : "")">
                                 <a class="navLink" asp-controller="Home" asp-action="Contact">Contact</a>
                             </li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li class="nav-item">
+                                    <a class="navLink" asp-controller="Home" asp-action="Dashboard">Dashboard</a>
+                                </li>
+                            }
                             <li class="nav-item">
                                 @if (User.Identity.IsAuthenticated)
                                 {
