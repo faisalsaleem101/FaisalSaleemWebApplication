@@ -37,5 +37,7 @@ namespace FaisalLearningProjectMVC.Models
         public string ShipCountry { get; set; }
 
         public virtual Customer Customer { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }

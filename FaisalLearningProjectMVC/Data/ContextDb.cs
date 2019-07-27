@@ -46,6 +46,7 @@ namespace FaisalLearningProjectMVC.Data
             modelBuilder.Entity<Order>().Property(b => b.ShipRegion).HasColumnName("shipregion");
             modelBuilder.Entity<Order>().Property(b => b.ShipPostalCode).HasColumnName("shippostalcode");
             modelBuilder.Entity<Order>().Property(b => b.ShipCountry).HasColumnName("shipcountry");
+            modelBuilder.Entity<Order>().Property(b => b.IsActive).HasColumnName("IsActive");
 
         }
     }

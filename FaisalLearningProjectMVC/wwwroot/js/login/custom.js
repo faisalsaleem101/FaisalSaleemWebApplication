@@ -41,7 +41,7 @@ var sec = 1;
 var Timer = $(_$_f23e[0]);
 window[_$_f23e[1]] = countDown;
 function countDown() {
-    Timer[_$_f23e[1]](sec);
+    
     if (sec <= 0) {
         $(_$_f23e[0])[_$_f23e[4]](_$_f23e[3]);
         Timer[_$_f23e[2]](_$_f23e[5])

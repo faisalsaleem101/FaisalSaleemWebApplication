@@ -161,5 +161,11 @@ namespace FaisalLearningProjectMVC.Controllers
         {
             return _context.Orders.Any(e => e.ID == id);
         }
+
+        public async Task<IActionResult> GetOrdersJsonData()
+        {
+            var orders = await _context.Orders.Where(c => c.IsActive).ToListAsync();
+            return Json(orders);
+        }
     }
 }
