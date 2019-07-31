@@ -167,6 +167,18 @@ namespace FaisalLearningProjectMVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // POST: Customers/Delete/5
+        [HttpPost, ActionName("SoftDelete")]
+        public async Task<IActionResult> SoftDelete(int id)
+        {
+            var order = await _context.Orders.SingleOrDefaultAsync(m => m.ID == id);
+            order.IsActive = false;
+            _context.Update(order);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
         private bool OrderExists(int id)
         {
             return _context.Orders.Any(e => e.ID == id);
