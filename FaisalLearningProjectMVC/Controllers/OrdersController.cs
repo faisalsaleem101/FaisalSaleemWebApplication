@@ -1,9 +1,15 @@
-﻿using FaisalLearningProjectMVC.Data;
+﻿using DocumentGenerator.Excel;
+using DocumentGenerator.PowerPoint;
+using DocumentGenerator.Word;
+using FaisalLearningProjectMVC.Data;
+using FaisalLearningProjectMVC.Helper;
 using FaisalLearningProjectMVC.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,11 +18,15 @@ namespace FaisalLearningProjectMVC.Controllers
     public class OrdersController : Controller
     {
         private readonly ContextDb _context;
+        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IConfiguration _configuration;
+        private readonly string documentTitle = "Orders";
 
-
-        public OrdersController(ContextDb context)
+        public OrdersController(ContextDb context, IHostingEnvironment hostingEnvironment, IConfiguration configuration)
         {
             _context = context;
+            _hostingEnvironment = hostingEnvironment;
+            _configuration = configuration;
         }
 
         // GET: Orders
@@ -181,6 +191,98 @@ namespace FaisalLearningProjectMVC.Controllers
                 }).ToListAsync();
 
             return Json(orders);
+        }
+
+        public async Task<ActionResult> DownloadWordTableDocument()
+        {
+            TableGeneratorWord word = new TableGeneratorWord();
+
+            // we need to use anonoymus type to set the custom label names
+            var orders = await _context.Orders.
+                Include(c => c.Customer).
+                Include(c => c.Shipper).
+                Where(c => c.IsActive).
+                Select(o => new
+                {
+                    OrderDate = o.OrderDate.ToString("MM/dd/yyyy"),
+                    Customer = o.Customer.ContactName ?? "",
+                    ShipAddress = o.ShipAddress,
+                    ShipCity = o.ShipCity,
+                    ShipPostalCode = o.ShipPostalCode,
+                    ShipCountry = o.ShipCountry,
+                    Shipper = o.Shipper.CompanyName ?? ""
+                }).ToListAsync();
+
+            var fileName = Helpers.GetWordDocumentFileName(documentTitle);
+            word.Run(orders, documentTitle, fileName);
+
+            //download file 
+            byte[] fileBytes = await Helpers.DownloadFile(fileName, _configuration, _hostingEnvironment);
+            var file = File(fileBytes, "application/x-msdownload", fileName);
+
+            return file;
+        }
+
+        public async Task<ActionResult> DownloadExcelTableDocument()
+        {
+            TableGeneratorExcel excel = new TableGeneratorExcel();
+
+            // we need to use anonoymus type to set the custom label names
+            var orders = await _context.Orders.
+                Include(c => c.Customer).
+                Include(c => c.Shipper).
+                Where(c => c.IsActive).
+                Select(o => new
+                {
+                    OrderDate = o.OrderDate.ToString("MM/dd/yyyy"),
+                    Customer = o.Customer.ContactName ?? "",
+                    ShipAddress = o.ShipAddress,
+                    ShipCity = o.ShipCity,
+                    ShipPostalCode = o.ShipPostalCode,
+                    ShipCountry = o.ShipCountry,
+                    Shipper = o.Shipper.CompanyName ?? ""
+                }).ToListAsync();
+
+
+            var fileName = Helpers.GetExcelDocumentFileName(documentTitle);
+            excel.Run(orders, documentTitle, fileName);
+
+            //download file 
+            byte[] fileBytes = await Helpers.DownloadFile(fileName, _configuration, _hostingEnvironment);
+            var file = File(fileBytes, "application/x-msdownload", fileName);
+
+            return file;
+        }
+
+        public async Task<ActionResult> DownloadPowerpointTableDocument()
+        {
+            TableGeneratorPowerPoint powerpoint = new TableGeneratorPowerPoint();
+
+            // we need to use anonoymus type to set the custom label names
+            var orders = await _context.Orders.
+                Include(c => c.Customer).
+                Include(c => c.Shipper).
+                Where(c => c.IsActive).
+                Select(o => new
+                {
+                    OrderDate = o.OrderDate.ToString("MM/dd/yyyy"),
+                    Customer = o.Customer.ContactName ?? "",
+                    ShipAddress = o.ShipAddress,
+                    ShipCity = o.ShipCity,
+                    ShipPostalCode = o.ShipPostalCode,
+                    ShipCountry = o.ShipCountry,
+                    Shipper = o.Shipper.CompanyName ?? ""
+                }).ToListAsync();
+
+
+            var fileName = Helpers.GetPowerpointDocumentFileName(documentTitle);
+            powerpoint.Run(orders, documentTitle, fileName);
+
+            //download file 
+            byte[] fileBytes = await Helpers.DownloadFile(fileName, _configuration, _hostingEnvironment);
+            var file = File(fileBytes, "application/x-msdownload", fileName);
+
+            return file;
         }
 
     }

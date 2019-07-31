@@ -63,7 +63,7 @@ namespace FaisalLearningProjectMVC.Controllers
 
         public async Task<ActionResult> DownloadWordTableDocument()
         {
-            TableGeneratorWord excel = new TableGeneratorWord();
+            TableGeneratorWord word = new TableGeneratorWord();
 
             // we need to use anonoymus type to set the custom label names
             var customers = await _context.Customers.Select(x => new
@@ -78,7 +78,7 @@ namespace FaisalLearningProjectMVC.Controllers
             var title = "Customers";
 
             var fileName = Helpers.GetWordDocumentFileName(title);
-            excel.Run(customers, title, fileName);
+            word.Run(customers, title, fileName);
 
             //download file 
             byte[] fileBytes = await Helpers.DownloadFile(fileName, _configuration, _hostingEnvironment);
