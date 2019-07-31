@@ -37,10 +37,14 @@ namespace FaisalLearningProjectMVC.Models
 
         public string ShipCountry { get; set; }
 
+
+        public bool IsActive { get; set; }
+
         public virtual Customer Customer { get; set; }
         public string CustomerName => Customer?.ContactName ?? string.Empty;
 
-        public bool IsActive { get; set; }
+        public virtual Shipper Shipper { get; set; }
+
 
 
     }

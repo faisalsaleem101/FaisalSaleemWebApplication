@@ -27,6 +27,7 @@ namespace FaisalLearningProjectMVC.Data.Entities
             modelBuilder.Property(b => b.IsActive).HasColumnName("IsActive");
 
             modelBuilder.HasOne(p => p.Customer).WithMany(b => b.Orders).HasForeignKey(p => p.CustomerId);
+            modelBuilder.HasOne(s => s.Shipper).WithMany(b => b.Orders).HasForeignKey(p => p.ShipperId);
 
         }
     }

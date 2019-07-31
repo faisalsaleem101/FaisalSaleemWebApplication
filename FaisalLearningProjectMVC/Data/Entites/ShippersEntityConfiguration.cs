@@ -8,6 +8,7 @@ namespace FaisalLearningProjectMVC.Data.Entites
     {
         public void Configure(EntityTypeBuilder<Shipper> modelBuilder)
         {
+            modelBuilder.ToTable("Shippers");
             modelBuilder.Property(b => b.ID).HasColumnName("shipperid");
             modelBuilder.Property(b => b.CompanyName).HasColumnName("companyname");
         }
