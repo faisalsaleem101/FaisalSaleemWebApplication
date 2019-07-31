@@ -9,8 +9,9 @@ namespace FaisalLearningProjectMVC.Models
         public int CustomerId { get; set; }
         public int EmployeeId { get; set; }
         public int ShipperId { get; set; }
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Order Date")]
         public DateTime OrderDate { get; set; }
         [Display(Name = "Required Date")]
@@ -18,26 +19,29 @@ namespace FaisalLearningProjectMVC.Models
         [Display(Name = "Shipped Date")]
         public DateTime? ShippedDate { get; set; }
         public Decimal Freight { get; set; }
-        [Display(Name = "Ship Name")]
+        [Display(Name = "Order Name")]
         public string ShipName { get; set; }
 
-        [Display(Name = "Ship Adrress")]
+        [Display(Name = "Adrress")]
         public string ShipAddress { get; set; }
-        [Display(Name = "Ship City")]
+        [Display(Name = "City")]
         public string ShipCity { get; set; }
-        [Display(Name = "Ship Region")]
+        [Display(Name = "Region")]
         public string ShipRegion { get; set; }
 
-        [Display(Name = "Ship Post Code")]
+        [Display(Name = "Post Code")]
 
         public string ShipPostalCode { get; set; }
 
-        [Display(Name = "Ship Country")]
+        [Display(Name = "Country")]
 
         public string ShipCountry { get; set; }
 
         public virtual Customer Customer { get; set; }
+        public string CustomerName => Customer?.ContactName ?? string.Empty;
 
         public bool IsActive { get; set; }
+
+
     }
 }

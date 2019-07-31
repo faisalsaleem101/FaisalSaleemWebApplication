@@ -24,8 +24,8 @@ namespace FaisalLearningProjectMVC.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            var tsqlContext = _context.Orders.Include(o => o.Customer);
-            return View(await tsqlContext.ToListAsync());
+            var orders = await _context.Orders.Include(o => o.Customer).ToListAsync();
+            return View(orders);
         }
 
         // GET: Orders/Details/5
@@ -164,8 +164,21 @@ namespace FaisalLearningProjectMVC.Controllers
 
         public async Task<IActionResult> GetOrdersJsonData()
         {
-            var orders = await _context.Orders.Where(c => c.IsActive).ToListAsync();
+            var orders = await _context.Orders.Include(c => c.Customer)
+                .Where(c => c.IsActive)
+                .Select(o => new
+                {
+                    ID = o.ID,
+                    OrderDate = o.OrderDate.ToString("MM/dd/yyyy"),
+                    ShipAddress = o.ShipAddress,
+                    ShipCity = o.ShipCity,
+                    ShipPostalCode = o.ShipPostalCode,
+                    ShipCountry = o.ShipCountry,
+                    CustomerName = o.Customer.ContactName ?? ""
+                }).ToListAsync();
+
             return Json(orders);
         }
+
     }
 }

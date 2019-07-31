@@ -2,14 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace FaisalLearningProjectMVC.Data
+namespace FaisalLearningProjectMVC.Data.Entities
 {
     public class CustomerEntityConfiguration : IEntityTypeConfiguration<Customer>
     {
         public void Configure(EntityTypeBuilder<Customer> modelBuilder)
         {
-            modelBuilder.ToTable("Customers", "Sales");
-
             modelBuilder.Property(b => b.ID).HasColumnName("custid");
             modelBuilder.Property(b => b.ContactName).HasColumnName("contactname");
             modelBuilder.Property(b => b.ContactTitle).HasColumnName("contacttitle");

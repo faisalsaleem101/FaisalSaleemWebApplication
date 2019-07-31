@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace FaisalLearningProjectMVC.Data
+namespace FaisalLearningProjectMVC.Data.Entities
 {
     public class OrderEntityConfiguration : IEntityTypeConfiguration<Order>
     {
@@ -27,6 +27,7 @@ namespace FaisalLearningProjectMVC.Data
             modelBuilder.Property(b => b.IsActive).HasColumnName("IsActive");
 
             modelBuilder.HasOne(p => p.Customer).WithMany(b => b.Orders).HasForeignKey(p => p.CustomerId);
+
         }
     }
 }
