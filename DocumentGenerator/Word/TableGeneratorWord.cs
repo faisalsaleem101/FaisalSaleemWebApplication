@@ -48,6 +48,22 @@ namespace DocumentGenerator.Word
                 SetColumnNamesInTable(columnNames, row, border);
                 SetDataInTable(data, documentTable, border);
 
+                int noOfColumns = columnNames.Count;
+                var columnPercentage = 100 / noOfColumns;
+
+                // set column widths 
+                if (noOfColumns > 4)
+                {
+                    List<float> columnPercentages = new List<float>();
+                    for (int i = 0; i < noOfColumns; i++)
+                    {
+                        columnPercentages.Add(columnPercentage);
+                    }
+
+                    if (columnPercentages != null && columnPercentages.Count > 0)
+                        documentTable.SetWidthsPercentage(columnPercentages.ToArray(), 760);
+                }
+
                 document.Save();
             }
         }
