@@ -7,7 +7,7 @@ namespace FaisalLearningProjectMVC.Data
         public ContextDb GetDbContext()
         {
             var options = new DbContextOptionsBuilder<ContextDb>()
-                .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TSQLV4Development;Trusted_Connection=True;MultipleActiveResultSets=true")
+                .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Development;Trusted_Connection=True;MultipleActiveResultSets=true")
                 .Options;
 
             // Create the schema in the database

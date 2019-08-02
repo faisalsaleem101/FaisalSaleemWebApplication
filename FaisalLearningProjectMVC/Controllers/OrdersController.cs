@@ -61,7 +61,7 @@ namespace FaisalLearningProjectMVC.Controllers
         [Authorize]
         public IActionResult Create()
         {
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "ID", "ID");
+            ViewData["Customers"] = new SelectList(_context.Customers, "ID", "ContactName");
             return View();
         }
 
@@ -70,7 +70,7 @@ namespace FaisalLearningProjectMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,CustomerId,EmployeeId,ShipperId,OrderDate,RequiredDate,ShiedpDate,Freight,ShipName,ShipAddress,ShipCity,ShipRegion,ShipPostalCode,ShipCountry")] Order order)
+        public async Task<IActionResult> Create(Order order)
         {
             if (ModelState.IsValid)
             {

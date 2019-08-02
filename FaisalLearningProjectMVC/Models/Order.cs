@@ -14,8 +14,12 @@ namespace FaisalLearningProjectMVC.Models
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Order Date")]
         public DateTime OrderDate { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Required Date")]
         public DateTime RequiredDate { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Shipped Date")]
         public DateTime? ShippedDate { get; set; }
         public Decimal Freight { get; set; }
